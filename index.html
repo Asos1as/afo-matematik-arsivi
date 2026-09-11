@@ -643,6 +643,46 @@ body.afo-welcome-mode #content{width:100%;min-height:100vh}
  .afo-welcome-quote{text-align:left!important;max-width:420px;margin:22px auto 0!important}
 }
 </style>
+
+<style id="afo-reference-v9">
+/* Exact user-reference welcome screen */
+body.afo-welcome-mode{overflow:hidden!important;background:#fff!important}
+body.afo-welcome-mode .main{padding:0!important;margin:0!important;overflow:hidden!important}
+.afo-welcome-screen{
+  position:relative!important;width:100vw!important;height:100vh!important;min-height:100vh!important;
+  overflow:hidden!important;background:#fff url('welcome-reference.png') center center/cover no-repeat!important;
+}
+.afo-welcome-screen .afo-math-field,
+.afo-welcome-screen .afo-welcome-ataturk,
+.afo-welcome-screen .afo-welcome-right{display:none!important}
+
+/* Transparent functional hit areas over the exact reference image */
+.afo-welcome-screen::after{
+  content:"";position:absolute;right:29.8%;top:56.7%;width:11.8%;height:7.2%;
+  z-index:20;cursor:pointer;
+}
+.afo-welcome-screen .v9-archive-hit{
+  position:absolute!important;right:21.5%!important;top:56.7%!important;width:12.2%!important;height:7.2%!important;
+  z-index:21!important;cursor:pointer!important;background:transparent!important;border:0!important;
+}
+.afo-welcome-screen .v9-start-hit{
+  position:absolute!important;right:29.8%!important;top:56.7%!important;width:11.8%!important;height:7.2%!important;
+  z-index:22!important;cursor:pointer!important;background:transparent!important;border:0!important;
+}
+
+/* Cover the Windows activation watermark present in the reference screenshot */
+.afo-welcome-screen .v9-watermark-cover{
+  position:absolute!important;right:0!important;bottom:0!important;width:22%!important;height:15%!important;
+  z-index:30!important;background:linear-gradient(135deg,rgba(255,255,255,0),#fff 28%,#fff)!important;
+}
+
+/* Responsive: preserve the artwork rather than stretching UI elements */
+@media(max-width:900px){
+  .afo-welcome-screen{background-size:cover!important}
+}
+body:not(.afo-welcome-mode){overflow-x:hidden!important;overflow-y:auto!important}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -969,6 +1009,9 @@ function showWelcome(){
  search.value=""; crumb.textContent="AFO / Hoş Geldiniz"; renderSide();
  content.innerHTML=`
  <section class="afo-welcome-screen" id="welcomeScreen">
+  <button class="v9-start-hit" aria-label="Derse Başla" onclick="startLesson()"></button>
+  <button class="v9-archive-hit" aria-label="Konu Arşivine Git" onclick="enterArchiveFromWelcome()"></button>
+  <div class="v9-watermark-cover" aria-hidden="true"></div>
   <div class="afo-math-field" aria-hidden="true">
    <span class="afo-math-symbol s1">x² + y² = r²</span>
    <span class="afo-math-symbol s2">Σ aₙ</span>
