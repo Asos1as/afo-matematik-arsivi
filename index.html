@@ -644,43 +644,165 @@ body.afo-welcome-mode #content{width:100%;min-height:100vh}
 }
 </style>
 
-<style id="afo-reference-v9">
-/* Exact user-reference welcome screen */
-body.afo-welcome-mode{overflow:hidden!important;background:#fff!important}
-body.afo-welcome-mode .main{padding:0!important;margin:0!important;overflow:hidden!important}
+<style id="afo-v10-final">
+/* ===== V10: REAL HTML WELCOME UI + USER'S ATATURK ARTWORK ===== */
+body.afo-welcome-mode{
+  overflow:hidden!important;
+  background:#fff!important;
+}
+body.afo-welcome-mode .main{
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+}
+
+/* If the existing welcome screen has a generated/image-only background, disable it. */
 .afo-welcome-screen{
-  position:relative!important;width:100vw!important;height:100vh!important;min-height:100vh!important;
-  overflow:hidden!important;background:#fff url('welcome-reference.png') center center/cover no-repeat!important;
-}
-.afo-welcome-screen .afo-math-field,
-.afo-welcome-screen .afo-welcome-ataturk,
-.afo-welcome-screen .afo-welcome-right{display:none!important}
-
-/* Transparent functional hit areas over the exact reference image */
-.afo-welcome-screen::after{
-  content:"";position:absolute;right:29.8%;top:56.7%;width:11.8%;height:7.2%;
-  z-index:20;cursor:pointer;
-}
-.afo-welcome-screen .v9-archive-hit{
-  position:absolute!important;right:21.5%!important;top:56.7%!important;width:12.2%!important;height:7.2%!important;
-  z-index:21!important;cursor:pointer!important;background:transparent!important;border:0!important;
-}
-.afo-welcome-screen .v9-start-hit{
-  position:absolute!important;right:29.8%!important;top:56.7%!important;width:11.8%!important;height:7.2%!important;
-  z-index:22!important;cursor:pointer!important;background:transparent!important;border:0!important;
+  position:relative!important;
+  width:100vw!important;
+  height:100vh!important;
+  min-height:100vh!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  display:block!important;
 }
 
-/* Cover the Windows activation watermark present in the reference screenshot */
-.afo-welcome-screen .v9-watermark-cover{
-  position:absolute!important;right:0!important;bottom:0!important;width:22%!important;height:15%!important;
-  z-index:30!important;background:linear-gradient(135deg,rgba(255,255,255,0),#fff 28%,#fff)!important;
+/* Artwork occupies only the left side. It does NOT cover the UI. */
+.afo-welcome-screen .afo-welcome-art{
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  width:52vw!important;
+  height:100%!important;
+  overflow:hidden!important;
+  z-index:1!important;
+  background:#fff!important;
+}
+.afo-welcome-screen .afo-welcome-art img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:left center!important;
+  display:block!important;
+}
+.afo-welcome-screen .afo-welcome-art:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,rgba(255,255,255,0) 55%,rgba(255,255,255,.7) 88%,#fff 100%)!important;
+  pointer-events:none!important;
 }
 
-/* Responsive: preserve the artwork rather than stretching UI elements */
+/* Real content on top */
+.afo-welcome-screen .afo-v10-content{
+  position:absolute!important;
+  z-index:5!important;
+  left:48vw!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  width:45vw!important;
+  max-width:700px!important;
+  padding:20px!important;
+}
+.afo-v10-content .eyebrow{
+  color:#58708a!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  letter-spacing:2.5px!important;
+  margin-bottom:13px!important;
+}
+.afo-v10-content h1{
+  color:#20324e!important;
+  font-size:clamp(42px,4.2vw,70px)!important;
+  line-height:1.02!important;
+  letter-spacing:-2.5px!important;
+  margin:0 0 14px!important;
+}
+.afo-v10-content p{
+  color:#607286!important;
+  font-size:14px!important;
+  line-height:1.65!important;
+  max-width:580px!important;
+  margin:0!important;
+}
+.afo-v10-actions{
+  display:flex!important;
+  gap:12px!important;
+  margin-top:27px!important;
+}
+.afo-v10-actions button{
+  border:0!important;
+  border-radius:12px!important;
+  padding:13px 21px!important;
+  font-weight:800!important;
+  cursor:pointer!important;
+}
+.afo-v10-primary{
+  background:#20324e!important;
+  color:#fff!important;
+  box-shadow:0 10px 25px rgba(32,50,78,.18)!important;
+}
+.afo-v10-secondary{
+  background:#eef3f7!important;
+  color:#20324e!important;
+}
+.afo-v10-quote{
+  margin-top:32px!important;
+  padding-left:16px!important;
+  border-left:2px solid #b9d1c0!important;
+  color:#718092!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:14px!important;
+  line-height:1.5!important;
+  font-style:italic!important;
+  max-width:430px!important;
+}
+.afo-v10-quote small{
+  display:block!important;
+  margin-top:6px!important;
+  color:#7a8795!important;
+  font:800 9px/1.2 Inter,system-ui,sans-serif!important;
+  letter-spacing:1.4px!important;
+  font-style:normal!important;
+}
+.afo-v10-math{
+  position:absolute!important;
+  right:4vw!important;
+  top:9vh!important;
+  color:#d9e4ec!important;
+  font-size:90px!important;
+  line-height:1!important;
+  z-index:2!important;
+  pointer-events:none!important;
+}
+.afo-v10-scroll{
+  margin-top:28px!important;
+  color:#9aa8b6!important;
+  font-size:10px!important;
+  letter-spacing:1.5px!important;
+}
+
+/* Hide any old welcome content so only V10 HTML content is visible */
+.afo-welcome-screen > .afo-welcome-ataturk,
+.afo-welcome-screen > .afo-welcome-right,
+.afo-welcome-screen > .afo-welcome-overlay{
+  display:none!important;
+}
+
 @media(max-width:900px){
-  .afo-welcome-screen{background-size:cover!important}
+  .afo-welcome-screen .afo-welcome-art{
+    width:100%!important;
+    opacity:.28!important;
+  }
+  .afo-welcome-screen .afo-welcome-art:after{
+    background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(255,255,255,.94) 80%,#fff 100%)!important;
+  }
+  .afo-welcome-screen .afo-v10-content{
+    left:9vw!important;
+    width:82vw!important;
+    max-width:none!important;
+  }
 }
-body:not(.afo-welcome-mode){overflow-x:hidden!important;overflow-y:auto!important}
 </style>
 
 </head>
@@ -1009,42 +1131,33 @@ function showWelcome(){
  search.value=""; crumb.textContent="AFO / Hoş Geldiniz"; renderSide();
  content.innerHTML=`
  <section class="afo-welcome-screen" id="welcomeScreen">
-  <button class="v9-start-hit" aria-label="Derse Başla" onclick="startLesson()"></button>
-  <button class="v9-archive-hit" aria-label="Konu Arşivine Git" onclick="enterArchiveFromWelcome()"></button>
-  <div class="v9-watermark-cover" aria-hidden="true"></div>
-  <div class="afo-math-field" aria-hidden="true">
-   <span class="afo-math-symbol s1">x² + y² = r²</span>
-   <span class="afo-math-symbol s2">Σ aₙ</span>
-   <span class="afo-math-symbol s3">∫ f(x) dx</span>
-   <span class="afo-math-symbol s4">√(a²+b²)</span>
-   <span class="afo-math-symbol s5">π · r²</span>
-   <span class="afo-math-symbol s6">f′(x)</span>
+  <div class="afo-welcome-art">
+    <img src="ataturk-afo.png" alt="Atatürk ve matematik">
   </div>
 
-  <div class="afo-welcome-ataturk" aria-hidden="true">
-   <img src="ataturk-afo.png" alt="">
-  </div>
+  <div class="afo-v10-math">∑<br>∞</div>
 
-  <div class="afo-welcome-right">
-   <div class="afo-welcome-clean">
-    <div class="afo-welcome-mark">AFO</div>
-    <div class="afo-welcome-eyebrow">AFO • MATEMATİK ARŞİVİ</div>
-    <h2 class="afo-welcome-title">Hoş geldiniz <span>Hocam.</span></h2>
-    <p class="afo-welcome-text">Kendi matematik arşivinden dersini yönet, öğrencilerinin hangi konuyu yaptığını takip et ve hazır içeriklere tek yerden ulaş.</p>
-    <div class="afo-welcome-actions">
-     <button class="afo-welcome-primary" onclick="startLesson()">▶ Derse Başla</button>
-     <button class="afo-welcome-secondary" onclick="enterArchiveFromWelcome()">📚 Konu Arşivine Git</button>
+  <div class="afo-v10-content">
+    <div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+    <h1>Hoş geldiniz<br>Hocam.</h1>
+    <p>
+      Kendi matematik arşivinizi oluşturun. Konularınızı, ders materyallerinizi
+      ve öğrencileriniz için hazırladığınız içerikleri tek yerde yönetin.
+    </p>
+
+    <div class="afo-v10-actions">
+      <button class="afo-v10-primary" onclick="startLesson()">▶ Derse Başla</button>
+      <button class="afo-v10-secondary" onclick="enterArchiveFromWelcome()">📚 Konu Arşivi</button>
     </div>
-    <div class="afo-welcome-meta">
-     <span class="afo-welcome-chip">👨‍🏫 Öğretmen arşivi</span>
-     <span class="afo-welcome-chip">${data.length} sınıf</span>
-     <span class="afo-welcome-chip">${data.reduce((a,g)=>a+g.topics.length,0)} konu</span>
+
+    <div class="afo-v10-quote">
+      “Hayatta en hakiki mürşit ilimdir.”
+      <small>MUSTAFA KEMAL ATATÜRK</small>
     </div>
-    <div class="afo-welcome-quote">“Hayatta en hakiki mürşit ilimdir.”<strong>— Mustafa Kemal Atatürk</strong></div>
-    <div class="afo-scroll-hint"><span class="mouse"></span><span>Arşivi keşfetmek için Derse Başla</span></div>
-   </div>
+
+    <div class="afo-v10-scroll">↓ ARŞİVE GEÇ</div>
   </div>
- </section>`;
+</section>`;
 }
 function leaveWelcome(next){
  const screen=document.getElementById("welcomeScreen");
