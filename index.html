@@ -364,6 +364,97 @@ body.afo-welcome-mode #content{min-height:100vh}
 <style>
 .cloud-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cloud-form .field{margin-bottom:0}.cloud-pill{display:inline-block;padding:7px 10px;border-radius:999px;background:#eef2f6;color:var(--muted);font-size:10px;font-weight:800;margin-right:8px}.cloud-pill.ok{background:#edf8e9;color:#5f914f}.cloud-note{margin-top:12px;padding:11px 13px;border-radius:12px;background:#f7f9fc;color:var(--muted);font-size:10px;line-height:1.6}@media(max-width:700px){.cloud-form{grid-template-columns:1fr}}
 </style>
+
+<style id="afo-beautify-v2">
+/* AFO VISUAL REFRESH — functionality untouched */
+:root{
+  --bg:#f3f6fb;--panel:#ffffff;--navy:#1f3553;--text:#26364d;--muted:#718096;
+  --line:#dfe7f1;--shadow:0 16px 38px rgba(31,53,83,.10);--accent:#5b7fa3;
+  --afo-blue:#355b86;--afo-sky:#dfeaf7;--afo-mint:#dff3ea;--afo-gold:#f6e8bd;--afo-lilac:#ebe4f7;
+}
+body{
+  background:
+    radial-gradient(circle at 88% 7%,rgba(113,159,204,.13),transparent 23rem),
+    radial-gradient(circle at 18% 92%,rgba(127,183,160,.09),transparent 25rem),
+    var(--bg);
+}
+body:before{
+  content:"∑   π   √   ∞   Δ   x²   f(x)";
+  position:fixed;inset:auto -30px 8px auto;z-index:0;pointer-events:none;
+  font-size:34px;letter-spacing:18px;font-weight:800;color:rgba(44,72,105,.035);
+  transform:rotate(-7deg);white-space:nowrap;
+}
+.app{position:relative;z-index:1}
+.sidebar{
+  background:
+    radial-gradient(circle at 85% 8%,rgba(255,255,255,.12),transparent 13rem),
+    linear-gradient(165deg,#1b304d 0%,#294664 52%,#223a58 100%);
+  box-shadow:10px 0 35px rgba(24,43,67,.10);
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.brand{padding-top:10px}
+.brand .mini{opacity:.7;color:#dbe8f5}
+.brand h1{letter-spacing:-.7px;text-shadow:0 2px 18px rgba(0,0,0,.12)}
+.brand p{color:#d1ddeb}
+.nav-title{color:#b7c8da}
+.nav button{transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.nav button:hover{transform:translateX(3px);background:rgba(255,255,255,.10)}
+.nav button.active{background:linear-gradient(90deg,rgba(255,255,255,.17),rgba(255,255,255,.07));box-shadow:inset 3px 0 0 #bcd6ee}
+.main{padding-top:32px}
+.topbar{margin-bottom:28px}
+.search{box-shadow:0 5px 18px rgba(31,53,83,.05);transition:.2s;border-color:#dce5ef}
+.search:focus{border-color:#9eb7d1;box-shadow:0 0 0 4px rgba(91,127,163,.10)}
+.hero{
+  background:linear-gradient(135deg,#1d3553 0%,#365b83 58%,#6b89a7 100%);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 20px 45px rgba(31,53,83,.16);
+}
+.hero:before{content:"∑  π  √  ∞";position:absolute;right:28px;bottom:-4px;font-size:52px;font-weight:900;letter-spacing:8px;color:rgba(255,255,255,.055);transform:rotate(-5deg)}
+.hero:after{width:360px;height:360px;background:radial-gradient(circle,rgba(255,255,255,.13),rgba(255,255,255,0) 68%);right:-135px;top:-160px}
+.eyebrow{color:#eaf3fb}
+.hero h2{letter-spacing:-1.1px}
+.stats .stat{border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(6px);background:rgba(255,255,255,.11)}
+.head h3{letter-spacing:-.3px}
+.grade-grid{gap:17px}
+.card{
+  border-color:#e0e7f0;box-shadow:0 8px 25px rgba(31,53,83,.055);overflow:hidden;
+}
+.grade{
+  min-height:154px;
+  background:linear-gradient(145deg,#fff 0%,#fbfcfe 72%,#f2f6fb 100%);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.grade:after{content:"→";position:absolute;right:17px;bottom:14px;font-size:18px;font-weight:800;color:#9aacbf;transition:.2s}
+.grade:hover{transform:translateY(-5px);border-color:#cbd9e8;box-shadow:0 17px 34px rgba(31,53,83,.11)}
+.grade:hover:after{transform:translateX(4px);color:#45698f}
+.grade .bar{width:6px;border-radius:0 5px 5px 0}
+.grade h4{letter-spacing:-.4px}
+.grade p{line-height:1.5}
+.grade .count{display:inline-block;padding:6px 9px;border-radius:9px;background:#edf3f9}
+.btn{transition:.18s ease;box-shadow:0 3px 10px rgba(31,53,83,.035)}
+.btn:hover{transform:translateY(-1px);border-color:#c7d5e4;box-shadow:0 7px 16px rgba(31,53,83,.08)}
+.btn.primary{background:linear-gradient(135deg,#203a5a,#345c84);box-shadow:0 8px 18px rgba(32,58,90,.16)}
+.btn.primary:hover{filter:brightness(1.05)}
+.page-title h3,.section-title,.panel-title{letter-spacing:-.35px}
+/* Give common content panels a slightly more premium feel */
+.resource-card,.topic-card,.student-card,.package-card,.material-card,.search-results .result,.archive-card,.panel,.box,.section-card{
+  border-color:#e0e7f0;
+  box-shadow:0 8px 24px rgba(31,53,83,.055);
+}
+/* Form controls */
+input,select,textarea{border-color:#dce5ef!important;box-shadow:0 3px 12px rgba(31,53,83,.025)}
+input:focus,select:focus,textarea:focus{border-color:#9eb7d1!important;box-shadow:0 0 0 4px rgba(91,127,163,.09)!important;outline:none}
+/* Scrollbars */
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#c5d1df;border-radius:20px;border:2px solid transparent;background-clip:padding-box}::-webkit-scrollbar-thumb:hover{background:#aebed0;border:2px solid transparent;background-clip:padding-box}
+@media(max-width:700px){
+  body:before{font-size:24px;letter-spacing:10px}
+  .main{padding:18px 15px 28px}
+  .hero{padding:25px 22px;border-radius:21px}
+  .hero h2{font-size:29px}
+  .grade-grid{gap:12px}
+  .grade{min-height:142px;padding:17px}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -475,35 +566,93 @@ const examData = [
 
 const data=[
 {grade:"4. Sınıf",color:"#5b7fa3",topics:[
-["Doğal Sayılar",["Doğal sayılar","Basamak ve basamak değeri","Sayıları okuma ve yazma","Karşılaştırma ve sıralama","Yuvarlama","Ritmik sayma"]],
+["Doğal Sayılar",["Sayıları okuma ve yazma","Basamak ve basamak değeri","Karşılaştırma ve sıralama","Yuvarlama","Ritmik sayma","Sayı örüntüleri"]],
 ["Doğal Sayılarla İşlemler",["Toplama ve çıkarma","Çarpma","Bölme","Zihinden işlemler","Tahmin","Problem çözme"]],
-["Kesirler",["Kesir kavramı","Birim kesir","Basit, bileşik ve tam sayılı kesirler","Kesirleri karşılaştırma","Kesirlerle toplama ve çıkarma"]],
-["Ondalık Gösterim",["Ondalık gösterim","Okuma ve yazma","Karşılaştırma ve sıralama","Kesir–ondalık ilişkisi"]],
-["Geometri",["Açı","Doğru, doğru parçası ve ışın","Üçgenler","Dörtgenler","Kare ve dikdörtgen","Simetri"]],
-["Ölçme",["Uzunluk ölçme","Zaman ölçme","Sıvı ölçme","Çevre","Alan"]],["Veri",["Veri toplama","Sıklık tablosu","Sütun grafiği","Grafik yorumlama"]]]},
+["Kesirler",["Kesir kavramı","Birim kesir","Basit, bileşik ve tam sayılı kesirler","Kesirleri karşılaştırma","Kesirlerle toplama ve çıkarma","Kesir problemleri"]],
+["Ondalık Gösterim",["Ondalık gösterim","Okuma ve yazma","Karşılaştırma ve sıralama","Kesir–ondalık ilişkisi","Ondalık işlemler"]],
+["Geometri",["Doğru, doğru parçası ve ışın","Açı","Üçgenler","Dörtgenler","Kare ve dikdörtgen","Simetri"]],
+["Ölçme",["Uzunluk ölçme","Çevre","Alan","Zaman ölçme","Sıvı ölçme","Kütle ölçme"]],
+["Veri ve Grafikler",["Veri toplama","Sıklık tablosu","Sütun grafiği","Grafik okuma ve yorumlama"]]]},
 {grade:"5. Sınıf",color:"#6d9b7b",topics:[
-["Sayılar ve İşlemler",["Doğal sayılar","Basamak değeri","İşlem önceliğine giriş","Dağılma özelliği","Problem çözme"]],
+["Sayılar ve İşlemler",["Doğal sayılar","Basamak değeri","İşlem önceliğine giriş","Dağılma özelliği","Zihinden işlem","Problem çözme"]],
 ["Kesirler",["Kesir kavramı","Kesirleri karşılaştırma","Kesirlerle işlemler","Kesir problemleri"]],
-["Ondalık Gösterim",["Ondalık gösterim","Ondalık sayıları karşılaştırma","Ondalık sayılarla işlemler"]],
-["Yüzdeler",["Yüzde kavramı","Kesir–ondalık–yüzde ilişkisi","Basit yüzde problemleri"]],
+["Ondalık Gösterim",["Ondalık gösterim","Ondalık sayıları karşılaştırma","Ondalık sayılarla işlemler","Kesir–ondalık ilişkisi"]],
+["Yüzdeler",["Yüzde kavramı","Kesir–ondalık–yüzde ilişkisi","Bir sayının yüzdesi","Yüzde problemleri"]],
 ["Geometri",["Doğru, doğru parçası ve ışın","Açılar","Çokgenler","Üçgenler","Dörtgenler","Çember"]],
-["Alan ve Çevre",["Dikdörtgenin çevresi","Dikdörtgenin alanı","Birim kare","Alan problemleri"]],["Veri",["Veri toplama","Sıklık tablosu","Sütun grafiği","Veri yorumlama"]]]},
+["Alan ve Çevre",["Dikdörtgenin çevresi","Dikdörtgenin alanı","Birim kare","Alan problemleri"]],
+["Veri ve Olasılık",["Veri toplama","Sıklık tablosu","Sütun grafiği","Veri yorumlama","Basit olasılık"]]]},
 {grade:"6. Sınıf",color:"#9b8bb4",topics:[
-["Doğal Sayılar ve İşlemler",["İşlem önceliği","Üslü ifadeye giriş","Dağılma özelliği","Ortak çarpan"]],["Çarpanlar ve Katlar",["Çarpan ve kat","Asal sayılar","Asal çarpanlar","Bölünebilme"]],["Kümeler",["Küme kavramı","Kümelerin gösterimi"]],["Tam Sayılar",["Pozitif ve negatif sayılar","Tam sayılar","Sayı doğrusu","Tam sayılarla işlemler"]],["Kesirler",["Kesirleri karşılaştırma","Kesirlerle dört işlem","Kesir problemleri"]],["Ondalık Gösterim",["Ondalık sayılar","Ondalık sayılarla işlemler","Ondalık–kesir ilişkisi"]],["Oran",["Oran kavramı","Birimli oran","Oran problemleri"]],["Cebir",["Bilinmeyen","Cebirsel ifadeler","Sözel ifadeleri cebirsel ifadeye çevirme"]],["Açılar ve Alan",["Açılar","Açılarda ilişkiler","Üçgen ve dörtgenler","Alan","Çember"]],["Veri",["Aritmetik ortalama","Açıklık","Sütun grafiği","Veri yorumlama"]]]},
+["Doğal Sayılar ve İşlemler",["İşlem önceliği","Üslü ifadeye giriş","Dağılma özelliği","Ortak çarpan"]],
+["Çarpanlar ve Katlar",["Çarpan ve kat","Asal sayılar","Asal çarpanlar","Bölünebilme"]],
+["Kümeler",["Küme kavramı","Kümelerin gösterimi","Kümelerde eleman ilişkisi"]],
+["Tam Sayılar",["Pozitif ve negatif sayılar","Tam sayılar","Sayı doğrusu","Tam sayılarla işlemler"]],
+["Kesirler",["Kesirleri karşılaştırma","Kesirlerle dört işlem","Kesir problemleri"]],
+["Ondalık Gösterim",["Ondalık sayılar","Ondalık sayılarla işlemler","Ondalık–kesir ilişkisi"]],
+["Oran",["Oran kavramı","Birimli oran","Oran problemleri"]],
+["Cebirsel İfadeler",["Bilinmeyen","Cebirsel ifadeler","Sözel ifadeyi cebirsel ifadeye çevirme"]],
+["Açılar ve Alan",["Açılar","Açılarda ilişkiler","Üçgen ve dörtgenler","Alan","Çember"]],
+["Veri ve Olasılık",["Aritmetik ortalama","Açıklık","Sütun grafiği","Veri yorumlama","Basit olasılık"]]]},
 {grade:"7. Sınıf",color:"#c58a63",topics:[
-["Tam Sayılar",["Tam sayılarla işlemler","İşlem özellikleri"]],["Rasyonel Sayılar",["Rasyonel sayı kavramı","Karşılaştırma ve sıralama","Rasyonel sayılarla işlemler"]],["Oran ve Orantı",["Oran","Orantı","Doğru orantı","Ters orantı","Orantı problemleri"]],["Yüzdeler",["Yüzde hesaplama","Bir sayının yüzdesi","Yüzde artış ve azalış","Kâr–zarar","İndirim problemleri"]],["Cebirsel İfadeler",["Terim","Katsayı","Sabit terim","Cebirsel ifadelerle işlemler"]],["Eşitlik ve Denklem",["Eşitlik","Birinci dereceden bir bilinmeyenli denklemler","Denklem problemleri"]],["Doğrular ve Açılar",["Açılar","Paralel doğrular","Tümler ve bütünler açılar"]],["Çokgenler",["Çokgenler","Dörtgenler","İç açılar","Düzgün çokgenler"]],["Çember ve Daire",["Çember","Daire","Çemberin uzunluğu","Dairenin alanı"]],["Veri Analizi",["Ortalama","Ortanca","Tepe değer","Açıklık","Grafikler"]],["Olasılık",["Olasılık kavramı","Basit olayların olasılığı"]]]},
+["Tam Sayılar",["Tam sayılarla işlemler","İşlem özellikleri"]],
+["Rasyonel Sayılar",["Rasyonel sayı kavramı","Karşılaştırma ve sıralama","Rasyonel sayılarla işlemler"]],
+["Oran ve Orantı",["Oran","Orantı","Doğru orantı","Ters orantı","Orantı problemleri"]],
+["Yüzdeler",["Yüzde hesaplama","Bir sayının yüzdesi","Yüzde artış ve azalış","Kâr–zarar","İndirim problemleri"]],
+["Cebirsel İfadeler",["Terim","Katsayı","Sabit terim","Cebirsel ifadelerle işlemler"]],
+["Eşitlik ve Denklem",["Eşitlik","Birinci dereceden bir bilinmeyenli denklemler","Denklem problemleri"]],
+["Doğrular ve Açılar",["Açılar","Paralel doğrular","Tümler ve bütünler açılar"]],
+["Çokgenler",["Çokgenler","Dörtgenler","İç açılar","Düzgün çokgenler"]],
+["Çember ve Daire",["Çember","Daire","Çemberin uzunluğu","Dairenin alanı"]],
+["Veri Analizi",["Ortalama","Ortanca","Tepe değer","Açıklık","Grafikler"]],
+["Olasılık",["Olasılık kavramı","Basit olayların olasılığı"]]]},
 {grade:"8. Sınıf",color:"#b46b72",topics:[
-["Çarpanlar ve Katlar",["Asal sayılar","Asal çarpanlara ayırma","EBOB","EKOK","Bölünebilme","Aralarında asal sayılar"]],["Üslü İfadeler",["Üslü ifade kavramı","Üs kuralları","10'un kuvvetleri","Bilimsel gösterim"]],["Kareköklü İfadeler",["Karekök kavramı","Tam kare sayılar","Kök dışına çıkarma","Kök içine alma","Köklü ifadelerde işlemler","Ondalık sayıların karekökü"]],["Veri Analizi",["Sütun grafiği","Daire grafiği","Çizgi grafiği","Grafikler arası dönüşüm","Grafik yorumlama"]],["Basit Olayların Olasılığı",["Olası durumlar","Olasılık","Olasılık karşılaştırmaları"]],["Cebirsel İfadeler ve Özdeşlikler",["Cebirsel ifadeler","Özdeşlik","Çarpanlara ayırma","Özdeşlikler"]],["Doğrusal Denklemler",["Birinci dereceden denklemler","Koordinat sistemi","Doğrusal ilişki","Doğrusal grafik","Eğim","Denklem problemleri"]],["Eşitsizlikler",["Birinci dereceden eşitsizlikler","Sayı doğrusunda gösterim","Eşitsizlik problemleri"]],["Üçgenler",["Üçgen eşitsizliği","Üçgende açı","Üçgende kenar ilişkileri","Pisagor bağıntısı","Eşlik ve benzerlik"]],["Dönüşüm Geometrisi",["Öteleme","Yansıma","Dönme"]],["Geometrik Cisimler",["Prizma","Silindir","Piramit","Koni","Küre","Alan ve hacim"]]]},
+["Çarpanlar ve Katlar",["Asal sayılar","Asal çarpanlara ayırma","EBOB","EKOK","Bölünebilme","Aralarında asal sayılar"]],
+["Üslü İfadeler",["Üslü ifade kavramı","Üs kuralları","10'un kuvvetleri","Bilimsel gösterim"]],
+["Kareköklü İfadeler",["Karekök kavramı","Tam kare sayılar","Kök dışına çıkarma","Kök içine alma","Köklü ifadelerde işlemler","Ondalık sayıların karekökü"]],
+["Veri Analizi",["Sütun grafiği","Daire grafiği","Çizgi grafiği","Grafikler arası dönüşüm","Grafik yorumlama"]],
+["Basit Olayların Olasılığı",["Olası durumlar","Olasılık","Olasılık karşılaştırmaları"]],
+["Cebirsel İfadeler ve Özdeşlikler",["Cebirsel ifadeler","Özdeşlik","Çarpanlara ayırma","Özdeşlik uygulamaları"]],
+["Doğrusal Denklemler",["Birinci dereceden denklemler","Koordinat sistemi","Doğrusal ilişki","Doğrusal grafik","Eğim","Denklem problemleri"]],
+["Eşitsizlikler",["Birinci dereceden eşitsizlikler","Sayı doğrusunda gösterim","Eşitsizlik problemleri"]],
+["Üçgenler",["Üçgen eşitsizliği","Üçgende açı","Üçgende kenar ilişkileri","Pisagor bağıntısı","Eşlik ve benzerlik"]],
+["Dönüşüm Geometrisi",["Öteleme","Yansıma","Dönme"]],
+["Geometrik Cisimler",["Prizma","Silindir","Piramit","Koni","Küre","Alan ve hacim"]]]},
 {grade:"9. Sınıf",color:"#5f8f8f",topics:[
-["Sayılar",["Sayı kümeleri","Doğal, tam ve rasyonel sayılar","İrrasyonel sayılar","Gerçek sayılar","Aralıklar","Üslü ifadeler","Köklü ifadeler"]],["Cebirsel İfadeler ve Özdeşlikler",["Cebirsel ifadeler","Özdeşlikler","Çarpanlara ayırma"]],["Denklemler ve Eşitsizlikler",["Birinci dereceden denklemler","Birinci dereceden eşitsizlikler","Mutlak değer","Problem çözme"]],["Fonksiyonlara Giriş",["Fonksiyon kavramı","Tanım ve görüntü kümesi","Fonksiyon gösterimleri","Fonksiyon grafikleri"]],["Algoritma ve Problem Çözme",["Algoritmik düşünme","Akış şemaları","Mantıksal ifadeler","Problem çözme"]],["Üçgenler",["Üçgende açılar","Üçgende kenar ilişkileri","Üçgen eşitsizliği","Üçgende alan"]],["Veri ve İstatistik",["Veri türleri","Ortalama","Ortanca","Tepe değer","Açıklık","Grafikler"]],["Olasılık",["Örnek uzay","Olay","Basit olasılık"]]]},
+["Sayılar",["Sayı kümeleri","Doğal, tam ve rasyonel sayılar","İrrasyonel sayılar","Gerçek sayılar","Aralıklar","Üslü ifadeler","Köklü ifadeler"]],
+["Cebirsel İfadeler",["Cebirsel ifadeler","Özdeşlikler","Çarpanlara ayırma"]],
+["Denklemler ve Eşitsizlikler",["Birinci dereceden denklemler","Birinci dereceden eşitsizlikler","Mutlak değer","Mutlak değerli denklemler","Mutlak değerli eşitsizlikler","Problem çözme"]],
+["Fonksiyonlara Giriş",["Fonksiyon kavramı","Tanım ve görüntü kümesi","Fonksiyon gösterimleri","Fonksiyon grafikleri"]],
+["Algoritma ve Problem Çözme",["Algoritmik düşünme","Akış şemaları","Mantıksal ifadeler","Problem çözme stratejileri"]],
+["Üçgenler",["Üçgende açılar","Üçgende kenar ilişkileri","Üçgen eşitsizliği","Üçgende alan"]],
+["Veri ve İstatistik",["Veri türleri","Ortalama","Ortanca","Tepe değer","Açıklık","Grafikler"]],
+["Olasılık",["Örnek uzay","Olay","Basit olasılık"]]]},
 {grade:"10. Sınıf",color:"#8b7e5b",topics:[
-["Sayma ve Olasılık",["Faktöriyel","Permütasyon","Kombinasyon","Binom açılımı","Olasılık"]],["Fonksiyonlar",["Fonksiyon kavramı","Tanım ve değer kümeleri","Fonksiyon çeşitleri","Fonksiyonlarda işlemler","Grafikler"]],["Polinomlar",["Polinom kavramı","Polinomlarda işlemler","Polinom bölmesi","Çarpanlara ayırma"]],["İkinci Dereceden Denklemler",["İkinci dereceden denklemler","Kökler","Diskriminant","Kök–katsayı ilişkileri"]],["Dörtgenler ve Çokgenler",["Çokgenler","Dörtgenler","Özel dörtgenler","Alan ilişkileri"]],["Çember ve Daire",["Çemberde açı","Çemberde uzunluk","Daire","Teğet"]]]},
+["Sayma ve Olasılık",["Faktöriyel","Permütasyon","Kombinasyon","Binom açılımı","Olasılık"]],
+["Fonksiyonlar",["Fonksiyon kavramı","Tanım ve değer kümeleri","Fonksiyon çeşitleri","Fonksiyonlarda işlemler","Bileşke fonksiyon","Ters fonksiyon","Grafikler"]],
+["Polinomlar",["Polinom kavramı","Polinomlarda işlemler","Polinom bölmesi","Kalan ve bölüm","Çarpanlara ayırma"]],
+["İkinci Dereceden Denklemler",["İkinci dereceden denklemler","Kökler","Diskriminant","Kök–katsayı ilişkileri","Karmaşık köklere giriş"]],
+["Dörtgenler ve Çokgenler",["Çokgenler","Dörtgenler","Özel dörtgenler","Alan ilişkileri","Benzerlik ve alan"]],
+["Çember ve Daire",["Çemberde açı","Çemberde uzunluk","Teğet","Daire","Alan"]],
+["Katı Cisimler",["Prizma","Piramit","Silindir","Koni","Küre","Yüzey alanı ve hacim"]],
+["Analitik Geometri",["Noktanın analitiği","Doğru ve eğim","Doğru denklemi","Uzaklık","Orta nokta"]]]},
 {grade:"11. Sınıf",color:"#6679a6",topics:[
-["Trigonometri",["Yönlü açılar","Trigonometrik fonksiyonlar","Birim çember","Sinüs, kosinüs, tanjant, kotanjant","Trigonometrik özdeşlikler","Trigonometrik denklemler"]],["Analitik Geometri",["Noktanın analitiği","Doğrunun analitiği","Eğim","Doğru denklemi","Paralel ve dik doğrular","Uzaklık","Orta nokta"]],["Fonksiyonlarda Uygulamalar",["Fonksiyon grafikleri","Grafik dönüşümleri","Ters fonksiyon"]],["Denklem ve Eşitsizlik Sistemleri",["İkinci dereceden eşitsizlikler","Eşitsizlik sistemleri","Parabol"]],["Çember ve Daire",["Çemberde açı","Çemberde uzunluk","Teğet","Daire"]],["Uzay Geometri",["Katı cisimler","Prizma","Silindir","Koni","Küre"]],["Olasılık",["Koşullu olasılık","Bağımlı ve bağımsız olaylar","Olasılık uygulamaları"]]]},
+["Trigonometri",["Yönlü açılar","Trigonometrik fonksiyonlar","Birim çember","Sinüs ve kosinüs","Tanjant ve kotanjant","Trigonometrik özdeşlikler","Trigonometrik denklemler"]],
+["Analitik Geometri",["Noktanın analitiği","Doğrunun analitiği","Eğim","Doğru denklemi","Paralel ve dik doğrular","Uzaklık","Orta nokta"]],
+["Fonksiyonlarda Uygulamalar",["Fonksiyon grafikleri","Grafik dönüşümleri","Bileşke ve ters fonksiyon","Fonksiyonların uygulamaları"]],
+["Denklem ve Eşitsizlik Sistemleri",["İkinci dereceden eşitsizlikler","Eşitsizlik sistemleri","Parabol","Parabolün grafiği","Parabol problemleri"]],
+["Çember ve Daire",["Çemberde açı","Çemberde uzunluk","Teğet","Daire","Alan problemleri"]],
+["Uzay Geometri",["Katı cisimler","Prizma","Silindir","Koni","Küre","Alan ve hacim"]],
+["Olasılık",["Koşullu olasılık","Bağımlı ve bağımsız olaylar","Birleşik olaylar","Olasılık uygulamaları"]],
+["İstatistik",["Veri dağılımı","Merkezi eğilim","Dağılım ölçüleri","Veri yorumlama"]]]},
 {grade:"12. Sınıf",color:"#7a6b8c",topics:[
-["Üstel ve Logaritmik Fonksiyonlar",["Üstel fonksiyon","Üstel denklemler","Logaritma","Logaritma özellikleri","Logaritmik denklemler"]],["Diziler",["Dizi kavramı","Genel terim","Aritmetik dizi","Geometrik dizi","Dizi problemleri"]],["Trigonometri",["Toplam ve fark formülleri","İki kat açı","Yarım açı","Trigonometrik dönüşümler","Trigonometrik denklemler"]],["Limit ve Süreklilik",["Limit kavramı","Sağ ve sol limit","Sonsuzda limit","Limit kuralları","Süreklilik"]],["Türev",["Türev kavramı","Türev alma kuralları","Zincir kuralı","Teğet ve normal","Artan–azalan fonksiyon","Ekstremum","Maksimum–minimum","Türev uygulamaları"]],["İntegral",["Belirsiz integral","İntegral alma","Belirli integral","Alan","İntegralin uygulamaları"]],["Analitik Geometri",["Çemberin analitiği","Doğru ve çember","Parabol","Konikler"]]]}
+["Üstel ve Logaritmik Fonksiyonlar",["Üstel fonksiyon","Üstel denklemler","Logaritma","Logaritma özellikleri","Logaritmik denklemler","Üstel ve logaritmik problemler"]],
+["Diziler",["Dizi kavramı","Genel terim","Aritmetik dizi","Geometrik dizi","Dizi problemleri"]],
+["Trigonometri",["Toplam ve fark formülleri","İki kat açı","Yarım açı","Trigonometrik dönüşümler","Trigonometrik denklemler","Ters trigonometrik fonksiyonlara giriş"]],
+["Limit ve Süreklilik",["Limit kavramı","Sağ ve sol limit","Sonsuzda limit","Limit kuralları","Süreklilik"]],
+["Türev",["Türev kavramı","Türev alma kuralları","Zincir kuralı","Teğet ve normal","Artan–azalan fonksiyon","Ekstremum","Maksimum–minimum","Türev uygulamaları"]],
+["İntegral",["Belirsiz integral","İntegral alma","Belirli integral","Alan","İntegralin uygulamaları"]],
+["Analitik Geometri",["Çemberin analitiği","Doğru ve çember","Parabol","Konikler","Geometrik problemlerde analitik çözüm"]],
+["Uzay Geometri",["Katı cisimler","Silindir","Koni","Küre","Alan ve hacim"]]]}
 ];
-
 function readJSON(key,fallback){
  try{ const raw=localStorage.getItem(key); return raw?JSON.parse(raw):fallback; }catch(e){ console.warn("AFO veri okuma uyarısı",key,e); return fallback; }
 }
