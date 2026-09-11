@@ -324,7 +324,7 @@ body.afo-welcome-mode{background:#fff}
 body.afo-welcome-mode .sidebar,
 body.afo-welcome-mode .topbar{display:none!important}
 body.afo-welcome-mode .app{display:block;min-height:100vh}
-body.afo-welcome-mode .main{margin-left:0;width:100%;min-height:100vh;padding:0;background:#fff}
+body.afo-welcome-mode .main{width:100%;min-height:100vh;padding:0;background:#fff}
 body.afo-welcome-mode #content{min-height:100vh}
 .afo-welcome-screen{min-height:100vh;display:grid;place-items:center;padding:40px 24px;background:#fff;opacity:1;transform:scale(1);transition:opacity .62s ease,transform .72s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
 .afo-welcome-screen:before{content:"";position:absolute;width:1px;height:0;background:#203955;left:50%;top:50%;transform:translate(-50%,-50%);opacity:.08;transition:height .7s ease}
@@ -454,6 +454,19 @@ input:focus,select:focus,textarea:focus{border-color:#9eb7d1!important;box-shado
   .grade-grid{gap:12px}
   .grade{min-height:142px;padding:17px}
 }
+</style>
+<style>
+/* AFO ATATURK ANA SAYFA */
+.afo-ataturk-hero{position:relative;min-height:390px;border-radius:28px;overflow:hidden;background:linear-gradient(90deg,rgba(244,248,251,.12) 0%,rgba(244,248,251,.92) 44%,#20324e 70%,#304f70 100%);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.45);display:flex;align-items:stretch}
+.afo-ataturk-image{position:absolute;left:0;top:0;bottom:0;width:55%;height:100%;object-fit:cover;object-position:left center;z-index:1;pointer-events:none}
+.afo-ataturk-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.02) 30%,rgba(32,50,78,.08) 48%,rgba(32,50,78,.86) 69%,rgba(32,50,78,.98) 100%);z-index:2}
+.afo-ataturk-content{position:relative;z-index:3;width:53%;margin-left:auto;padding:48px 42px 42px 25px;display:flex;flex-direction:column;justify-content:center;color:#fff}
+.afo-ataturk-content .eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:800;opacity:.65}
+.afo-ataturk-content h2{font-size:36px;line-height:1.08;margin:10px 0 12px;letter-spacing:-1px}
+.afo-ataturk-content p{margin:0;color:#dce5ee;line-height:1.65;max-width:520px;font-size:13px}
+.afo-ataturk-content .stats{margin-top:20px}
+.afo-ataturk-content .stat{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(4px)}
+@media(max-width:800px){.afo-ataturk-hero{min-height:430px;background:#20324e}.afo-ataturk-image{width:100%;opacity:.42}.afo-ataturk-overlay{background:linear-gradient(90deg,rgba(32,50,78,.25),rgba(32,50,78,.92))}.afo-ataturk-content{width:100%;padding:35px 28px}}
 </style>
 </head>
 <body>
@@ -886,78 +899,16 @@ function enterArchiveFromWelcome(){
 }
 function home(){
  page={type:"home",grade:null,topic:null}; search.value=""; crumb.textContent="Ana Sayfa"; renderSide();
- content.innerHTML=`<section class="hero"><div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
- <h2>Kendi matematik arşivin.</h2>
- <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
- <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div></section>
- <div class="quick-grid">
-   <article class="quick-card" onclick="showAllTopics()"><div class="quick-icon">📚</div><div><div class="mini">AFO ARŞİVİ</div><h3>Konu Arşivine Gir</h3><p>Sınıf → konu → alt konu → mikro konu</p></div><span>→</span></article>
-   <article class="quick-card" onclick="showArchiveManager()"><div class="quick-icon">＋</div><div><div class="mini">MATERYAL</div><h3>Arşive Materyal Ekle</h3><p>PDF, görsel ve ders içeriklerini bağla</p></div><span>→</span></article>
-   <article class="quick-card" onclick="showCloudSync()"><div class="quick-icon">☁</div><div><div class="mini">SENKRONİZASYON</div><h3>Arşivi Senkronize Et</h3><p>Bilgisayar ve tablet aynı arşivi kullansın</p></div><span>→</span></article>
- </div>
- <div class="head"><h3>📚 Sınıf Arşivi</h3><span>Bir sınıf seç</span></div>
- <div class="grade-grid">${data.map((g,i)=>`<article class="card grade" style="--accent:${g.color}" onclick="showGrade(${i})"><div class="bar" style="background:${g.color}"></div><div class="mini">MATEMATİK</div><h4>${g.grade}</h4><p>${g.topics.length} konu başlığı</p><div class="count">Konuları görüntüle →</div></article>`).join("")}</div>`;
-}
-function showExam(i){
- page={type:"exam",exam:i,grade:null,topic:null}; search.value="";
- const e=examData[i]; crumb.textContent=`Ana Sayfa / ${e.name}`; renderSide();
- const s=student();
- content.innerHTML=`<div class="page-title"><button class="btn" onclick="home()">← Ana Sayfa</button><div><h3>${e.name}</h3><p>${e.tag} • ${e.topics.length} ana başlık</p></div></div>
- ${s?`<div class="student-banner"><strong>Öğrenci: ${esc(s.name)}</strong><span>${s.grade} • Sınav takibini buradan yapabilirsin.</span><button class="btn small" onclick="showStudent('${s.id}')">Öğrenciyi Gör</button></div>`:""}
- <div class="head"><h3>${e.name} Konu Haritası</h3><span>Sınav konu haritası</span></div>
- <div class="topic-grid">${e.topics.map((t,j)=>`<article class="card topic"><div><span class="num">${String(j+1).padStart(2,"0")}</span><span class="name">${esc(t)}</span></div><span style="color:${e.color}">→</span></article>`).join("")}</div>
- <div class="detail card" style="margin-top:18px;border-left:5px solid ${e.color}">
-   <h3 style="font-size:20px">${e.name} Öğrenci Takibi</h3>
-   <div class="muted">Sınava özel takip ekranı sonraki geliştirmede soru sayısı, net, kaynak ve deneme takibi ile genişletilebilir.</div>
- </div>`;
-}
-function showGrade(i){
- page={type:"grade",grade:i,topic:null}; search.value=""; crumb.textContent=`Ana Sayfa / ${data[i].grade}`; renderSide();
- const g=data[i], s=student();
- content.innerHTML=`<div class="page-title"><button class="btn" onclick="showAllTopics()">← Konu Arşivi</button><div><h3>${g.grade}</h3><p>${g.topics.length} konu</p></div></div>
- ${s?`<div class="student-banner"><strong>Öğrenci: ${esc(s.name)}</strong><span>${s.grade} • Genel ilerleme %${studentProgress(s)}</span><button class="btn small" onclick="showStudent('${s.id}')">Öğrenciyi Gör</button></div>`:""}
- <div class="head"><h3>Konu İndeksi</h3><span>Konuyu seç</span></div>
- <div class="topic-grid">${g.topics.map((t,j)=>{
-   const rec=s?.progress?.[topicKey(i,j)]||{};
-   const st=detailedStructure(t[0]);
-   const all=st.reduce((n,x)=>n+x.micro.length,0);
-   const md=st.reduce((n,x,si)=>n+x.micro.filter((_,mi)=>isMicroDone(i,j,si,mi,s)).length,0);
-   const done=!!rec.done || (all>0 && md===all);
-   const pct=rec.done?100:(all?Math.round(md/all*100):0);
-   return `<article class="card topic ${done?'completed':''}" onclick="showTopic(${i},${j})">
-     <div><span class="num">${String(j+1).padStart(2,"0")}</span><span class="name">${esc(t[0])}</span>
-     <div style="font-size:9px;color:${done?'#5f914c':'var(--muted)'};margin-top:4px">${rec.done?'KONU TAMAMLANDI':`${md}/${all} mikro konu • %${pct}`}</div></div>
-     <span class="topic-status ${done?'done':'pending'}">${done?'✓ BİTTİ':pct>0?'%'+pct:'BAŞLAMADI'}</span>
-   </article>`;
- }).join("")}</div>`;
-}
-
-
-const resourceCategories=["Konu Anlatımı","Çözümlü Örnekler","Soru Bankası","Test","Yeni Nesil","LGS / TYT / AYT","Sık Yapılan Hatalar","Ödev"];
-function normalizeResourceCategory(r){ return r.category || "Diğer"; }
-let archiveSelection={grade:0,topic:0,level:"micro",sub:0,micro:0,category:"Konu Anlatımı"};
-function archiveGradeOptions(){return data.map((g,i)=>`<option value="${i}" ${i===+archiveSelection.grade?'selected':''}>${esc(g.grade)}</option>`).join("")}
-function archiveTopicOptions(){const g=data[+archiveSelection.grade]||data[0];return g.topics.map((t,i)=>`<option value="${i}" ${i===+archiveSelection.topic?'selected':''}>${esc(t[0])}</option>`).join("")}
-function archiveSubOptions(){const g=data[+archiveSelection.grade]||data[0],t=g.topics[+archiveSelection.topic]||g.topics[0],st=detailedStructure(t[0]);return st.map((x,i)=>`<option value="${i}" ${i===+archiveSelection.sub?'selected':''}>${esc(x.name)}</option>`).join("")}
-function archiveMicroOptions(){const g=data[+archiveSelection.grade]||data[0],t=g.topics[+archiveSelection.topic]||g.topics[0],st=detailedStructure(t[0]),sub=st[+archiveSelection.sub]||st[0];return (sub?.micro||[]).map((x,i)=>`<option value="${i}" ${i===+archiveSelection.micro?'selected':''}>${esc(x)}</option>`).join("")}
-function archiveFilteredResources(){const gi=+archiveSelection.grade,ti=+archiveSelection.topic,cat=archiveSelection.category;return resources.filter(r=>r.gradeIndex===gi&&r.topicIndex===ti&&normalizeResourceCategory(r)===cat&&(archiveSelection.level==='topic'?(!r.microtopic):r.microtopic))}
-function showArchiveManager(pref={}){archiveSelection={...archiveSelection,...pref};page={type:"archive"};search.value="";crumb.textContent="AFO / Arşiv Yönetimi";renderSide();renderArchiveManager()}
-function renderArchiveManager(){
- const gi=+archiveSelection.grade,ti=+archiveSelection.topic,si=+archiveSelection.sub,mi=+archiveSelection.micro,g=data[gi]||data[0],t=g.topics[ti]||g.topics[0],st=detailedStructure(t[0]),sub=st[si]||st[0],micro=sub?.micro?.[mi]||"",isMicro=archiveSelection.level==='micro',cat=archiveSelection.category||resourceCategories[0],rs=archiveFilteredResources();
- content.innerHTML=`<div class="page-title"><div><h3>📚 Arşiv Yönetimi</h3><p>Bütün materyallerini tek yerden ekle ve doğru konuya bağla.</p></div><span class="archive-badge">MERKEZİ ARŞİV</span></div>
- <section class="archive-manager-grid"><div class="card detail archive-form-card">
- <div class="archive-step"><span>01</span><div><b>Konumu seç</b><small>Materyalin AFO içindeki yeri</small></div></div>
- <div class="field"><label>SINIF</label><select class="select" id="amGrade" onchange="archiveChange('grade',this.value)">${archiveGradeOptions()}</select></div>
- <div class="field"><label>ANA KONU</label><select class="select" id="amTopic" onchange="archiveChange('topic',this.value)">${archiveTopicOptions()}</select></div>
- <div class="field"><label>HEDEF DÜZEYİ</label><div class="archive-levels"><button class="archive-level ${!isMicro?'active':''}" onclick="archiveSetLevel('topic')">Ana konu</button><button class="archive-level ${isMicro?'active':''}" onclick="archiveSetLevel('micro')">Mikro konu</button></div></div>
- ${isMicro?`<div class="field"><label>ALT KONU</label><select class="select" id="amSub" onchange="archiveChange('sub',this.value)">${archiveSubOptions()}</select></div><div class="field"><label>MİKRO KONU</label><select class="select" id="amMicro" onchange="archiveChange('micro',this.value)">${archiveMicroOptions()}</select></div>`:`<div class="archive-target-note">📌 Materyal doğrudan <b>${esc(g.grade)} → ${esc(t[0])}</b> ana konu arşivine bağlanacak.</div>`}
- <div class="field"><label>İÇERİK TÜRÜ</label><select class="select" id="amCategory" onchange="archiveChange('category',this.value)">${resourceCategories.slice(0,8).map(x=>`<option ${x===cat?'selected':''}>${esc(x)}</option>`).join("")}</select></div>
- <div class="archive-step"><span>02</span><div><b>Materyali ekle</b><small>PDF veya görsel</small></div></div>
- <div class="field"><label>MATERYAL BAŞLIĞI</label><input class="input" id="amTitle" placeholder="Örn. ${esc(micro||t[0])} • ${esc(cat)} 1"></div>
- <div class="material-drop" onclick="document.getElementById('amFile').click()"><input id="amFile" class="file-input" type="file" accept=".pdf,application/pdf,image/*"><strong>📎 PDF veya Resim Seç</strong><div id="amFileName" style="font-size:11px;color:var(--muted);margin-top:6px">Dosya seçilmedi.</div></div>
- <div class="modal-actions"><button class="btn primary" onclick="archiveUpload()">⬆ Arşive Kaydet</button></div><div class="archive-rule">Bu işlem öğrencinin ilerlemesini değiştirmez; sadece AFO arşivine materyal ekler.</div>
- </div><div><div class="card archive-location-card"><div class="muted">SEÇİLİ ARŞİV KONUMU</div><h3>${esc(g.grade)} → ${esc(t[0])}</h3><p>${isMicro?`→ ${esc(sub.name)} → <b>${esc(micro)}</b>`:`Bu ana konunun genel arşivi`}</p><div class="archive-path-chip">${esc(cat)} • ${rs.length} materyal</div></div>
- <div class="head" style="margin-top:18px"><h3>Bu Konumdaki Materyaller</h3><span>${rs.length} dosya</span></div><div class="material-list">${rs.length?rs.slice().reverse().map(r=>`<article class="material-item"><div class="resource-icon" style="background:${r.type==='pdf'?'#b46b72':'#5f8f8f'}">${r.type==='pdf'?'PDF':'IMG'}</div><div class="resource-info"><strong>${esc(r.name)}</strong><span>${r.microtopic?esc(r.microtopic)+' • ':''}${esc(normalizeResourceCategory(r))} • ${formatBytes(r.size)}</span></div><div class="resource-actions"><button class="btn small primary" onclick="viewArchiveResource('${r.id}')">Görüntüle</button><button class="btn small danger" onclick="deleteArchiveResource('${r.id}')">Sil</button></div></article>`).join(""):`<div class="empty">Bu konum ve içerik türünde henüz materyal yok.</div>`}</div></div></section>`;
+ content.innerHTML=`<section class="afo-ataturk-hero">
+  <img class="afo-ataturk-image" src="ataturk-afo.png" alt="Atatürk ve matematik">
+  <div class="afo-ataturk-overlay"></div>
+  <div class="afo-ataturk-content">
+    <div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+    <h2>Kendi matematik arşivin.</h2>
+    <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
+    <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div>
+  </div>
+</section>`;
  const f=document.getElementById('amFile');if(f)f.onchange=e=>document.getElementById('amFileName').textContent=e.target.files[0]?.name||'Dosya seçilmedi.';
 }
 function archiveChange(key,val){archiveSelection[key]=key==='category'?val:+val;if(key==='grade'){archiveSelection.topic=0;archiveSelection.sub=0;archiveSelection.micro=0}if(key==='topic'){archiveSelection.sub=0;archiveSelection.micro=0}if(key==='sub')archiveSelection.micro=0;renderArchiveManager()}
