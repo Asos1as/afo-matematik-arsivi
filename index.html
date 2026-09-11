@@ -359,10 +359,134 @@ body.afo-welcome-mode #content{min-height:100vh}
 .afo-welcome-clean .afo-welcome-actions{justify-content:center;margin-top:30px}
 .afo-app-enter{animation:afoAppEnter .38s ease both}
 @keyframes afoAppEnter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* AFO giriş ekranı + Atatürk */
+html,body{max-width:100%;overflow-x:hidden}
+body.afo-welcome-mode{overflow-x:hidden}
+body.afo-welcome-mode .main{overflow:hidden}
+.afo-welcome-screen{min-height:100vh;height:100vh;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,1fr);place-items:stretch;padding:0;background:#fff;overflow:hidden}
+.afo-welcome-ataturk{position:relative;min-width:0;overflow:hidden;background:#f8fafc}
+.afo-welcome-ataturk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center}
+.afo-welcome-ataturk:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 58%,rgba(255,255,255,.95) 100%);pointer-events:none}
+.afo-welcome-right{position:relative;z-index:4;display:flex;align-items:center;justify-content:center;padding:48px 7vw 48px 28px;min-width:0;background:linear-gradient(90deg,rgba(255,255,255,.88),#fff 18%)}
+.afo-welcome-right .afo-welcome-clean{width:min(650px,100%);text-align:left;animation:afoWelcomeIn .75s cubic-bezier(.18,.8,.2,1) both}
+.afo-welcome-right .afo-welcome-mark{margin:0;background:#203955}
+.afo-welcome-right .afo-welcome-eyebrow{margin-top:22px}
+.afo-welcome-right .afo-welcome-title{font-size:clamp(38px,4.5vw,64px);margin-top:10px}
+.afo-welcome-right .afo-welcome-text{margin:0;max-width:590px}
+.afo-welcome-right .afo-welcome-actions{justify-content:flex-start;margin-top:28px}
+.afo-welcome-right .afo-welcome-meta{justify-content:flex-start}
+.afo-welcome-screen .afo-math-field{z-index:1;opacity:.5}
+.afo-welcome-screen .afo-math-symbol{z-index:1}
+.afo-home-ataturk{margin-bottom:22px}
+@media(max-width:900px){.afo-welcome-screen{grid-template-columns:1fr;height:100vh}.afo-welcome-ataturk{position:absolute;inset:0;z-index:1}.afo-welcome-ataturk:after{background:linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,.96) 68%)}.afo-welcome-right{position:relative;z-index:3;background:linear-gradient(90deg,rgba(255,255,255,.25),rgba(255,255,255,.9) 55%,#fff);padding:32px 7vw}}
+@media(max-width:600px){.afo-welcome-right{padding:28px 22px}.afo-welcome-right .afo-welcome-title{font-size:38px}.afo-welcome-right .afo-welcome-actions{display:flex;flex-wrap:wrap}}
+
+.afo-ataturk-hero{position:relative;min-height:390px;border-radius:28px;overflow:hidden;background:linear-gradient(90deg,#f7fafc 0%,#fff 45%,#20324e 70%,#304f70 100%);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.45);display:flex;align-items:stretch}
+.afo-ataturk-image{position:absolute;left:0;top:0;bottom:0;width:55%;object-fit:cover;object-position:left center;z-index:1;pointer-events:none}
+.afo-ataturk-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.02) 30%,rgba(32,50,78,.08) 48%,rgba(32,50,78,.86) 69%,rgba(32,50,78,.98) 100%);z-index:2}
+.afo-ataturk-content{position:relative;z-index:3;width:53%;margin-left:auto;padding:48px 42px 42px 25px;display:flex;flex-direction:column;justify-content:center;color:#fff}
+.afo-ataturk-content .eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:800;opacity:.65}
+.afo-ataturk-content h2{font-size:36px;line-height:1.08;margin:10px 0 12px;letter-spacing:-1px}
+.afo-ataturk-content p{margin:0;color:#dce5ee;line-height:1.65;max-width:520px;font-size:13px}
+.afo-ataturk-content .stats{margin-top:20px}
+.afo-ataturk-content .stat{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(4px)}
+@media(max-width:800px){.afo-ataturk-hero{min-height:430px;background:#20324e}.afo-ataturk-image{width:100%;opacity:.42}.afo-ataturk-overlay{background:linear-gradient(90deg,rgba(32,50,78,.25),rgba(32,50,78,.92))}.afo-ataturk-content{width:100%;padding:35px 28px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 .cloud-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cloud-form .field{margin-bottom:0}.cloud-pill{display:inline-block;padding:7px 10px;border-radius:999px;background:#eef2f6;color:var(--muted);font-size:10px;font-weight:800;margin-right:8px}.cloud-pill.ok{background:#edf8e9;color:#5f914f}.cloud-note{margin-top:12px;padding:11px 13px;border-radius:12px;background:#f7f9fc;color:var(--muted);font-size:10px;line-height:1.6}@media(max-width:700px){.cloud-form{grid-template-columns:1fr}}
+</style>
+
+<style id="afo-beautify-v2">
+/* AFO VISUAL REFRESH — functionality untouched */
+:root{
+  --bg:#f3f6fb;--panel:#ffffff;--navy:#1f3553;--text:#26364d;--muted:#718096;
+  --line:#dfe7f1;--shadow:0 16px 38px rgba(31,53,83,.10);--accent:#5b7fa3;
+  --afo-blue:#355b86;--afo-sky:#dfeaf7;--afo-mint:#dff3ea;--afo-gold:#f6e8bd;--afo-lilac:#ebe4f7;
+}
+body{
+  background:
+    radial-gradient(circle at 88% 7%,rgba(113,159,204,.13),transparent 23rem),
+    radial-gradient(circle at 18% 92%,rgba(127,183,160,.09),transparent 25rem),
+    var(--bg);
+}
+body:before{
+  content:"∑   π   √   ∞   Δ   x²   f(x)";
+  position:fixed;inset:auto -30px 8px auto;z-index:0;pointer-events:none;
+  font-size:34px;letter-spacing:18px;font-weight:800;color:rgba(44,72,105,.035);
+  transform:rotate(-7deg);white-space:nowrap;
+}
+.app{position:relative;z-index:1}
+.sidebar{
+  background:
+    radial-gradient(circle at 85% 8%,rgba(255,255,255,.12),transparent 13rem),
+    linear-gradient(165deg,#1b304d 0%,#294664 52%,#223a58 100%);
+  box-shadow:10px 0 35px rgba(24,43,67,.10);
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.brand{padding-top:10px}
+.brand .mini{opacity:.7;color:#dbe8f5}
+.brand h1{letter-spacing:-.7px;text-shadow:0 2px 18px rgba(0,0,0,.12)}
+.brand p{color:#d1ddeb}
+.nav-title{color:#b7c8da}
+.nav button{transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.nav button:hover{transform:translateX(3px);background:rgba(255,255,255,.10)}
+.nav button.active{background:linear-gradient(90deg,rgba(255,255,255,.17),rgba(255,255,255,.07));box-shadow:inset 3px 0 0 #bcd6ee}
+.main{padding-top:32px}
+.topbar{margin-bottom:28px}
+.search{box-shadow:0 5px 18px rgba(31,53,83,.05);transition:.2s;border-color:#dce5ef}
+.search:focus{border-color:#9eb7d1;box-shadow:0 0 0 4px rgba(91,127,163,.10)}
+.hero{
+  background:linear-gradient(135deg,#1d3553 0%,#365b83 58%,#6b89a7 100%);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 20px 45px rgba(31,53,83,.16);
+}
+.hero:before{content:"∑  π  √  ∞";position:absolute;right:28px;bottom:-4px;font-size:52px;font-weight:900;letter-spacing:8px;color:rgba(255,255,255,.055);transform:rotate(-5deg)}
+.hero:after{width:360px;height:360px;background:radial-gradient(circle,rgba(255,255,255,.13),rgba(255,255,255,0) 68%);right:-135px;top:-160px}
+.eyebrow{color:#eaf3fb}
+.hero h2{letter-spacing:-1.1px}
+.stats .stat{border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(6px);background:rgba(255,255,255,.11)}
+.head h3{letter-spacing:-.3px}
+.grade-grid{gap:17px}
+.card{
+  border-color:#e0e7f0;box-shadow:0 8px 25px rgba(31,53,83,.055);overflow:hidden;
+}
+.grade{
+  min-height:154px;
+  background:linear-gradient(145deg,#fff 0%,#fbfcfe 72%,#f2f6fb 100%);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.grade:after{content:"→";position:absolute;right:17px;bottom:14px;font-size:18px;font-weight:800;color:#9aacbf;transition:.2s}
+.grade:hover{transform:translateY(-5px);border-color:#cbd9e8;box-shadow:0 17px 34px rgba(31,53,83,.11)}
+.grade:hover:after{transform:translateX(4px);color:#45698f}
+.grade .bar{width:6px;border-radius:0 5px 5px 0}
+.grade h4{letter-spacing:-.4px}
+.grade p{line-height:1.5}
+.grade .count{display:inline-block;padding:6px 9px;border-radius:9px;background:#edf3f9}
+.btn{transition:.18s ease;box-shadow:0 3px 10px rgba(31,53,83,.035)}
+.btn:hover{transform:translateY(-1px);border-color:#c7d5e4;box-shadow:0 7px 16px rgba(31,53,83,.08)}
+.btn.primary{background:linear-gradient(135deg,#203a5a,#345c84);box-shadow:0 8px 18px rgba(32,58,90,.16)}
+.btn.primary:hover{filter:brightness(1.05)}
+.page-title h3,.section-title,.panel-title{letter-spacing:-.35px}
+/* Give common content panels a slightly more premium feel */
+.resource-card,.topic-card,.student-card,.package-card,.material-card,.search-results .result,.archive-card,.panel,.box,.section-card{
+  border-color:#e0e7f0;
+  box-shadow:0 8px 24px rgba(31,53,83,.055);
+}
+/* Form controls */
+input,select,textarea{border-color:#dce5ef!important;box-shadow:0 3px 12px rgba(31,53,83,.025)}
+input:focus,select:focus,textarea:focus{border-color:#9eb7d1!important;box-shadow:0 0 0 4px rgba(91,127,163,.09)!important;outline:none}
+/* Scrollbars */
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#c5d1df;border-radius:20px;border:2px solid transparent;background-clip:padding-box}::-webkit-scrollbar-thumb:hover{background:#aebed0;border:2px solid transparent;background-clip:padding-box}
+@media(max-width:700px){
+  body:before{font-size:24px;letter-spacing:10px}
+  .main{padding:18px 15px 28px}
+  .hero{padding:25px 22px;border-radius:21px}
+  .hero h2{font-size:29px}
+  .grade-grid{gap:12px}
+  .grade{min-height:142px;padding:17px}
+}
 </style>
 </head>
 <body>
@@ -701,19 +825,24 @@ function showWelcome(){
    <span class="afo-math-symbol s5">π · r²</span>
    <span class="afo-math-symbol s6">f′(x)</span>
   </div>
-  <div class="afo-welcome-clean">
-   <div class="afo-welcome-mark">AFO</div>
-   <div class="afo-welcome-eyebrow">AFO • MATEMATİK ARŞİVİ</div>
-   <h2 class="afo-welcome-title">Hoş geldiniz <span>Hocam.</span></h2>
-   <p class="afo-welcome-text">Kendi matematik arşivinden dersini yönet, öğrencilerinin hangi konuyu yaptığını takip et ve hazır içeriklere tek yerden ulaş.</p>
-   <div class="afo-welcome-actions">
-    <button class="afo-welcome-primary" onclick="startLesson()">▶ Derse Başla</button>
-    <button class="afo-welcome-secondary" onclick="enterArchiveFromWelcome()">📚 Konu Arşivine Git</button>
-   </div>
-   <div class="afo-welcome-meta">
-    <span class="afo-welcome-chip">👨‍🏫 Öğretmen arşivi</span>
-    <span class="afo-welcome-chip">${data.length} sınıf</span>
-    <span class="afo-welcome-chip">${data.reduce((a,g)=>a+g.topics.length,0)} konu</span>
+  <div class="afo-welcome-ataturk" aria-hidden="true">
+   <img src="ataturk-afo.png" alt="">
+  </div>
+  <div class="afo-welcome-right">
+   <div class="afo-welcome-clean">
+    <div class="afo-welcome-mark">AFO</div>
+    <div class="afo-welcome-eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+    <h2 class="afo-welcome-title">Hoş geldiniz <span>Hocam.</span></h2>
+    <p class="afo-welcome-text">Kendi matematik arşivinden dersini yönet, öğrencilerinin hangi konuyu yaptığını takip et ve hazır içeriklere tek yerden ulaş.</p>
+    <div class="afo-welcome-actions">
+     <button class="afo-welcome-primary" onclick="startLesson()">▶ Derse Başla</button>
+     <button class="afo-welcome-secondary" onclick="enterArchiveFromWelcome()">📚 Konu Arşivine Git</button>
+    </div>
+    <div class="afo-welcome-meta">
+     <span class="afo-welcome-chip">👨‍🏫 Öğretmen arşivi</span>
+     <span class="afo-welcome-chip">${data.length} sınıf</span>
+     <span class="afo-welcome-chip">${data.reduce((a,g)=>a+g.topics.length,0)} konu</span>
+    </div>
    </div>
   </div>
  </section>`;
@@ -737,7 +866,17 @@ function enterArchiveFromWelcome(){
 }
 function home(){
  page={type:"home",grade:null,topic:null}; search.value=""; crumb.textContent="Ana Sayfa"; renderSide();
- content.innerHTML=`<section class="hero"><div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+ content.innerHTML=`<section class="afo-ataturk-hero afo-home-ataturk">
+  <img class="afo-ataturk-image" src="ataturk-afo.png" alt="Atatürk ve matematik">
+  <div class="afo-ataturk-overlay"></div>
+  <div class="afo-ataturk-content">
+    <div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+    <h2>Kendi matematik arşivin.</h2>
+    <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
+    <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div>
+  </div>
+</section>
+<section class="hero"><div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
  <h2>Kendi matematik arşivin.</h2>
  <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
  <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div></section>
