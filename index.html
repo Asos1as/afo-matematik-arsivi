@@ -565,6 +565,84 @@ body:not(.afo-welcome-mode) #content > *{position:relative;z-index:1}
  .afo-welcome-quote{display:none}
 }
 </style>
+
+<style id="afo-final-welcome-fix">
+/* AFO FINAL WELCOME — temiz, taşmasız, Atatürk görselli */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body.afo-welcome-mode{overflow:hidden!important;background:#fff!important}
+body.afo-welcome-mode .sidebar,
+body.afo-welcome-mode .topbar{display:none!important}
+body.afo-welcome-mode .app{display:block;min-height:100vh;width:100%}
+body.afo-welcome-mode .main{margin:0!important;width:100%!important;min-height:100vh;padding:0!important;background:#fff;overflow:hidden}
+body.afo-welcome-mode #content{width:100%;min-height:100vh}
+.afo-welcome-screen{
+  width:100%!important;height:100vh!important;min-height:620px!important;
+  display:grid!important;grid-template-columns:minmax(0,52%) minmax(0,48%)!important;
+  padding:0!important;margin:0!important;overflow:hidden!important;
+  position:relative;background:#fff!important;
+}
+.afo-welcome-ataturk{
+  position:relative!important;display:block!important;min-width:0!important;
+  width:100%!important;height:100%!important;overflow:hidden!important;
+  background:#fff url('ataturk-afo.png') no-repeat left center!important;
+  background-size:auto 100%!important;z-index:1!important;
+}
+.afo-welcome-ataturk img{display:none!important}
+.afo-welcome-ataturk:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,0) 58%,rgba(255,255,255,.42) 76%,#fff 100%)!important;
+}
+.afo-welcome-right{
+  position:relative!important;z-index:5!important;min-width:0!important;width:100%!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:42px clamp(28px,4.5vw,72px)!important;background:#fff!important;
+  overflow:hidden!important;
+}
+.afo-welcome-right .afo-welcome-clean{
+  width:min(650px,100%)!important;max-width:100%!important;
+  min-width:0!important;text-align:left!important;
+}
+.afo-welcome-right .afo-welcome-mark{margin:0!important;background:#203955!important}
+.afo-welcome-right .afo-welcome-eyebrow{margin-top:22px!important;color:#65788e!important}
+.afo-welcome-right .afo-welcome-title{
+  font-size:clamp(38px,3.6vw,58px)!important;
+  line-height:1.04!important;letter-spacing:-1.6px!important;
+  margin:10px 0 14px!important;white-space:normal!important;
+  overflow-wrap:break-word!important;color:#203955!important;
+}
+.afo-welcome-right .afo-welcome-text{
+  max-width:560px!important;margin:0!important;color:#68798d!important;
+  font-size:13px!important;line-height:1.7!important;
+}
+.afo-welcome-right .afo-welcome-actions{justify-content:flex-start!important;margin-top:28px!important}
+.afo-welcome-right .afo-welcome-meta{justify-content:flex-start!important;margin-top:20px!important}
+.afo-welcome-quote{
+  display:block!important;margin-top:24px!important;padding:4px 0 4px 15px!important;
+  border-left:2px solid #b7cfb2!important;color:#65788e!important;
+  font:italic 14px Georgia,serif!important;line-height:1.55!important;
+}
+.afo-welcome-quote strong{display:block;margin-top:4px;color:#65788e;font:700 9px Inter,system-ui,sans-serif;letter-spacing:1px}
+.afo-scroll-hint{margin-top:22px!important;color:#9aa8b7!important}
+.afo-math-field{z-index:2!important;pointer-events:none!important}
+.afo-welcome-screen .afo-math-symbol{opacity:.07!important}
+@media(max-width:1050px){
+ .afo-welcome-screen{grid-template-columns:minmax(0,50%) minmax(0,50%)!important}
+ .afo-welcome-right{padding-left:28px!important;padding-right:28px!important}
+ .afo-welcome-right .afo-welcome-title{font-size:clamp(34px,4vw,50px)!important}
+}
+@media(max-width:800px){
+ .afo-welcome-screen{display:block!important;min-height:100vh!important;height:100vh!important}
+ .afo-welcome-ataturk{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-size:auto 100%!important}
+ .afo-welcome-ataturk:after{background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.84) 66%,#fff 100%)!important}
+ .afo-welcome-right{position:relative!important;min-height:100vh!important;background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.86) 62%,rgba(255,255,255,.97))!important;padding:28px 7vw!important}
+ .afo-welcome-right .afo-welcome-clean{text-align:center!important}
+ .afo-welcome-right .afo-welcome-mark{margin:0 auto!important}
+ .afo-welcome-right .afo-welcome-text{margin:0 auto!important}
+ .afo-welcome-right .afo-welcome-actions{justify-content:center!important}
+ .afo-welcome-right .afo-welcome-meta{justify-content:center!important}
+ .afo-welcome-quote{text-align:left!important;max-width:420px;margin:22px auto 0!important}
+}
+</style>
 </head>
 <body>
 <div class="app">
