@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AFO Matematik Arşivi</title>
+<style>
+:root{
+ --bg:#f5f7fb;--panel:#fff;--navy:#20324e;--text:#263447;--muted:#76839a;
+ --line:#e2e8f0;--shadow:0 14px 35px rgba(32,50,78,.10);--accent:#5b7fa3;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh;display:flex}
+.sidebar{width:275px;position:fixed;inset:0 auto 0 0;background:linear-gradient(180deg,#1e304b,#2f4663);color:#fff;padding:25px 17px;z-index:10;overflow:auto}
+.brand{padding:6px 12px 25px}.brand .mini{font-size:12px;letter-spacing:3px;opacity:.55;font-weight:800}.brand h1{margin:8px 0 6px;font-size:26px;line-height:1.04}.brand p{margin:0;color:#cbd5e2;font-size:12px}
+.nav-title{padding:10px 12px 7px;font-size:10px;letter-spacing:1.4px;color:#aab8c9;font-weight:700}
+.nav button{width:100%;border:0;background:transparent;color:#e4ebf3;padding:10px 12px;border-radius:12px;text-align:left;margin:2px 0}
+.nav button:hover,.nav button.active{background:rgba(255,255,255,.11)}
+.side-sep{height:1px;background:rgba(255,255,255,.12);margin:14px 10px}
+.student-nav{display:flex;flex-direction:column;gap:5px}
+.student-chip{border:0;background:rgba(255,255,255,.06);color:#eef3f8;border-radius:11px;padding:10px 11px;text-align:left}
+.student-chip:hover{background:rgba(255,255,255,.13)}
+.student-chip strong{display:block;font-size:12px}.student-chip small{display:block;color:#b5c2d1;margin-top:2px}
+.footer{margin-top:22px;padding:8px 12px;color:#97a7ba;font-size:10px;line-height:1.5}
+.main{margin-left:275px;width:calc(100% - 275px);padding:30px 42px}
+.topbar{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:25px}
+.crumb{font-size:12px;color:var(--muted)}
+.search{width:min(350px,44vw);padding:11px 14px;border:1px solid var(--line);border-radius:13px;background:#fff;outline:none}
+.hero{background:linear-gradient(135deg,#20324e,#476886);border-radius:25px;color:#fff;padding:31px 34px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-110px;top:-140px;background:rgba(255,255,255,.07)}
+.eyebrow{font-size:10px;letter-spacing:2px;font-weight:800;opacity:.6}.hero h2{font-size:33px;line-height:1.08;margin:9px 0 9px}.hero p{margin:0;color:#dce5ee;line-height:1.6;max-width:760px;font-size:13px}
+.stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.stat{padding:8px 12px;border-radius:11px;background:rgba(255,255,255,.1);font-size:11px}
+.head{display:flex;justify-content:space-between;align-items:end;margin:30px 0 14px}.head h3{margin:0;color:var(--navy);font-size:18px}.head span{font-size:11px;color:var(--muted)}
+.grade-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.card{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:0 7px 22px rgba(32,50,78,.05);transition:.16s}
+.grade{padding:19px;cursor:pointer;position:relative;overflow:hidden}.grade:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.grade .bar{position:absolute;left:0;top:0;bottom:0;width:5px}.grade .mini{font-size:9px;color:var(--muted);font-weight:800;letter-spacing:1.2px}.grade h4{margin:7px 0 8px;font-size:22px;color:var(--navy)}.grade p{margin:0;color:var(--muted);font-size:12px}.grade .count{margin-top:15px;font-size:11px;font-weight:800;color:var(--navy)}
+.btn{border:1px solid var(--line);background:#fff;color:var(--navy);padding:9px 12px;border-radius:11px}.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}.btn.danger{color:#a83f50}
+.btn.small{padding:7px 9px;font-size:11px}
+.page-title{display:flex;align-items:center;gap:10px}.page-title h3{margin:0;font-size:27px;color:var(--navy)}.page-title p{margin:3px 0 0;font-size:11px;color:var(--muted)}
+.topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.topic{padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}.topic:hover{box-shadow:var(--shadow)}.topic .num{font-size:10px;color:var(--muted);font-weight:800;margin-right:9px}.topic .name{font-size:14px;font-weight:750;color:var(--navy)}
+.detail{padding:25px}.detail h3{margin:0 0 4px;font-size:28px;color:var(--navy)}.detail .muted{color:var(--muted);font-size:12px}
+.student-banner{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:15px 0 20px;padding:13px 15px;border-radius:14px;background:#eef3f8;border:1px solid #dbe4ee}
+.student-banner strong{color:var(--navy)}.student-banner span{font-size:11px;color:var(--muted)}
+.progress{height:8px;background:#e9eef4;border-radius:20px;overflow:hidden;margin:18px 0}.progress>div{height:100%;background:linear-gradient(90deg,#5b7fa3,#8caa62)}
+.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid var(--line);background:linear-gradient(135deg,#fbfcfe,#f6f9fc);border-radius:13px;font-size:12px;transition:.15s}
+.check:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(32,50,78,.06)}
+.check.done{background:linear-gradient(135deg,#eef9e9,#f8fcf6);border-color:#c8dfbf}
+.check.done{background:#f1f8ed;border-color:#cfe2c8}.check input{width:17px;height:17px;accent-color:#6b9852}
+.notes textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:12px;padding:12px;resize:vertical;background:#fbfcfe;outline:none}
+.search-results{display:grid;gap:9px}.result{padding:13px 15px;display:flex;justify-content:space-between;align-items:center}
+.modal-back{position:fixed;inset:0;background:rgba(16,28,45,.50);display:flex;justify-content:center;align-items:center;padding:20px;z-index:50}
+.modal{width:min(520px,100%);background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:24px}.modal h3{margin:0 0 17px;color:var(--navy)}.field{margin-bottom:13px}.field label{display:block;font-size:11px;font-weight:800;color:var(--muted);margin-bottom:6px}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;outline:none}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.student-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.student-card{padding:17px}.student-card h4{margin:0 0 5px;color:var(--navy);font-size:16px}.student-card p{margin:0 0 11px;color:var(--muted);font-size:11px}.student-progress{font-size:10px;color:var(--muted);margin-bottom:7px}
+@media(max-width:980px){.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px);padding:22px}.grade-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.app{display:block}.sidebar{position:static;width:100%}.main{margin:0;width:100%}.nav{display:grid;grid-template-columns:repeat(3,1fr)}.student-list,.topic-grid,.check-grid{grid-template-columns:1fr}.search{width:100%}.topbar{flex-direction:column;align-items:stretch}}
+
+.exam-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.exam-card{background:linear-gradient(135deg,#fff,#f8fafc);border:1px solid var(--line);border-radius:18px;padding:17px;display:grid;grid-template-columns:58px 1fr 20px;gap:13px;align-items:center;cursor:pointer;box-shadow:0 7px 22px rgba(32,50,78,.05);position:relative;overflow:hidden}
+.exam-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--exam)}
+.exam-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.exam-icon{width:58px;height:58px;border-radius:16px;background:var(--exam);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;letter-spacing:.5px}
+.exam-tag{font-size:9px;color:var(--muted);font-weight:800;letter-spacing:1px}.exam-card h4{margin:4px 0;font-size:19px;color:var(--navy)}.exam-card p{margin:0;font-size:10px;color:var(--muted)}.exam-arrow{font-size:19px;color:var(--muted)}
+.hero:before{content:"";position:absolute;width:90px;height:90px;border:1px solid rgba(255,255,255,.12);border-radius:24px;right:55px;bottom:-35px;transform:rotate(20deg)}
+.nav-title{font-weight:800}
+@media(max-width:980px){.exam-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.exam-grid{grid-template-columns:1fr}}
+
+.topic-detail-head{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}
+.color-pills{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 20px}
+.color-pill{padding:7px 10px;border-radius:99px;font-size:10px;font-weight:800;color:#fff}
+.subtopic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.subtopic-card{border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.subtopic-card.done{background:#f1f8ed;border-color:#cfe2c8}
+.subtopic-name{font-size:12px;font-weight:700;color:var(--navy)}
+.status-dot{width:9px;height:9px;border-radius:50%;background:#c8d1dd;display:inline-block;margin-right:7px}
+.subtopic-card.done .status-dot{background:#73a45c}
+.lesson-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:20px}
+.lesson-card{padding:15px;border-radius:15px;color:#fff;min-height:90px;box-shadow:0 8px 20px rgba(32,50,78,.08)}
+
+.lesson-card strong{display:block;font-size:12px;margin-bottom:5px}.lesson-card span{font-size:10px;opacity:.85}
+.afo-package{margin-top:14px;border:1px solid #dfe7ef;border-radius:18px;background:linear-gradient(135deg,#f8fbfd,#ffffff);padding:18px;box-shadow:0 10px 28px rgba(32,50,78,.06)}
+.afo-package-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.afo-package-title{font-size:18px;font-weight:850;color:var(--navy)}.afo-package-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.afo-package-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:14px}.afo-package-item{padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;cursor:pointer;transition:.15s}.afo-package-item:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(32,50,78,.08)}.afo-package-item b{display:block;font-size:11px;color:var(--navy)}.afo-package-item span{display:block;font-size:9px;color:var(--muted);margin-top:4px}.afo-package-empty{opacity:.6}
+.afo-package-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.afo-package-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:#eef3f8;border:1px solid #e0e7ef;color:var(--navy);font-size:9px;font-weight:800}.afo-package-pill.ready{background:#edf8e9;border-color:#cce4c5;color:#4f8847}.afo-package-pill.empty{opacity:.58}.afo-package-cta{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 13px;border-radius:14px;background:linear-gradient(135deg,#20324e,#31506f);color:#fff}.afo-package-cta strong{font-size:11px}.afo-package-cta span{display:block;font-size:9px;opacity:.75;margin-top:2px}.afo-package-cta .btn{background:#fff;color:#20324e;border-color:#fff}.micro-package-btn{border-color:#d7e4ef!important;color:#20324e!important;background:#fff!important}.micro-package-btn:hover{background:#eef5fa!important}
+.current-place .path{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}.current-place .path strong{color:var(--navy)}.current-place .mini-note{margin-top:9px;padding:9px 11px;border-radius:10px;background:#f6f8fb;color:var(--muted);font-size:10px;line-height:1.5}
+.search-group{margin-top:18px}.search-kind{font-size:10px;font-weight:850;letter-spacing:1px;color:var(--muted);margin:0 0 8px}.search-meta{font-size:10px;color:var(--muted);margin-top:4px}
+@media(max-width:850px){.afo-package-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){.afo-package-grid{grid-template-columns:1fr}}
+
+@media(max-width:850px){.subtopic-grid{grid-template-columns:1fr}.lesson-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){.lesson-grid{grid-template-columns:1fr}}
+
+<style>
+.qbank-toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}
+.filterbar{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px}
+.input,.select,.textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;outline:none}
+.question-card{padding:18px;margin-bottom:11px}
+.question-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.badges{display:flex;gap:6px;flex-wrap:wrap}.badge{padding:5px 8px;border-radius:999px;font-size:9px;font-weight:800;background:#eef3f8;color:var(--navy)}
+.question-text{margin:13px 0;font-size:14px;line-height:1.65;white-space:pre-wrap}
+.option-list{display:grid;gap:7px}.option{border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-size:12px}
+.option.correct{background:#eef8e9;border-color:#c8dfbf}
+.test-builder{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.sticky-box{position:sticky;top:20px;height:max-content}
+.selected-q{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;margin:7px 0;background:#fafbfd}
+.test-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.test-card{padding:18px}
+.test-meta{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.assignment{padding:16px;border-left:4px solid var(--accent)}
+.student-test{padding:18px;margin-bottom:12px}
+.answer-choice{display:block;border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin:8px 0;cursor:pointer}
+.answer-choice:hover{background:#f7f9fb}
+.answer-choice input{margin-right:8px}
+.result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.metric{padding:16px;text-align:center}.metric .n{font-size:26px;font-weight:850;color:var(--navy)}.metric .l{font-size:10px;color:var(--muted)}
+.mini-table{width:100%;border-collapse:collapse;font-size:11px}.mini-table th,.mini-table td{padding:9px;border-bottom:1px solid var(--line);text-align:left}.mini-table th{color:var(--muted);font-size:9px;letter-spacing:.6px}
+@media(max-width:850px){.filterbar,.test-builder,.result-grid{grid-template-columns:1fr}.test-list{grid-template-columns:1fr}.sticky-box{position:static}}
+
+<style>
+.resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:12px}
+.resource-card{padding:16px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(135deg,#fff,#f8fafc);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.resource-icon{width:45px;height:45px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:12px;flex:none}
+.resource-info{min-width:0;flex:1}.resource-info strong{display:block;color:var(--navy);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.resource-info span{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.resource-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.upload-box{border:2px dashed #cbd6e3;border-radius:15px;padding:18px;text-align:center;background:#fbfcfe;margin-top:10px}
+.upload-box:hover{border-color:#8fa7bd}
+.file-input{display:none}
+.resource-preview{margin-top:15px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#f8fafc}
+.resource-preview iframe{width:100%;height:620px;border:0}
+.resource-preview img{display:block;max-width:100%;max-height:620px;margin:auto}
+.resource-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.resource-tab{padding:8px 11px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:11px;cursor:pointer}
+.resource-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.teacher-only{background:#fff5ec;border:1px solid #f2d3b0;color:#9a5b24}
+@media(max-width:800px){.resource-grid{grid-template-columns:1fr}}
+
+<style>
+.material-page{display:grid;grid-template-columns:1fr 340px;gap:18px}
+.material-header{padding:23px;border-radius:20px;background:linear-gradient(135deg,#20324e,#466582);color:#fff;box-shadow:var(--shadow)}
+.material-header .eyebrow{opacity:.65;font-size:10px;letter-spacing:1.7px;font-weight:800}
+.material-header h3{margin:6px 0;font-size:28px}
+.material-header p{margin:0;color:#dbe4ed;font-size:12px}
+.material-upload{padding:20px}
+.material-list{display:grid;gap:10px;margin-top:13px}
+.material-item{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.material-item .resource-info{flex:1;min-width:0}
+.material-item .resource-info strong{display:block;color:var(--navy);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.material-item .resource-info span{font-size:10px;color:var(--muted)}
+.material-drop{border:2px dashed #c8d5e2;border-radius:16px;padding:24px;text-align:center;background:#fbfcfe;cursor:pointer}
+.material-drop:hover{border-color:#8fa9c0;background:#f6f9fc}
+.viewer-wrap{margin-top:16px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#f5f7fa}
+.viewer-wrap iframe{width:100%;height:700px;border:0}.viewer-wrap img{display:block;max-width:100%;max-height:700px;margin:auto}
+.material-side{position:sticky;top:18px;height:max-content}
+.material-side .mini-card{padding:16px;margin-bottom:12px}
+.material-side h4{margin:0 0 8px;color:var(--navy);font-size:14px}
+.help-text{font-size:10px;line-height:1.6;color:var(--muted)}
+@media(max-width:900px){.material-page{grid-template-columns:1fr}.material-side{position:static}}
+
+<style>
+.tree{display:grid;gap:9px;margin-top:12px}
+.tree-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.tree-main{padding:13px 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer}
+.tree-main:hover{background:#fafcff}
+.tree-main strong{font-size:12px;color:var(--navy)}
+.tree-main .tree-meta{font-size:10px;color:var(--muted)}
+.tree-chevron{font-size:13px;color:var(--muted);transition:.15s}
+.tree-item.open .tree-chevron{transform:rotate(90deg)}
+.tree-children{display:none;padding:0 12px 12px 38px;border-top:1px solid #edf0f4;background:#fbfcfe}
+.tree-item.open .tree-children{display:grid;gap:7px}
+.micro{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;transition:.16s}
+.micro.done,.micro.topic-manually-done{background:linear-gradient(135deg,#58a653,#79be69)!important;border-color:#4f984a!important;box-shadow:0 5px 14px rgba(88,166,83,.22)!important}.micro.done input{outline:2px solid rgba(255,255,255,.45);outline-offset:1px}
+.micro.done .micro-name,.micro.topic-manually-done .micro-name{color:#fff;font-weight:800}
+.micro.done .micro-action,.micro.topic-manually-done .micro-action{color:#fff;font-weight:900;letter-spacing:.4px}
+.micro.done input,.micro.topic-manually-done input{accent-color:#fff}
+
+.micro-name{font-size:11px;color:var(--navy);font-weight:650}
+.micro-action{font-size:10px;color:var(--muted);white-space:nowrap;display:flex;align-items:center}
+.micro input{width:16px;height:16px;accent-color:#73a45c}
+.level-label{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;color:var(--muted);margin-top:3px}
+.level-dot{width:7px;height:7px;border-radius:50%;background:#cbd4df;display:inline-block}
+.level-dot.on{background:#73a45c}
+.depth-note{font-size:10px;color:var(--muted);margin:0 0 8px 0;line-height:1.5}
+.structure-summary{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0}
+.structure-pill{padding:6px 9px;border-radius:999px;background:#eef3f8;color:var(--navy);font-size:9px;font-weight:800}
+
+
+
+
+<style>
+.tree-item.all-done>.tree-main{background:linear-gradient(135deg,#edf8e9,#f7fcf5)}
+.tree-item.all-done>.tree-main strong{color:#4f8847}
+.tree-item.all-done>.tree-main .level-label{color:#5f914f}
+.tree-item.all-done>.tree-main .tree-chevron{color:#5f914f}
+.tree-item.topic-manually-done{border-color:#b9d7b0;box-shadow:0 5px 15px rgba(88,166,83,.10)}
+.tree-item.topic-manually-done>.tree-main{background:linear-gradient(135deg,#eaf7e6,#f7fcf5)}
+.tree-item.topic-manually-done>.tree-main strong{color:#4f8847}
+.tree-item.topic-manually-done>.tree-main .level-label{color:#5f914f}
+.tree-item.topic-manually-done>.tree-main .level-dot{background:#58a653;box-shadow:0 0 0 3px rgba(88,166,83,.12)}
+.tree-item.topic-manually-done>.tree-main .tree-chevron{color:#5f914f}
+.topic-tree-complete-banner{display:flex;align-items:center;gap:10px;padding:11px 14px;margin:10px 0 12px;border:1px solid #bfdcb8;border-radius:13px;background:#f0f9ed;color:#4f8847;font-size:10px;font-weight:850}
+.topic-tree-complete-banner .tree-check{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#58a653;color:#fff;font-size:13px}
+
+.topic.completed{border-color:#b9d7b0!important;background:linear-gradient(135deg,#f3faef,#ffffff)!important;box-shadow:0 8px 20px rgba(88,166,83,.10)}
+.topic.completed .name{color:#4f8847!important;font-weight:850}
+.topic-complete-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;margin:14px 0;border:1px solid #bdddb5;border-left:5px solid #58a653;border-radius:14px;background:linear-gradient(135deg,#eef8ea,#f8fcf7)}
+.topic-complete-banner .mark{font-size:11px;font-weight:900;letter-spacing:.5px;color:#4f8847}
+.topic-complete-banner .desc{font-size:10px;color:#6f806d;margin-top:3px}
+.topic-complete-btn{background:linear-gradient(135deg,#4f984a,#6db861)!important;border-color:#4f984a!important;color:#fff!important;box-shadow:0 6px 16px rgba(88,166,83,.20)}
+.topic-page-completed{padding:10px 14px;border-radius:16px;background:linear-gradient(135deg,#eef8ea,#ffffff);border:1px solid #c8dfc2}.topic-page-completed h3{color:#4f8847}.topic-page-completed p{color:#5f914c;font-weight:750}
+@media(max-width:700px){.topic-complete-banner{align-items:flex-start;flex-direction:column}}
+
+<style>
+.dashboard-hero{background:linear-gradient(135deg,#20324e,#4b6f8f);border-radius:24px;padding:25px 27px;color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.dashboard-hero:after{content:"";position:absolute;width:210px;height:210px;border:1px solid rgba(255,255,255,.09);border-radius:50%;right:-70px;top:-85px}
+.dashboard-top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;position:relative;z-index:1}
+.dashboard-name{font-size:27px;font-weight:850;margin:4px 0 4px}
+.dashboard-grade{font-size:11px;color:#dce6ef}
+.dashboard-percent{font-size:36px;font-weight:900;line-height:1}
+.dashboard-percent-label{font-size:9px;letter-spacing:1px;opacity:.68;text-align:right;margin-top:5px}
+.dashboard-stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:20px;position:relative;z-index:1}
+.dashboard-stat{padding:12px 13px;border-radius:13px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.08)}
+.dashboard-stat .v{font-size:20px;font-weight:850}.dashboard-stat .l{font-size:9px;opacity:.7;margin-top:3px}
+.dashboard-section{margin-top:24px}.dashboard-section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:12px}.dashboard-section-title h3{margin:0;color:var(--navy);font-size:18px}.dashboard-section-title span{font-size:10px;color:var(--muted)}
+.status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.status-card{padding:16px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:0 6px 20px rgba(32,50,78,.05)}
+.status-card.green{border-left:5px solid #69a55c}.status-card.yellow{border-left:5px solid #c9a245}.status-card.gray{border-left:5px solid #bdc7d2}
+.status-card .label{font-size:9px;letter-spacing:1px;font-weight:800;color:var(--muted)}
+.status-card .big{font-size:22px;font-weight:850;color:var(--navy);margin-top:5px}
+.status-list{margin-top:9px;display:grid;gap:6px}.status-line{font-size:11px;color:var(--text);display:flex;justify-content:space-between;gap:10px}.status-line span:last-child{color:var(--muted);font-size:9px}
+.grade-progress-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.grade-progress-card{padding:15px;border-radius:15px;background:#fff;border:1px solid var(--line)}
+.grade-progress-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.grade-progress-head strong{font-size:13px;color:var(--navy)}.grade-progress-head span{font-size:10px;color:var(--muted)}
+.small-progress{height:7px;background:#e9eef4;border-radius:20px;overflow:hidden;margin-top:10px}.small-progress>div{height:100%;background:linear-gradient(90deg,#5b7fa3,#77a45c)}
+.current-place{padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,#eef5fb,#f8fbfd);border:1px solid #d8e4ef}
+.current-place .ey{font-size:9px;letter-spacing:1px;font-weight:800;color:var(--muted)}.current-place h4{margin:5px 0;font-size:18px;color:var(--navy)}.current-place p{margin:0;font-size:11px;color:var(--muted)}
+.dashboard-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+@media(max-width:900px){.dashboard-stat-row,.status-grid{grid-template-columns:repeat(2,1fr)}.grade-progress-list{grid-template-columns:1fr}}
+@media(max-width:600px){.dashboard-top{flex-direction:column}.dashboard-stat-row,.status-grid{grid-template-columns:1fr}}
+
+<style>
+.afo-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#c9df55,#77a65a);display:flex;align-items:center;justify-content:center;color:#20324e;font-size:22px;font-weight:950;box-shadow:0 8px 18px rgba(0,0,0,.13);margin-bottom:10px}
+.afo-mark span{transform:rotate(-5deg)}
+.brand-tag{display:inline-block;margin-top:12px;padding:6px 8px;border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#b7c5d4;font-size:8px;letter-spacing:1px;font-weight:800}
+.sidebar{box-shadow:10px 0 28px rgba(20,35,55,.10)}
+
+<style>
+.mock-head{background:linear-gradient(135deg,#263b5a,#5d7592);color:#fff;border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.mock-head h3{margin:5px 0;font-size:25px}.mock-head p{margin:0;color:#dae4ee;font-size:11px}
+.mock-form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mock-subjects{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mock-subject{padding:12px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe}
+.mock-subject label{display:block;font-size:9px;color:var(--muted);font-weight:800;margin-bottom:5px}
+.mock-subject input{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px;outline:none}
+.mock-table{width:100%;border-collapse:collapse;font-size:11px}.mock-table th,.mock-table td{padding:10px;border-bottom:1px solid var(--line);text-align:left}.mock-table th{font-size:9px;color:var(--muted)}
+.spark{display:flex;align-items:flex-end;gap:7px;height:130px;padding:10px 0}
+.barx{flex:1;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#6d9b7b,#b2ce88);min-width:18px;position:relative}
+.barx span{position:absolute;left:50%;transform:translateX(-50%);top:-18px;font-size:8px;color:var(--muted);white-space:nowrap}
+.barx small{position:absolute;left:50%;transform:translateX(-50%);bottom:-17px;font-size:8px;color:var(--muted);white-space:nowrap}
+@media(max-width:900px){.mock-form-grid,.mock-subjects{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.mock-form-grid,.mock-subjects{grid-template-columns:1fr}}
+
+<style>
+.topic-status{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:800;white-space:nowrap}
+.topic-status.done{background:#edf8e9;color:#5f914c;border:1px solid #cbe1c1}
+.topic-status.pending{background:#f1f4f7;color:#7a8798;border:1px solid #dfe5eb}
+</style>
+
+</style>
+
+</style>
+
+</style>
+
+</style>
+
+</style>
+
+</style>
+
+</style>
+
+</style>
+
+</style>
+<style>
+.archive-manager-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:18px}.archive-form-card{padding:22px}.archive-step{display:flex;align-items:center;gap:10px;margin:2px 0 14px}.archive-step>span{width:30px;height:30px;border-radius:10px;background:#eef4f9;color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900}.archive-step b{display:block;color:var(--navy);font-size:12px}.archive-step small{display:block;color:var(--muted);font-size:9px;margin-top:2px}.archive-levels{display:grid;grid-template-columns:1fr 1fr;gap:8px}.archive-level{padding:11px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--navy);font-weight:800;cursor:pointer}.archive-level.active{background:#20324e;color:#fff;border-color:#20324e}.archive-target-note{padding:12px;border-radius:12px;background:#f4f7fa;color:var(--muted);font-size:10px;line-height:1.5}.archive-badge{padding:7px 10px;border-radius:999px;background:#edf8e9;color:#5f914c;font-size:9px;font-weight:900;letter-spacing:.7px}.archive-location-card{padding:20px;background:linear-gradient(135deg,#20324e,#496b89);color:#fff}.archive-location-card .muted{color:#d7e2eb}.archive-location-card h3{margin:6px 0;font-size:22px}.archive-location-card p{margin:0;color:#dbe6ef;font-size:11px}.archive-path-chip{display:inline-block;margin-top:14px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:9px}.archive-rule{margin-top:12px;padding:10px 12px;border-radius:10px;background:#faf6ed;color:#896d33;font-size:9px;line-height:1.5}@media(max-width:900px){.archive-manager-grid{grid-template-columns:1fr}}
+</style>
+
+<style>
+.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 26px}
+.quick-card{display:flex;align-items:center;gap:13px;padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow);cursor:pointer;transition:.16s}
+.quick-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(24,43,68,.09)}
+.quick-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#eef3f8;color:var(--navy);font-size:21px;flex:0 0 auto}
+.quick-card h3{margin:4px 0 3px;font-size:15px;color:var(--navy)}
+.quick-card p{margin:0;color:var(--muted);font-size:10px;line-height:1.4}
+.quick-card>span{margin-left:auto;font-size:17px;color:var(--muted)}
+@media(max-width:900px){.quick-grid{grid-template-columns:1fr}.quick-card{min-height:74px}}
+</style>
+
+<style>
+/* AFO karşılama ekranı */
+.afo-welcome{min-height:calc(100vh - 40px);display:grid;place-items:center;padding:30px 20px}
+.afo-welcome-card{width:min(820px,100%);position:relative;overflow:hidden;border:1px solid #dfe7ef;border-radius:28px;background:linear-gradient(145deg,#f9fbfd,#eef4f8);box-shadow:0 24px 70px rgba(24,43,68,.12);padding:48px}
+.afo-welcome-card:before,.afo-welcome-card:after{content:"";position:absolute;border:1px solid rgba(37,61,91,.08);border-radius:50%;pointer-events:none}
+.afo-welcome-card:before{width:330px;height:330px;right:-120px;top:-150px}.afo-welcome-card:after{width:220px;height:220px;left:-110px;bottom:-125px}
+.afo-welcome-inner{position:relative;z-index:1;max-width:650px}
+.afo-welcome-mark{width:58px;height:38px;border-radius:12px;display:grid;place-items:center;background:#203955;color:#fff;font-weight:900;font-size:12px;letter-spacing:2px;box-shadow:0 10px 24px rgba(32,57,85,.18)}
+.afo-welcome-eyebrow{margin-top:22px;font-size:11px;letter-spacing:2.2px;font-weight:800;color:#6b7c91}
+.afo-welcome-title{margin:7px 0 9px;font-size:clamp(34px,5vw,54px);line-height:1.02;letter-spacing:-1.4px;color:#1f3550}.afo-welcome-title span{color:#5c8f55}
+.afo-welcome-text{max-width:590px;margin:0;color:#68798d;font-size:14px;line-height:1.7}
+.afo-welcome-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.afo-welcome-primary{padding:13px 20px;border:0;border-radius:13px;background:#203955;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 9px 22px rgba(32,57,85,.18);transition:.16s}.afo-welcome-primary:hover{transform:translateY(-2px)}
+.afo-welcome-secondary{padding:13px 17px;border:1px solid #d6e0ea;border-radius:13px;background:#fff;color:#203955;font-weight:750;cursor:pointer}
+.afo-welcome-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:23px}.afo-welcome-chip{padding:7px 10px;border-radius:999px;background:#fff;border:1px solid #dde6ee;color:#66788d;font-size:10px;font-weight:750}
+@media(max-width:700px){.afo-welcome-card{padding:32px 24px;border-radius:22px}.afo-welcome{padding:15px}.afo-welcome-actions{display:grid}.afo-welcome-primary,.afo-welcome-secondary{width:100%}}
+
+/* AFO karşılama: tamamen beyaz, dikkat dağıtmayan giriş ekranı */
+body.afo-welcome-mode{background:#fff}
+body.afo-welcome-mode .sidebar,
+body.afo-welcome-mode .topbar{display:none!important}
+body.afo-welcome-mode .app{display:block;min-height:100vh}
+body.afo-welcome-mode .main{width:100%;min-height:100vh;padding:0;background:#fff}
+body.afo-welcome-mode #content{min-height:100vh}
+.afo-welcome-screen{min-height:100vh;display:grid;place-items:center;padding:40px 24px;background:#fff;opacity:1;transform:scale(1);transition:opacity .62s ease,transform .72s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.afo-welcome-screen:before{content:"";position:absolute;width:1px;height:0;background:#203955;left:50%;top:50%;transform:translate(-50%,-50%);opacity:.08;transition:height .7s ease}
+.afo-welcome-screen.leaving{opacity:0;transform:scale(1.035)}
+.afo-welcome-screen.leaving:before{height:140vh}
+.afo-welcome-clean{animation:afoWelcomeIn .75s cubic-bezier(.18,.8,.2,1) both}
+.afo-math-field{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:.9}
+.afo-math-symbol{position:absolute;color:#203955;font-family:Georgia,serif;font-weight:700;opacity:.10;transform:translate3d(0,0,0) scale(1);transition:opacity .35s ease,transform .85s cubic-bezier(.2,.8,.2,1)}
+.afo-math-symbol.s1{left:10%;top:18%;font-size:34px;transform:rotate(-8deg)}
+.afo-math-symbol.s2{left:18%;bottom:18%;font-size:28px;transform:rotate(7deg)}
+.afo-math-symbol.s3{right:16%;top:17%;font-size:38px;transform:rotate(6deg)}
+.afo-math-symbol.s4{right:9%;bottom:21%;font-size:30px;transform:rotate(-9deg)}
+.afo-math-symbol.s5{left:45%;top:12%;font-size:24px}
+.afo-math-symbol.s6{right:38%;bottom:10%;font-size:26px}
+.afo-math-grid{position:absolute;left:50%;top:50%;width:0;height:0;transform:translate(-50%,-50%);border-radius:50%;box-shadow:0 0 0 1px rgba(32,57,85,.04);opacity:0;transition:opacity .5s ease, width .8s ease,height .8s ease}
+.afo-math-grid:before,.afo-math-grid:after{content:"";position:absolute;background:rgba(32,57,85,.055)}
+.afo-math-grid:before{width:100%;height:1px;left:0;top:50%}.afo-math-grid:after{height:100%;width:1px;top:0;left:50%}
+.afo-math-curve{position:absolute;left:50%;top:50%;width:170px;height:80px;border-top:2px solid rgba(92,143,85,.14);border-radius:50%;transform:translate(-50%,-15%) rotate(-7deg) scale(.7);opacity:0;transition:opacity .4s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.afo-welcome-screen.leaving .afo-math-symbol{opacity:0;transform:scale(1.5) translateY(-8px) rotate(0deg)}
+.afo-welcome-screen.leaving .afo-math-grid{opacity:1;width:360px;height:360px}
+.afo-welcome-screen.leaving .afo-math-curve{opacity:1;transform:translate(-50%,-15%) rotate(-7deg) scale(1)}
+@media(max-width:700px){.afo-math-symbol.s1{left:6%;top:15%}.afo-math-symbol.s2{left:7%;bottom:12%}.afo-math-symbol.s3{right:7%;top:14%}.afo-math-symbol.s4{right:5%;bottom:14%}.afo-welcome-screen.leaving .afo-math-grid{width:260px;height:260px}}
+
+.afo-welcome-mark{transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s ease}
+.afo-welcome-screen.leaving .afo-welcome-mark{transform:translateY(-8px) scale(.92);box-shadow:0 0 0 16px rgba(32,57,85,.05),0 10px 24px rgba(32,57,85,.18)}
+@keyframes afoWelcomeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.afo-welcome-clean{width:min(760px,100%);text-align:center}
+.afo-welcome-clean .afo-welcome-mark{margin:0 auto;background:#203955}
+.afo-welcome-clean .afo-welcome-eyebrow{margin-top:24px}
+.afo-welcome-clean .afo-welcome-title{font-size:clamp(38px,6vw,64px);margin-top:10px}
+.afo-welcome-clean .afo-welcome-text{margin:0 auto;max-width:570px}
+.afo-welcome-clean .afo-welcome-actions{justify-content:center;margin-top:30px}
+.afo-app-enter{animation:afoAppEnter .38s ease both}
+@keyframes afoAppEnter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+.cloud-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cloud-form .field{margin-bottom:0}.cloud-pill{display:inline-block;padding:7px 10px;border-radius:999px;background:#eef2f6;color:var(--muted);font-size:10px;font-weight:800;margin-right:8px}.cloud-pill.ok{background:#edf8e9;color:#5f914f}.cloud-note{margin-top:12px;padding:11px 13px;border-radius:12px;background:#f7f9fc;color:var(--muted);font-size:10px;line-height:1.6}@media(max-width:700px){.cloud-form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">
+  <div class="afo-mark"><span>A</span></div>
+  <div class="mini">AFO</div><h1>Matematik<br>Arşivi</h1><p>4. sınıftan 12. sınıfa</p>
+  <div class="brand-tag">ÖZEL DERS • ÖĞRENCİ • SINAV</div>
+</div>
+  <div class="nav-title">ARŞİV</div>
+  <nav class="nav" id="nav"></nav>
+  <div class="side-sep"></div>
+  <div class="nav-title">ÖĞRENCİLER</div>
+  <button class="btn" style="width:100%;margin:2px 0 8px" onclick="openStudentModal()">＋ Öğrenci Ekle</button>
+  <div class="student-nav" id="studentNav"></div>
+  <div class="footer">Öğrenci ilerlemeleri bu cihazın tarayıcısında saklanır.</div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="crumb" id="crumb">Ana Sayfa</div>
+    <input class="search" id="search" placeholder="Konu veya öğrenci ara...">
+  </div>
+  <div id="content"></div>
+</main>
+</div>
+
+<div id="modalRoot"></div>
+
+<script>
+const subtopicData = {
+ "Doğal Sayılar":["Sayıları okuma ve yazma","Basamak ve basamak değeri","Sayı karşılaştırma","Sıralama","Yuvarlama","Ritmik sayma","Sayı örüntüleri"],
+ "Doğal Sayılarla İşlemler":["Toplama","Çıkarma","Çarpma","Bölme","Zihinden işlemler","Tahmin","Problem çözme"],
+ "Kesirler":["Kesir kavramı","Birim kesir","Basit kesir","Bileşik kesir","Tam sayılı kesir","Kesirleri karşılaştırma","Kesirlerle toplama ve çıkarma","Kesir problemleri"],
+ "Ondalık Gösterim":["Ondalık gösterim","Ondalık sayıları okuma","Karşılaştırma","Sıralama","Kesir–ondalık dönüşümü","Ondalık işlemleri"],
+ "Geometri":["Nokta, doğru ve doğru parçası","Işın","Açı","Üçgenler","Dörtgenler","Kare","Dikdörtgen","Simetri"],
+ "Ölçme":["Uzunluk ölçme","Zaman ölçme","Sıvı ölçme","Çevre","Alan"],
+ "Veri":["Veri toplama","Sıklık tablosu","Sütun grafiği","Grafik okuma","Grafik yorumlama"],
+ "Çarpanlar ve Katlar":["Çarpan ve kat","Asal sayılar","Asal çarpanlar","Bölünebilme","EBOB","EKOK","Aralarında asal sayılar"],
+ "Üslü İfadeler":["Üslü ifade kavramı","Üs kuralları","10'un kuvvetleri","Bilimsel gösterim","Üslü denklemlere giriş"],
+ "Kareköklü İfadeler":["Karekök kavramı","Tam kare sayılar","Kök dışına çıkarma","Kök içine alma","Köklü ifadelerde toplama–çıkarma","Köklü ifadelerde çarpma–bölme","Ondalık sayıların karekökü"],
+ "Veri Analizi":["Sütun grafiği","Daire grafiği","Çizgi grafiği","Grafikler arası dönüşüm","Grafik yorumlama"],
+ "Basit Olayların Olasılığı":["Örnek uzay","Olası durumlar","Olasılık değeri","Olasılık karşılaştırmaları"],
+ "Cebirsel İfadeler ve Özdeşlikler":["Cebirsel ifade","Terim","Katsayı","Sabit terim","Özdeşlikler","Çarpanlara ayırma"],
+ "Doğrusal Denklemler":["Denklem kavramı","Birinci dereceden denklemler","Koordinat sistemi","Doğrusal ilişki","Doğrusal grafik","Eğim","Denklem problemleri"],
+ "Eşitsizlikler":["Eşitsizlik kavramı","Birinci dereceden eşitsizlikler","Sayı doğrusunda gösterim","Eşitsizlik problemleri"],
+ "Üçgenler":["Üçgen eşitsizliği","Üçgende açı","Üçgende kenar ilişkileri","Pisagor bağıntısı","Eşlik","Benzerlik","Üçgende alan"],
+ "Dönüşüm Geometrisi":["Öteleme","Yansıma","Dönme"],
+ "Geometrik Cisimler":["Prizma","Silindir","Piramit","Koni","Küre","Alan","Hacim"],
+ "Sayılar":["Sayı kümeleri","Doğal sayılar","Tam sayılar","Rasyonel sayılar","İrrasyonel sayılar","Gerçek sayılar","Aralıklar","Üslü ifadeler","Köklü ifadeler"],
+ "Denklemler ve Eşitsizlikler":["Birinci dereceden denklemler","Eşitsizlikler","Mutlak değer","Problem çözme"],
+ "Fonksiyonlara Giriş":["Fonksiyon kavramı","Tanım kümesi","Değer kümesi","Görüntü kümesi","Fonksiyon gösterimleri","Grafikler"],
+ "Algoritma ve Problem Çözme":["Algoritmik düşünme","Akış şemaları","Mantıksal ifadeler","Problem çözme"],
+ "Veri ve İstatistik":["Veri türleri","Aritmetik ortalama","Ortanca","Tepe değer","Açıklık","Grafikler"],
+ "Olasılık":["Örnek uzay","Olay","Basit olasılık"],
+ "Sayma ve Olasılık":["Faktöriyel","Permütasyon","Kombinasyon","Binom açılımı","Olasılık"],
+ "Fonksiyonlar":["Fonksiyon kavramı","Tanım ve değer kümeleri","Fonksiyon çeşitleri","Fonksiyonlarda işlemler","Bileşke","Ters fonksiyon","Grafikler"],
+ "Polinomlar":["Polinom kavramı","Derece","Polinomlarda işlemler","Polinom bölmesi","Kalan teoremi","Çarpanlara ayırma"],
+ "İkinci Dereceden Denklemler":["İkinci dereceden denklem","Kökler","Diskriminant","Kök–katsayı ilişkileri"],
+ "Dörtgenler ve Çokgenler":["Çokgenler","Dörtgenler","Özel dörtgenler","İç açı toplamı","Alan ilişkileri"],
+ "Çember ve Daire":["Çemberde açı","Çemberde uzunluk","Teğet","Daire","Alan"],
+ "Trigonometri":["Yönlü açılar","Birim çember","Trigonometrik fonksiyonlar","Sinüs","Kosinüs","Tanjant","Kotanjant","Trigonometrik özdeşlikler","Trigonometrik denklemler"],
+ "Analitik Geometri":["Noktanın analitiği","Doğrunun analitiği","Eğim","Doğru denklemi","Paralel doğrular","Dik doğrular","Uzaklık","Orta nokta"],
+ "Fonksiyonlarda Uygulamalar":["Grafik dönüşümleri","Ters fonksiyon","Fonksiyon bileşkesi","Fonksiyon yorumlama"],
+ "Denklem ve Eşitsizlik Sistemleri":["İkinci dereceden eşitsizlikler","Eşitsizlik sistemleri","Parabol"],
+ "Uzay Geometri":["Katı cisimler","Prizma","Silindir","Koni","Küre"],
+ "Üstel ve Logaritmik Fonksiyonlar":["Üstel fonksiyon","Üstel denklemler","Logaritma tanımı","Logaritma özellikleri","Logaritmik denklemler"],
+ "Diziler":["Dizi kavramı","Genel terim","Aritmetik dizi","Geometrik dizi","Dizi problemleri"],
+ "Limit ve Süreklilik":["Limit kavramı","Sağ limit","Sol limit","Sonsuzda limit","Limit kuralları","Süreklilik"],
+ "Türev":["Türev kavramı","Türev kuralları","Zincir kuralı","Teğet","Normal","Artan–azalan fonksiyon","Ekstremum","Maksimum–minimum","Türev uygulamaları"],
+ "İntegral":["Belirsiz integral","İntegral alma","Belirli integral","Alan","İntegralin uygulamaları"],
+ "Temel Kavramlar":["Sayı kavramı","Tek ve çift sayılar","Pozitif–negatif sayılar","Ardışık sayılar","Asal sayılar","Basamak kavramı"],
+ "Sayı Basamakları":["Basamak","Basamak değeri","Sayı oluşturma","Rakamlar","Çözümleme"],
+ "Bölme ve Bölünebilme":["Bölme","Bölünebilme kuralları","Kalan","Bölüm","Bölünebilme problemleri"],
+ "EBOB–EKOK":["EBOB","EKOK","Asal çarpan","EBOB–EKOK problemleri"],
+ "Rasyonel Sayılar":["Rasyonel sayı kavramı","Karşılaştırma","Sıralama","Dört işlem"],
+ "Basit Eşitsizlikler":["Eşitsizlik kavramı","Sayı doğrusunda gösterim","Aralıklar"],
+ "Mutlak Değer":["Mutlak değer tanımı","Sayı doğrusunda uzaklık","Mutlak değerli denklemler","Mutlak değerli eşitsizlikler"],
+ "Üslü Sayılar":["Üs tanımı","Üs kuralları","Negatif üs","Sıfırıncı kuvvet","Bilimsel gösterim"],
+ "Köklü Sayılar":["Karekök","Kök dışına çıkarma","Kök içine alma","Köklü işlemler"],
+ "Oran–Orantı":["Oran","Orantı","Doğru orantı","Ters orantı","Orantı problemleri"],
+ "Problemler":["Sayı problemleri","Kesir problemleri","Yaş problemleri","Hız problemleri","İşçi–havuz","Yüzde problemleri","Kâr–zarar","Karışım problemleri","Grafik problemleri"],
+ "Kümeler":["Küme kavramı","Küme gösterimleri","Birleşim","Kesişim","Fark"],
+ "Permütasyon–Kombinasyon":["Permütasyon","Kombinasyon","Sayma ilkeleri"],
+ "Olasılık":["Olasılık kavramı","Basit olasılık","Koşullu olasılık"],
+ "Geometri":["Doğruda açılar","Üçgenler","Dörtgenler","Çokgenler","Çember ve daire","Analitik geometri"],
+ "Logaritma":["Logaritma tanımı","Logaritma özellikleri","Taban değiştirme","Logaritmik denklemler"],
+ "Limit":["Limit kavramı","Sağ–sol limit","Sonsuzda limit","Belirsizlikler"],
+ "İntegral":["Belirsiz integral","Belirli integral","Alan"],
+};
+const examData = [
+ {name:"LGS", tag:"8. Sınıf", color:"#b46b72", topics:[
+  "Çarpanlar ve Katlar","Üslü İfadeler","Kareköklü İfadeler","Veri Analizi",
+  "Basit Olayların Olasılığı","Cebirsel İfadeler ve Özdeşlikler","Doğrusal Denklemler",
+  "Eşitsizlikler","Üçgenler","Dönüşüm Geometrisi","Geometrik Cisimler"
+ ]},
+ {name:"TYT", tag:"Temel Yeterlilik", color:"#5f8f8f", topics:[
+  "Temel Kavramlar","Sayı Basamakları","Bölme ve Bölünebilme","EBOB–EKOK",
+  "Rasyonel Sayılar","Basit Eşitsizlikler","Mutlak Değer","Üslü Sayılar",
+  "Köklü Sayılar","Oran–Orantı","Problemler","Kümeler","Fonksiyonlar",
+  "Permütasyon–Kombinasyon","Olasılık","Veri ve İstatistik","Geometri"
+ ]},
+ {name:"AYT", tag:"Alan Yeterlilik", color:"#6679a6", topics:[
+  "Fonksiyonlar","Polinomlar","İkinci Dereceden Denklemler","Parabol",
+  "Trigonometri","Logaritma","Diziler","Limit","Türev","İntegral",
+  "Analitik Geometri","Çember ve Daire","Katı Cisimler","Olasılık"
+ ]}
+];
+
+const data=[
+{grade:"4. Sınıf",color:"#5b7fa3",topics:[
+["Doğal Sayılar",["Doğal sayılar","Basamak ve basamak değeri","Sayıları okuma ve yazma","Karşılaştırma ve sıralama","Yuvarlama","Ritmik sayma"]],
+["Doğal Sayılarla İşlemler",["Toplama ve çıkarma","Çarpma","Bölme","Zihinden işlemler","Tahmin","Problem çözme"]],
+["Kesirler",["Kesir kavramı","Birim kesir","Basit, bileşik ve tam sayılı kesirler","Kesirleri karşılaştırma","Kesirlerle toplama ve çıkarma"]],
+["Ondalık Gösterim",["Ondalık gösterim","Okuma ve yazma","Karşılaştırma ve sıralama","Kesir–ondalık ilişkisi"]],
+["Geometri",["Açı","Doğru, doğru parçası ve ışın","Üçgenler","Dörtgenler","Kare ve dikdörtgen","Simetri"]],
+["Ölçme",["Uzunluk ölçme","Zaman ölçme","Sıvı ölçme","Çevre","Alan"]],["Veri",["Veri toplama","Sıklık tablosu","Sütun grafiği","Grafik yorumlama"]]]},
+{grade:"5. Sınıf",color:"#6d9b7b",topics:[
+["Sayılar ve İşlemler",["Doğal sayılar","Basamak değeri","İşlem önceliğine giriş","Dağılma özelliği","Problem çözme"]],
+["Kesirler",["Kesir kavramı","Kesirleri karşılaştırma","Kesirlerle işlemler","Kesir problemleri"]],
+["Ondalık Gösterim",["Ondalık gösterim","Ondalık sayıları karşılaştırma","Ondalık sayılarla işlemler"]],
+["Yüzdeler",["Yüzde kavramı","Kesir–ondalık–yüzde ilişkisi","Basit yüzde problemleri"]],
+["Geometri",["Doğru, doğru parçası ve ışın","Açılar","Çokgenler","Üçgenler","Dörtgenler","Çember"]],
+["Alan ve Çevre",["Dikdörtgenin çevresi","Dikdörtgenin alanı","Birim kare","Alan problemleri"]],["Veri",["Veri toplama","Sıklık tablosu","Sütun grafiği","Veri yorumlama"]]]},
+{grade:"6. Sınıf",color:"#9b8bb4",topics:[
+["Doğal Sayılar ve İşlemler",["İşlem önceliği","Üslü ifadeye giriş","Dağılma özelliği","Ortak çarpan"]],["Çarpanlar ve Katlar",["Çarpan ve kat","Asal sayılar","Asal çarpanlar","Bölünebilme"]],["Kümeler",["Küme kavramı","Kümelerin gösterimi"]],["Tam Sayılar",["Pozitif ve negatif sayılar","Tam sayılar","Sayı doğrusu","Tam sayılarla işlemler"]],["Kesirler",["Kesirleri karşılaştırma","Kesirlerle dört işlem","Kesir problemleri"]],["Ondalık Gösterim",["Ondalık sayılar","Ondalık sayılarla işlemler","Ondalık–kesir ilişkisi"]],["Oran",["Oran kavramı","Birimli oran","Oran problemleri"]],["Cebir",["Bilinmeyen","Cebirsel ifadeler","Sözel ifadeleri cebirsel ifadeye çevirme"]],["Açılar ve Alan",["Açılar","Açılarda ilişkiler","Üçgen ve dörtgenler","Alan","Çember"]],["Veri",["Aritmetik ortalama","Açıklık","Sütun grafiği","Veri yorumlama"]]]},
+{grade:"7. Sınıf",color:"#c58a63",topics:[
+["Tam Sayılar",["Tam sayılarla işlemler","İşlem özellikleri"]],["Rasyonel Sayılar",["Rasyonel sayı kavramı","Karşılaştırma ve sıralama","Rasyonel sayılarla işlemler"]],["Oran ve Orantı",["Oran","Orantı","Doğru orantı","Ters orantı","Orantı problemleri"]],["Yüzdeler",["Yüzde hesaplama","Bir sayının yüzdesi","Yüzde artış ve azalış","Kâr–zarar","İndirim problemleri"]],["Cebirsel İfadeler",["Terim","Katsayı","Sabit terim","Cebirsel ifadelerle işlemler"]],["Eşitlik ve Denklem",["Eşitlik","Birinci dereceden bir bilinmeyenli denklemler","Denklem problemleri"]],["Doğrular ve Açılar",["Açılar","Paralel doğrular","Tümler ve bütünler açılar"]],["Çokgenler",["Çokgenler","Dörtgenler","İç açılar","Düzgün çokgenler"]],["Çember ve Daire",["Çember","Daire","Çemberin uzunluğu","Dairenin alanı"]],["Veri Analizi",["Ortalama","Ortanca","Tepe değer","Açıklık","Grafikler"]],["Olasılık",["Olasılık kavramı","Basit olayların olasılığı"]]]},
+{grade:"8. Sınıf",color:"#b46b72",topics:[
+["Çarpanlar ve Katlar",["Asal sayılar","Asal çarpanlara ayırma","EBOB","EKOK","Bölünebilme","Aralarında asal sayılar"]],["Üslü İfadeler",["Üslü ifade kavramı","Üs kuralları","10'un kuvvetleri","Bilimsel gösterim"]],["Kareköklü İfadeler",["Karekök kavramı","Tam kare sayılar","Kök dışına çıkarma","Kök içine alma","Köklü ifadelerde işlemler","Ondalık sayıların karekökü"]],["Veri Analizi",["Sütun grafiği","Daire grafiği","Çizgi grafiği","Grafikler arası dönüşüm","Grafik yorumlama"]],["Basit Olayların Olasılığı",["Olası durumlar","Olasılık","Olasılık karşılaştırmaları"]],["Cebirsel İfadeler ve Özdeşlikler",["Cebirsel ifadeler","Özdeşlik","Çarpanlara ayırma","Özdeşlikler"]],["Doğrusal Denklemler",["Birinci dereceden denklemler","Koordinat sistemi","Doğrusal ilişki","Doğrusal grafik","Eğim","Denklem problemleri"]],["Eşitsizlikler",["Birinci dereceden eşitsizlikler","Sayı doğrusunda gösterim","Eşitsizlik problemleri"]],["Üçgenler",["Üçgen eşitsizliği","Üçgende açı","Üçgende kenar ilişkileri","Pisagor bağıntısı","Eşlik ve benzerlik"]],["Dönüşüm Geometrisi",["Öteleme","Yansıma","Dönme"]],["Geometrik Cisimler",["Prizma","Silindir","Piramit","Koni","Küre","Alan ve hacim"]]]},
+{grade:"9. Sınıf",color:"#5f8f8f",topics:[
+["Sayılar",["Sayı kümeleri","Doğal, tam ve rasyonel sayılar","İrrasyonel sayılar","Gerçek sayılar","Aralıklar","Üslü ifadeler","Köklü ifadeler"]],["Cebirsel İfadeler ve Özdeşlikler",["Cebirsel ifadeler","Özdeşlikler","Çarpanlara ayırma"]],["Denklemler ve Eşitsizlikler",["Birinci dereceden denklemler","Birinci dereceden eşitsizlikler","Mutlak değer","Problem çözme"]],["Fonksiyonlara Giriş",["Fonksiyon kavramı","Tanım ve görüntü kümesi","Fonksiyon gösterimleri","Fonksiyon grafikleri"]],["Algoritma ve Problem Çözme",["Algoritmik düşünme","Akış şemaları","Mantıksal ifadeler","Problem çözme"]],["Üçgenler",["Üçgende açılar","Üçgende kenar ilişkileri","Üçgen eşitsizliği","Üçgende alan"]],["Veri ve İstatistik",["Veri türleri","Ortalama","Ortanca","Tepe değer","Açıklık","Grafikler"]],["Olasılık",["Örnek uzay","Olay","Basit olasılık"]]]},
+{grade:"10. Sınıf",color:"#8b7e5b",topics:[
+["Sayma ve Olasılık",["Faktöriyel","Permütasyon","Kombinasyon","Binom açılımı","Olasılık"]],["Fonksiyonlar",["Fonksiyon kavramı","Tanım ve değer kümeleri","Fonksiyon çeşitleri","Fonksiyonlarda işlemler","Grafikler"]],["Polinomlar",["Polinom kavramı","Polinomlarda işlemler","Polinom bölmesi","Çarpanlara ayırma"]],["İkinci Dereceden Denklemler",["İkinci dereceden denklemler","Kökler","Diskriminant","Kök–katsayı ilişkileri"]],["Dörtgenler ve Çokgenler",["Çokgenler","Dörtgenler","Özel dörtgenler","Alan ilişkileri"]],["Çember ve Daire",["Çemberde açı","Çemberde uzunluk","Daire","Teğet"]]]},
+{grade:"11. Sınıf",color:"#6679a6",topics:[
+["Trigonometri",["Yönlü açılar","Trigonometrik fonksiyonlar","Birim çember","Sinüs, kosinüs, tanjant, kotanjant","Trigonometrik özdeşlikler","Trigonometrik denklemler"]],["Analitik Geometri",["Noktanın analitiği","Doğrunun analitiği","Eğim","Doğru denklemi","Paralel ve dik doğrular","Uzaklık","Orta nokta"]],["Fonksiyonlarda Uygulamalar",["Fonksiyon grafikleri","Grafik dönüşümleri","Ters fonksiyon"]],["Denklem ve Eşitsizlik Sistemleri",["İkinci dereceden eşitsizlikler","Eşitsizlik sistemleri","Parabol"]],["Çember ve Daire",["Çemberde açı","Çemberde uzunluk","Teğet","Daire"]],["Uzay Geometri",["Katı cisimler","Prizma","Silindir","Koni","Küre"]],["Olasılık",["Koşullu olasılık","Bağımlı ve bağımsız olaylar","Olasılık uygulamaları"]]]},
+{grade:"12. Sınıf",color:"#7a6b8c",topics:[
+["Üstel ve Logaritmik Fonksiyonlar",["Üstel fonksiyon","Üstel denklemler","Logaritma","Logaritma özellikleri","Logaritmik denklemler"]],["Diziler",["Dizi kavramı","Genel terim","Aritmetik dizi","Geometrik dizi","Dizi problemleri"]],["Trigonometri",["Toplam ve fark formülleri","İki kat açı","Yarım açı","Trigonometrik dönüşümler","Trigonometrik denklemler"]],["Limit ve Süreklilik",["Limit kavramı","Sağ ve sol limit","Sonsuzda limit","Limit kuralları","Süreklilik"]],["Türev",["Türev kavramı","Türev alma kuralları","Zincir kuralı","Teğet ve normal","Artan–azalan fonksiyon","Ekstremum","Maksimum–minimum","Türev uygulamaları"]],["İntegral",["Belirsiz integral","İntegral alma","Belirli integral","Alan","İntegralin uygulamaları"]],["Analitik Geometri",["Çemberin analitiği","Doğru ve çember","Parabol","Konikler"]]]}
+];
+
+function readJSON(key,fallback){
+ try{ const raw=localStorage.getItem(key); return raw?JSON.parse(raw):fallback; }catch(e){ console.warn("AFO veri okuma uyarısı",key,e); return fallback; }
+}
+let students=readJSON("afoStudents",[]);
+let questions=readJSON("afoQuestions",[]);
+let tests=readJSON("afoTests",[]);
+let assignments=readJSON("afoAssignments",[]);
+let results=readJSON("afoResults",[]);
+let resources=[];
+let resourceDb=null;
+let appStateLoaded=false;
+let appStateSaveTimer=null;
+let selectedQuestionIds=[];
+let mockExams=readJSON("afoMockExams",[]);
+let expandedTrees=readJSON("afoExpandedTrees",{});
+let generalMicroProgress=readJSON("afoGeneralMicro",{});
+
+let activeStudentId=localStorage.getItem("afoActiveStudent")||null;
+let page={type:"home",grade:null,topic:null};
+const nav=document.getElementById("nav"),studentNav=document.getElementById("studentNav"),content=document.getElementById("content"),crumb=document.getElementById("crumb"),search=document.getElementById("search");
+window.addEventListener("error",e=>{
+  try{ if(content && !document.body.classList.contains("afo-welcome-mode")){ content.innerHTML=`<div class="empty" style="margin-top:30px"><strong>AFO açılışında beklenmeyen bir hata oluştu.</strong><br><span style="font-size:11px;color:#7b8797">Sayfayı yenileyip tekrar deneyebilirsin.</span></div>`; } }catch(_){}
+  console.error("AFO runtime error:",e.error||e.message);
+});
+
+async function openResourceDB(){
+ return new Promise((resolve,reject)=>{
+  if(resourceDb){resolve(resourceDb);return}
+  const req=indexedDB.open("AFO_Matematik_Arsivi_DB",2);
+  req.onupgradeneeded=e=>{
+   const db=e.target.result;
+   if(!db.objectStoreNames.contains("resources")) db.createObjectStore("resources",{keyPath:"id"});
+   if(!db.objectStoreNames.contains("appState")) db.createObjectStore("appState",{keyPath:"id"});
+  };
+  req.onsuccess=e=>{resourceDb=e.target.result;resolve(resourceDb)};
+  req.onerror=()=>reject(req.error);
+ });
+}
+
+function appStateSnapshot(){
+ return {id:"state",version:1,updatedAt:new Date().toISOString(),students,questions,tests,assignments,results,mockExams,expandedTrees,generalMicroProgress,activeStudentId};
+}
+
+async function persistAppState(){
+ try{
+  const db=await openResourceDB();
+  await new Promise((resolve,reject)=>{
+   const req=db.transaction("appState","readwrite").objectStore("appState").put(appStateSnapshot());
+   req.onsuccess=resolve;req.onerror=()=>reject(req.error);
+  });
+  return true;
+ }catch(e){console.error("AFO veri kaydı başarısız:",e);return false}
+}
+
+function save(){
+ // Eski sürüm uyumluluğu: localStorage yedek/geri dönüş katmanı olarak tutuluyor.
+ try{
+  localStorage.setItem("afoStudents",JSON.stringify(students));
+  localStorage.setItem("afoQuestions",JSON.stringify(questions));
+  localStorage.setItem("afoTests",JSON.stringify(tests));
+  localStorage.setItem("afoAssignments",JSON.stringify(assignments));
+  localStorage.setItem("afoResults",JSON.stringify(results));
+  localStorage.setItem("afoGeneralMicro",JSON.stringify(generalMicroProgress));
+  localStorage.setItem("afoMockExams",JSON.stringify(mockExams));
+  localStorage.setItem("afoExpandedTrees",JSON.stringify(expandedTrees));
+  if(activeStudentId)localStorage.setItem("afoActiveStudent",activeStudentId);else localStorage.removeItem("afoActiveStudent");
+ }catch(e){console.warn("localStorage yedek kaydı başarısız",e)}
+ clearTimeout(appStateSaveTimer);
+ appStateSaveTimer=setTimeout(()=>persistAppState(),40);
+}
+
+async function loadAppState(){
+ try{
+  const db=await openResourceDB();
+  const state=await new Promise((resolve,reject)=>{
+   const req=db.transaction("appState","readonly").objectStore("appState").get("state");
+   req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);
+  });
+  if(state){
+   students=Array.isArray(state.students)?state.students:[];
+   questions=Array.isArray(state.questions)?state.questions:[];
+   tests=Array.isArray(state.tests)?state.tests:[];
+   assignments=Array.isArray(state.assignments)?state.assignments:[];
+   results=Array.isArray(state.results)?state.results:[];
+   mockExams=Array.isArray(state.mockExams)?state.mockExams:[];
+   expandedTrees=state.expandedTrees||{};
+   generalMicroProgress=state.generalMicroProgress||{};
+   activeStudentId=state.activeStudentId||null;
+  }else{
+   // İlk açılışta mevcut localStorage verisini tek veritabanı katmanına taşır.
+   await persistAppState();
+  }
+  appStateLoaded=true;
+ }catch(e){
+  console.warn("IndexedDB uygulama verisi yüklenemedi; yerel geri dönüş kullanılıyor.",e);
+  appStateLoaded=false;
+ }
+}
+function student(){return students.find(s=>s.id===activeStudentId)}
+function ensureProgress(s){
+ if(!s.progress)s.progress={};
+ return s.progress;
+}
+function topicKey(g,t){return `${g}-${t}`}
+function completedCount(s,g){
+ const p=ensureProgress(s); return data[g].topics.reduce((a,_,i)=>a+(p[topicKey(g,i)]?.done?1:0),0);
+}
+
+async function loadResources(){
+ try{
+  const db=await openResourceDB();
+  resources=await new Promise((resolve,reject)=>{
+   const req=db.transaction("resources","readonly").objectStore("resources").getAll();
+   req.onsuccess=()=>resolve(req.result||[]);req.onerror=()=>reject(req.error);
+  });
+  resources.forEach(r=>{
+   if(r.gradeIndex===undefined||r.topicIndex===undefined){
+    const m=String(r.key||'').match(/^(micro|topic)-(\d+)-(\d+)(?:-(\d+)-(\d+))?$/);
+    if(m){r.gradeIndex=+m[2];r.topicIndex=+m[3];r.gradeLabel=data[r.gradeIndex]?.grade||r.gradeLabel;r.topic=data[r.gradeIndex]?.topics?.[r.topicIndex]?.[0]||r.topic;if(m[1]==='micro'&&m[4]!=null){r.microSubIndex=+m[4];r.microIndex=+m[5];const st=detailedStructure(r.topic);r.subtopic=st[r.microSubIndex]?.name||r.subtopic;r.microtopic=st[r.microSubIndex]?.micro?.[r.microIndex]||r.microtopic;}}
+   }
+  });
+ }catch(e){resources=[]}
+}
+async function saveResource(obj){
+ const db=await openResourceDB();
+ await new Promise((resolve,reject)=>{
+  const req=db.transaction("resources","readwrite").objectStore("resources").put(obj);
+  req.onsuccess=resolve;req.onerror=()=>reject(req.error);
+ });
+ resources.push(obj);
+}
+async function removeResource(id){
+ const db=await openResourceDB();
+ await new Promise((resolve,reject)=>{
+  const req=db.transaction("resources","readwrite").objectStore("resources").delete(id);
+  req.onsuccess=resolve;req.onerror=()=>reject(req.error);
+ });
+ resources=resources.filter(x=>x.id!==id);
+}
+function topicResourceKey(i,j,si=null,mi=null){
+ return (si!==null&&mi!==null)?`micro-${i}-${j}-${si}-${mi}`:`topic-${i}-${j}`;
+}
+function getMicroResources(i,j,si,mi){
+ return resources.filter(r=>r.key===topicResourceKey(i,j,si,mi));
+}
+
+function getTopicResources(i,j){
+ return resources.filter(r=>r.key===topicResourceKey(i,j));
+}
+function formatBytes(bytes){
+ if(bytes<1024)return bytes+" B";
+ if(bytes<1024*1024)return (bytes/1024).toFixed(0)+" KB";
+ return (bytes/1024/1024).toFixed(1)+" MB";
+}
+function renderSide(){
+ nav.innerHTML=`<button onclick="home()" class="${page.type==='home'?'active':''}">⌂ Ana Sayfa</button>
+ <div class="nav-title" style="padding-left:12px">AFO ARŞİVİ</div>
+ <button onclick="showAllTopics()" class="${page.type==='archiveClasses'?'active':''}">📚 Konu Arşivi</button>
+ <button onclick="showArchiveManager()" class="${page.type==='archive'?'active':''}">＋ Arşive Ekle</button>
+ <button onclick="showCloudSync()" class="${page.type==='cloud'?'active':''}">☁️ Arşiv Senkronizasyonu</button>
+ <div class="nav-title" style="padding-left:12px">ÖĞRENCİ TAKİBİ</div>
+ <button onclick="showStudents()" class="${page.type==='students'?'active':''}">👥 Öğrenciler</button>
+ <button onclick="showDataManager()" class="${page.type==='data'?'active':''}">💾 Yedekleme</button>`;
+}
+function studentProgress(s){
+ let total=0,score=0;
+ data.forEach((g,gi)=>{
+   g.topics.forEach((t,ti)=>{
+     total++;
+     const rec=s.progress?.[topicKey(gi,ti)]||{};
+     if(rec.done){ score+=1; return; }
+     const st=detailedStructure(t[0]);
+     const all=st.reduce((n,x)=>n+x.micro.length,0);
+     const completed=st.reduce((n,x,si)=>n+x.micro.filter((_,mi)=>isMicroDone(gi,ti,si,mi,s)).length,0);
+     if(all) score += completed/all;
+   });
+ });
+ return total?Math.round(score/total*100):0;
+}
+function esc(x){return String(x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+function showWelcome(){
+ document.body.classList.add("afo-welcome-mode");
+ page={type:"welcome",grade:null,topic:null};
+ search.value=""; crumb.textContent="AFO / Hoş Geldiniz"; renderSide();
+ const s=student();
+ content.innerHTML=`
+ <section class="afo-welcome-screen" id="welcomeScreen">
+  <div class="afo-math-field" aria-hidden="true">
+   <div class="afo-math-grid"></div>
+   <div class="afo-math-curve"></div>
+   <span class="afo-math-symbol s1">x² + y² = r²</span>
+   <span class="afo-math-symbol s2">Σ aₙ</span>
+   <span class="afo-math-symbol s3">∫ f(x) dx</span>
+   <span class="afo-math-symbol s4">√(a²+b²)</span>
+   <span class="afo-math-symbol s5">π · r²</span>
+   <span class="afo-math-symbol s6">f′(x)</span>
+  </div>
+  <div class="afo-welcome-clean">
+   <div class="afo-welcome-mark">AFO</div>
+   <div class="afo-welcome-eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+   <h2 class="afo-welcome-title">Hoş geldiniz <span>Hocam.</span></h2>
+   <p class="afo-welcome-text">Kendi matematik arşivinden dersini yönet, öğrencilerinin hangi konuyu yaptığını takip et ve hazır içeriklere tek yerden ulaş.</p>
+   <div class="afo-welcome-actions">
+    <button class="afo-welcome-primary" onclick="startLesson()">▶ Derse Başla</button>
+    <button class="afo-welcome-secondary" onclick="enterArchiveFromWelcome()">📚 Konu Arşivine Git</button>
+   </div>
+   <div class="afo-welcome-meta">
+    <span class="afo-welcome-chip">👨‍🏫 Öğretmen arşivi</span>
+    <span class="afo-welcome-chip">${data.length} sınıf</span>
+    <span class="afo-welcome-chip">${data.reduce((a,g)=>a+g.topics.length,0)} konu</span>
+   </div>
+  </div>
+ </section>`;
+}
+function leaveWelcome(next){
+ const screen=document.getElementById("welcomeScreen");
+ if(!screen){ document.body.classList.remove("afo-welcome-mode"); next(); return; }
+ screen.classList.add("leaving");
+ content.classList.add("afo-app-enter");
+ setTimeout(()=>{
+   document.body.classList.remove("afo-welcome-mode");
+   next();
+   requestAnimationFrame(()=>{
+     content.classList.remove("afo-app-enter");
+   });
+ },660);
+}
+function startLesson(){ leaveWelcome(()=>home()); }
+function enterArchiveFromWelcome(){
+ leaveWelcome(()=>showAllTopics());
+}
+function home(){
+ page={type:"home",grade:null,topic:null}; search.value=""; crumb.textContent="Ana Sayfa"; renderSide();
+ content.innerHTML=`<section class="hero"><div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+ <h2>Kendi matematik arşivin.</h2>
+ <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
+ <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div></section>
+ <div class="quick-grid">
+   <article class="quick-card" onclick="showAllTopics()"><div class="quick-icon">📚</div><div><div class="mini">AFO ARŞİVİ</div><h3>Konu Arşivine Gir</h3><p>Sınıf → konu → alt konu → mikro konu</p></div><span>→</span></article>
+   <article class="quick-card" onclick="showArchiveManager()"><div class="quick-icon">＋</div><div><div class="mini">MATERYAL</div><h3>Arşive Materyal Ekle</h3><p>PDF, görsel ve ders içeriklerini bağla</p></div><span>→</span></article>
+   <article class="quick-card" onclick="showCloudSync()"><div class="quick-icon">☁</div><div><div class="mini">SENKRONİZASYON</div><h3>Arşivi Senkronize Et</h3><p>Bilgisayar ve tablet aynı arşivi kullansın</p></div><span>→</span></article>
+ </div>
+ <div class="head"><h3>📚 Sınıf Arşivi</h3><span>Bir sınıf seç</span></div>
+ <div class="grade-grid">${data.map((g,i)=>`<article class="card grade" style="--accent:${g.color}" onclick="showGrade(${i})"><div class="bar" style="background:${g.color}"></div><div class="mini">MATEMATİK</div><h4>${g.grade}</h4><p>${g.topics.length} konu başlığı</p><div class="count">Konuları görüntüle →</div></article>`).join("")}</div>`;
+}
+function showExam(i){
+ page={type:"exam",exam:i,grade:null,topic:null}; search.value="";
+ const e=examData[i]; crumb.textContent=`Ana Sayfa / ${e.name}`; renderSide();
+ const s=student();
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="home()">← Ana Sayfa</button><div><h3>${e.name}</h3><p>${e.tag} • ${e.topics.length} ana başlık</p></div></div>
+ ${s?`<div class="student-banner"><strong>Öğrenci: ${esc(s.name)}</strong><span>${s.grade} • Sınav takibini buradan yapabilirsin.</span><button class="btn small" onclick="showStudent('${s.id}')">Öğrenciyi Gör</button></div>`:""}
+ <div class="head"><h3>${e.name} Konu Haritası</h3><span>Sınav konu haritası</span></div>
+ <div class="topic-grid">${e.topics.map((t,j)=>`<article class="card topic"><div><span class="num">${String(j+1).padStart(2,"0")}</span><span class="name">${esc(t)}</span></div><span style="color:${e.color}">→</span></article>`).join("")}</div>
+ <div class="detail card" style="margin-top:18px;border-left:5px solid ${e.color}">
+   <h3 style="font-size:20px">${e.name} Öğrenci Takibi</h3>
+   <div class="muted">Sınava özel takip ekranı sonraki geliştirmede soru sayısı, net, kaynak ve deneme takibi ile genişletilebilir.</div>
+ </div>`;
+}
+function showGrade(i){
+ page={type:"grade",grade:i,topic:null}; search.value=""; crumb.textContent=`Ana Sayfa / ${data[i].grade}`; renderSide();
+ const g=data[i], s=student();
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showAllTopics()">← Konu Arşivi</button><div><h3>${g.grade}</h3><p>${g.topics.length} konu</p></div></div>
+ ${s?`<div class="student-banner"><strong>Öğrenci: ${esc(s.name)}</strong><span>${s.grade} • Genel ilerleme %${studentProgress(s)}</span><button class="btn small" onclick="showStudent('${s.id}')">Öğrenciyi Gör</button></div>`:""}
+ <div class="head"><h3>Konu İndeksi</h3><span>Konuyu seç</span></div>
+ <div class="topic-grid">${g.topics.map((t,j)=>{
+   const rec=s?.progress?.[topicKey(i,j)]||{};
+   const st=detailedStructure(t[0]);
+   const all=st.reduce((n,x)=>n+x.micro.length,0);
+   const md=st.reduce((n,x,si)=>n+x.micro.filter((_,mi)=>isMicroDone(i,j,si,mi,s)).length,0);
+   const done=!!rec.done || (all>0 && md===all);
+   const pct=rec.done?100:(all?Math.round(md/all*100):0);
+   return `<article class="card topic ${done?'completed':''}" onclick="showTopic(${i},${j})">
+     <div><span class="num">${String(j+1).padStart(2,"0")}</span><span class="name">${esc(t[0])}</span>
+     <div style="font-size:9px;color:${done?'#5f914c':'var(--muted)'};margin-top:4px">${rec.done?'KONU TAMAMLANDI':`${md}/${all} mikro konu • %${pct}`}</div></div>
+     <span class="topic-status ${done?'done':'pending'}">${done?'✓ BİTTİ':pct>0?'%'+pct:'BAŞLAMADI'}</span>
+   </article>`;
+ }).join("")}</div>`;
+}
+
+
+const resourceCategories=["Konu Anlatımı","Çözümlü Örnekler","Soru Bankası","Test","Yeni Nesil","LGS / TYT / AYT","Sık Yapılan Hatalar","Ödev"];
+function normalizeResourceCategory(r){ return r.category || "Diğer"; }
+let archiveSelection={grade:0,topic:0,level:"micro",sub:0,micro:0,category:"Konu Anlatımı"};
+function archiveGradeOptions(){return data.map((g,i)=>`<option value="${i}" ${i===+archiveSelection.grade?'selected':''}>${esc(g.grade)}</option>`).join("")}
+function archiveTopicOptions(){const g=data[+archiveSelection.grade]||data[0];return g.topics.map((t,i)=>`<option value="${i}" ${i===+archiveSelection.topic?'selected':''}>${esc(t[0])}</option>`).join("")}
+function archiveSubOptions(){const g=data[+archiveSelection.grade]||data[0],t=g.topics[+archiveSelection.topic]||g.topics[0],st=detailedStructure(t[0]);return st.map((x,i)=>`<option value="${i}" ${i===+archiveSelection.sub?'selected':''}>${esc(x.name)}</option>`).join("")}
+function archiveMicroOptions(){const g=data[+archiveSelection.grade]||data[0],t=g.topics[+archiveSelection.topic]||g.topics[0],st=detailedStructure(t[0]),sub=st[+archiveSelection.sub]||st[0];return (sub?.micro||[]).map((x,i)=>`<option value="${i}" ${i===+archiveSelection.micro?'selected':''}>${esc(x)}</option>`).join("")}
+function archiveFilteredResources(){const gi=+archiveSelection.grade,ti=+archiveSelection.topic,cat=archiveSelection.category;return resources.filter(r=>r.gradeIndex===gi&&r.topicIndex===ti&&normalizeResourceCategory(r)===cat&&(archiveSelection.level==='topic'?(!r.microtopic):r.microtopic))}
+function showArchiveManager(pref={}){archiveSelection={...archiveSelection,...pref};page={type:"archive"};search.value="";crumb.textContent="AFO / Arşiv Yönetimi";renderSide();renderArchiveManager()}
+function renderArchiveManager(){
+ const gi=+archiveSelection.grade,ti=+archiveSelection.topic,si=+archiveSelection.sub,mi=+archiveSelection.micro,g=data[gi]||data[0],t=g.topics[ti]||g.topics[0],st=detailedStructure(t[0]),sub=st[si]||st[0],micro=sub?.micro?.[mi]||"",isMicro=archiveSelection.level==='micro',cat=archiveSelection.category||resourceCategories[0],rs=archiveFilteredResources();
+ content.innerHTML=`<div class="page-title"><div><h3>📚 Arşiv Yönetimi</h3><p>Bütün materyallerini tek yerden ekle ve doğru konuya bağla.</p></div><span class="archive-badge">MERKEZİ ARŞİV</span></div>
+ <section class="archive-manager-grid"><div class="card detail archive-form-card">
+ <div class="archive-step"><span>01</span><div><b>Konumu seç</b><small>Materyalin AFO içindeki yeri</small></div></div>
+ <div class="field"><label>SINIF</label><select class="select" id="amGrade" onchange="archiveChange('grade',this.value)">${archiveGradeOptions()}</select></div>
+ <div class="field"><label>ANA KONU</label><select class="select" id="amTopic" onchange="archiveChange('topic',this.value)">${archiveTopicOptions()}</select></div>
+ <div class="field"><label>HEDEF DÜZEYİ</label><div class="archive-levels"><button class="archive-level ${!isMicro?'active':''}" onclick="archiveSetLevel('topic')">Ana konu</button><button class="archive-level ${isMicro?'active':''}" onclick="archiveSetLevel('micro')">Mikro konu</button></div></div>
+ ${isMicro?`<div class="field"><label>ALT KONU</label><select class="select" id="amSub" onchange="archiveChange('sub',this.value)">${archiveSubOptions()}</select></div><div class="field"><label>MİKRO KONU</label><select class="select" id="amMicro" onchange="archiveChange('micro',this.value)">${archiveMicroOptions()}</select></div>`:`<div class="archive-target-note">📌 Materyal doğrudan <b>${esc(g.grade)} → ${esc(t[0])}</b> ana konu arşivine bağlanacak.</div>`}
+ <div class="field"><label>İÇERİK TÜRÜ</label><select class="select" id="amCategory" onchange="archiveChange('category',this.value)">${resourceCategories.slice(0,8).map(x=>`<option ${x===cat?'selected':''}>${esc(x)}</option>`).join("")}</select></div>
+ <div class="archive-step"><span>02</span><div><b>Materyali ekle</b><small>PDF veya görsel</small></div></div>
+ <div class="field"><label>MATERYAL BAŞLIĞI</label><input class="input" id="amTitle" placeholder="Örn. ${esc(micro||t[0])} • ${esc(cat)} 1"></div>
+ <div class="material-drop" onclick="document.getElementById('amFile').click()"><input id="amFile" class="file-input" type="file" accept=".pdf,application/pdf,image/*"><strong>📎 PDF veya Resim Seç</strong><div id="amFileName" style="font-size:11px;color:var(--muted);margin-top:6px">Dosya seçilmedi.</div></div>
+ <div class="modal-actions"><button class="btn primary" onclick="archiveUpload()">⬆ Arşive Kaydet</button></div><div class="archive-rule">Bu işlem öğrencinin ilerlemesini değiştirmez; sadece AFO arşivine materyal ekler.</div>
+ </div><div><div class="card archive-location-card"><div class="muted">SEÇİLİ ARŞİV KONUMU</div><h3>${esc(g.grade)} → ${esc(t[0])}</h3><p>${isMicro?`→ ${esc(sub.name)} → <b>${esc(micro)}</b>`:`Bu ana konunun genel arşivi`}</p><div class="archive-path-chip">${esc(cat)} • ${rs.length} materyal</div></div>
+ <div class="head" style="margin-top:18px"><h3>Bu Konumdaki Materyaller</h3><span>${rs.length} dosya</span></div><div class="material-list">${rs.length?rs.slice().reverse().map(r=>`<article class="material-item"><div class="resource-icon" style="background:${r.type==='pdf'?'#b46b72':'#5f8f8f'}">${r.type==='pdf'?'PDF':'IMG'}</div><div class="resource-info"><strong>${esc(r.name)}</strong><span>${r.microtopic?esc(r.microtopic)+' • ':''}${esc(normalizeResourceCategory(r))} • ${formatBytes(r.size)}</span></div><div class="resource-actions"><button class="btn small primary" onclick="viewArchiveResource('${r.id}')">Görüntüle</button><button class="btn small danger" onclick="deleteArchiveResource('${r.id}')">Sil</button></div></article>`).join(""):`<div class="empty">Bu konum ve içerik türünde henüz materyal yok.</div>`}</div></div></section>`;
+ const f=document.getElementById('amFile');if(f)f.onchange=e=>document.getElementById('amFileName').textContent=e.target.files[0]?.name||'Dosya seçilmedi.';
+}
+function archiveChange(key,val){archiveSelection[key]=key==='category'?val:+val;if(key==='grade'){archiveSelection.topic=0;archiveSelection.sub=0;archiveSelection.micro=0}if(key==='topic'){archiveSelection.sub=0;archiveSelection.micro=0}if(key==='sub')archiveSelection.micro=0;renderArchiveManager()}
+function archiveSetLevel(level){archiveSelection.level=level;renderArchiveManager()}
+async function archiveUpload(){const f=document.getElementById('amFile')?.files?.[0];if(!f){alert('Önce PDF veya resim seç.');return}const type=f.type==='application/pdf'?'pdf':(f.type.startsWith('image/')?'image':null);if(!type){alert('Sadece PDF veya resim yükleyebilirsin.');return}const gi=+archiveSelection.grade,ti=+archiveSelection.topic,si=+archiveSelection.sub,mi=+archiveSelection.micro,g=data[gi],t=g.topics[ti],st=detailedStructure(t[0]),sub=st[si],micro=sub?.micro?.[mi],title=(document.getElementById('amTitle')?.value||'').trim()||f.name,category=archiveSelection.category,base={id:uid(),gradeIndex:gi,topicIndex:ti,gradeLabel:g.grade,topic:t[0],category,name:title,type,mime:f.type,size:f.size,data:f};if(archiveSelection.level==='micro'){base.key=topicResourceKey(gi,ti,si,mi);base.microSubIndex=si;base.microIndex=mi;base.subtopic=sub.name;base.microtopic=micro}else base.key=topicResourceKey(gi,ti);try{await saveResource(base);renderArchiveManager();alert('Materyal AFO arşivine eklendi.')}catch(e){console.error(e);alert('Dosya kaydedilemedi.')}}
+function viewArchiveResource(id){const r=resources.find(x=>x.id===id);if(!r)return;const box=document.createElement('div');box.className='modal-back';box.id='archivePreviewModal';const url=URL.createObjectURL(r.data);box.innerHTML=`<div class="modal" style="width:min(1050px,94vw);height:min(88vh,900px);display:flex;flex-direction:column" onclick="event.stopPropagation()"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3 style="margin:0">${esc(r.name)}</h3><button class="btn small" onclick="document.getElementById('archivePreviewModal').remove();URL.revokeObjectURL('${url}')">Kapat</button></div><div style="flex:1;margin-top:12px;overflow:auto;background:#f4f6f9;border-radius:12px">${r.type==='pdf'?`<iframe src="${url}" style="width:100%;height:100%;min-height:600px;border:0"></iframe>`:`<img src="${url}" style="display:block;max-width:100%;max-height:100%;margin:auto;padding:18px" alt="${esc(r.name)}">`}</div></div>`;box.onclick=()=>box.remove();document.body.appendChild(box)}
+async function deleteArchiveResource(id){if(!confirm('Bu materyal arşivden silinsin mi?'))return;await removeResource(id);renderArchiveManager()}
+
+function showLessonPackage(i,j,si,mi){
+ const t=data[i].topics[j][0], sub=detailedStructure(t)[si], micro=sub.micro[mi], g=data[i], rs=getMicroResources(i,j,si,mi);
+ page={type:"lessonPackage",grade:i,topic:j,si,mi};
+ crumb.textContent=`${g.grade} / ${t} / ${sub.name} / ${micro}`;search.value="";renderSide();
+ const icons=["📖","📝","📚","🧪","🎯","📌","⚠️","◈"];
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showMicroMaterialPage(${i},${j},${si},${mi})">← Mikro Konu</button><div><h3>Ders Paketi</h3><p>${esc(g.grade)} → ${esc(t)} → ${esc(sub.name)} → ${esc(micro)}</p></div></div>
+ <div class="afo-package" style="margin-top:18px">
+  <div class="afo-package-head"><div><div class="eyebrow" style="color:var(--navy);opacity:.5">AFO • HAZIR DERS PAKETİ</div><div class="afo-package-title">${esc(micro)}</div><div class="afo-package-sub">Bu mikro konu için ders sırasında kullanacağın tüm içerikler tek yerde.</div></div><button class="btn small" onclick="showArchiveManager({grade:${i},topic:${j},sub:${si},micro:${mi},level:'micro'})">＋ Arşive Ekle</button></div>
+  <div class="afo-package-strip">${resourceCategories.slice(0,8).map((cat,k)=>{const arr=rs.filter(r=>normalizeResourceCategory(r)===cat);return `<span class="afo-package-pill ${arr.length?'ready':'empty'}">${icons[k]||'•'} ${esc(cat)} · ${arr.length}</span>`}).join('')}</div>
+  <div class="afo-package-cta"><div><strong>📦 Ders Paketini Aç</strong><span>Konu anlatımı, örnek, test, yeni nesil ve ödev içerikleri</span></div><button class="btn small" onclick="showLessonPackage(${i},${j},${si},${mi})">Paketi Aç →</button></div>
+  <div class="afo-package-grid">${resourceCategories.slice(0,8).map((cat,k)=>{const arr=rs.filter(r=>normalizeResourceCategory(r)===cat);return `<div class="afo-package-item ${arr.length?'':'afo-package-empty'}" onclick="openMicroPackageCategory(${i},${j},${si},${mi},'${esc(cat).replace(/'/g,"\'")}')"><b>${icons[k]||'•'} ${esc(cat)}</b><span>${arr.length?arr.length+' materyal • Aç':'Henüz hazırlanmadı'}</span></div>`}).join('')}</div>
+  <div id="packageViewer" style="margin-top:14px"></div>
+ </div>`;
+}
+function openMicroPackageCategory(i,j,si,mi,category){
+ const rs=getMicroResources(i,j,si,mi).filter(r=>normalizeResourceCategory(r)===category);
+ const box=document.getElementById('packageViewer'); if(!box)return;
+ box.innerHTML=`<div class="card detail"><div class="head" style="margin-top:0"><h3>${esc(category)}</h3><span>${rs.length} materyal</span></div>${rs.length?`<div class="material-list">${rs.map(r=>`<article class="material-item"><div class="resource-icon" style="background:${r.type==='pdf'?'#b46b72':'#5f8f8f'}">${r.type==='pdf'?'PDF':'IMG'}</div><div class="resource-info"><strong>${esc(r.name)}</strong><span>${r.type==='pdf'?'PDF':'Resim'} • ${formatBytes(r.size)}</span></div><div class="resource-actions"><button class="btn small primary" onclick="viewMaterialOnPage('${r.id}',${i},${j},'packageViewer')">Görüntüle</button></div></article>`).join('')}</div>`:`<div class="empty">Bu alan şu an boş. Arşiv Yönetimi'nden içerik ekleyebilirsin.</div>`}</div>`;
+}
+
+function showMicroMaterialPage(i,j,si,mi){
+ const t=data[i].topics[j][0], sub=detailedStructure(t)[si], micro=sub.micro[mi], g=data[i], rs=getMicroResources(i,j,si,mi);
+ page={type:"microMaterial",grade:i,topic:j,si,mi};
+ crumb.textContent=`${g.grade} / ${t} / ${sub.name} / ${micro}`;search.value="";renderSide();
+ const lessonColors=["#5b7fa3","#6d9b7b","#9b8bb4","#c58a63","#b46b72","#5f8f8f","#6679a6","#7a6b8c"];
+ const cats=resourceCategories.slice(0,8);
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showTopic(${i},${j})">← ${esc(t)}</button><div><h3>${esc(micro)}</h3><p>${esc(sub.name)} • Mikro konu arşivi</p></div></div>
+ <div style="height:15px"></div><div class="material-page">
+ <section>
+  <div class="material-header"><div class="eyebrow">AFO • MİKRO KONU ARŞİVİ</div><h3>${esc(micro)}</h3><p>${esc(g.grade)} → ${esc(t)} → ${esc(sub.name)} → <b>${esc(micro)}</b></p></div>
+  <div class="card detail" style="margin-top:14px">
+   <div class="head" style="margin-top:0"><h3>🎯 Bu Konunun Ders İçeriği</h3><span>İhtiyacın olan içeriği doğrudan aç</span></div>
+   <div class="lesson-grid">
+    ${cats.map((cat,k)=>{const crs=rs.filter(r=>normalizeResourceCategory(r)===cat);return `<div class="lesson-card" style="background:${lessonColors[k%lessonColors.length]};cursor:pointer" onclick="openMicroCategory(${i},${j},${si},${mi},'${esc(cat).replace(/'/g,"\\'")}')"><strong>${esc(cat)}</strong><span>${crs.length} materyal${crs.length?' • Aç':' • Henüz yok'}</span></div>`}).join("")}
+   </div>
+  </div>
+  <div class="head"><h3>📚 Bu Mikro Konudaki Dosyalar</h3><span>${rs.length} dosya</span></div>
+  <div class="material-list">${rs.length?rs.map(r=>`<article class="material-item"><div class="resource-icon" style="background:${r.type==='pdf'?'#b46b72':'#5f8f8f'}">${r.type==='pdf'?'PDF':'IMG'}</div><div class="resource-info"><strong>${esc(r.name)}</strong><span>${esc(normalizeResourceCategory(r))} • ${r.type==='pdf'?'PDF':'Resim'} • ${formatBytes(r.size)}</span></div><div class="resource-actions"><button class="btn small primary" onclick="viewMaterialOnPage('${r.id}',${i},${j})">Görüntüle</button><button class="btn small danger" onclick="deleteMicroMaterial('${r.id}',${i},${j},${si},${mi})">Sil</button></div></article>`).join(""):`<div class="empty">Bu mikro konuya henüz materyal eklenmedi. İlk dosyayı yukarıdan ekleyebilirsin.</div>`}</div>
+  <div id="microCategoryViewer" class="viewer-wrap" style="display:none"></div>
+ </section>
+ <aside class="material-side"><div class="card mini-card"><h4>📍 Arşiv Konumu</h4><div class="help-text"><b>${esc(g.grade)}</b><br>→ ${esc(t)}<br>→ ${esc(sub.name)}<br>→ <b>${esc(micro)}</b></div></div><div class="card mini-card"><h4>👨‍🏫 Ders Kullanımı</h4><div class="help-text">Ders sırasında bu mikro konuya girip konu anlatımını, örnekleri, testi veya ödevi tek yerden açabilirsin.</div></div></aside></div>`;
+}
+function openMicroCategory(i,j,si,mi,category){
+ const box=document.getElementById("microCategoryViewer"); if(!box)return;
+ const rs=getMicroResources(i,j,si,mi).filter(r=>normalizeResourceCategory(r)===category);
+ box.style.display="block";
+ box.innerHTML=`<div class="card detail" style="margin-top:14px"><div class="head" style="margin-top:0"><h3>${esc(category)}</h3><span>${rs.length} materyal</span></div>${rs.length?`<div class="material-list">${rs.map(r=>`<article class="material-item"><div class="resource-icon" style="background:${r.type==='pdf'?'#b46b72':'#5f8f8f'}">${r.type==='pdf'?'PDF':'IMG'}</div><div class="resource-info"><strong>${esc(r.name)}</strong><span>${r.type==='pdf'?'PDF':'Resim'} • ${formatBytes(r.size)}</span></div><div class="resource-actions"><button class="btn small primary" onclick="viewMaterialOnPage('${r.id}',${i},${j},'microCategoryViewer')">Görüntüle</button></div></article>`).join("")}</div>`:`<div class="empty">Bu içerik türüne henüz materyal eklenmemiş. Yukarıdaki arşiv alanından ekleyebilirsin.</div>`}<div style="text-align:right;margin-top:10px"><button class="btn small" onclick="document.getElementById('microCategoryViewer').style.display='none'">Kapat</button></div></div>`;
+ box.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+async function deleteMicroMaterial(id,i,j,si,mi){if(!confirm("Bu materyal silinsin mi?"))return;await removeResource(id);showMicroMaterialPage(i,j,si,mi)}
+function showMaterialPage(i,j,category){
+ page={type:"materialPage",grade:i,topic:j,category};
+ const g=data[i],t=g.topics[j],rs=getTopicResources(i,j).filter(r=>normalizeResourceCategory(r)===category);
+ crumb.textContent=`${g.grade} / ${t[0]} / ${category}`;
+ search.value="";renderSide();
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showTopic(${i},${j})">← ${g.grade} / ${esc(t[0])}</button><div><h3>${esc(category)}</h3><p>${esc(t[0])} • ${rs.length} materyal</p></div></div>
+ <div style="height:16px"></div>
+ <div class="material-page">
+  <section>
+   <div class="material-header">
+    <div class="eyebrow">AFO • ${esc(g.grade).toUpperCase()}</div>
+    <h3>${esc(t[0])}</h3>
+    <p>📂 ${esc(category)} arşivi</p>
+   </div>
+   <div class="head"><h3>Bu Alandaki Materyaller</h3><span>${rs.length} dosya</span></div>
+   <div class="material-list">
+    ${rs.length?rs.map(r=>`<article class="material-item"><div class="resource-icon" style="background:${r.type==='pdf'?'#b46b72':'#5f8f8f'}">${r.type==='pdf'?'PDF':'IMG'}</div><div class="resource-info"><strong>${esc(r.name)}</strong><span>${r.type==='pdf'?'PDF dosyası':'Resim'} • ${formatBytes(r.size)}</span></div><div class="resource-actions"><button class="btn small primary" onclick="viewMaterialOnPage('${r.id}',${i},${j})">Görüntüle</button><button class="btn small danger" onclick="deleteResourceFromMaterialPage('${r.id}',${i},${j},'${esc(category).replace(/'/g,"\\'")}')">Sil</button></div></article>`).join(""):`<div class="empty">Henüz bu alana materyal eklenmedi.</div>`}
+   </div>
+   <div id="materialViewer" class="viewer-wrap" style="display:none"></div>
+  </section>
+  <aside class="material-side">
+   <div class="card mini-card"><h4>📍 Konum</h4><div class="help-text"><b>${esc(g.grade)}</b><br>→ ${esc(t[0])}<br>→ <b>${esc(category)}</b></div></div>
+   <div class="card mini-card"><h4>📦 Dosya Türleri</h4><div class="help-text">PDF veya resim yükleyebilirsin.</div></div>
+   <div class="card mini-card"><h4>🎯 Mantık</h4><div class="help-text">Her içerik türünün kendi arşivi var. Test yüklediğinde sadece Test kutusunun altında kalır.</div></div>
+  </aside>
+ </div>`;
+}
+
+function viewMaterialOnPage(id,i,j,viewerId="materialViewer"){
+ const r=resources.find(x=>x.id===id),v=document.getElementById(viewerId);if(!r||!v)return;
+ const url=URL.createObjectURL(r.data); v.style.display="block";
+ const close=`document.getElementById('${viewerId}').style.display='none'`;
+ v.innerHTML=r.type==="pdf"?`<div style="padding:10px 13px;background:#eef3f8;color:var(--navy);font-size:11px;font-weight:800;display:flex;justify-content:space-between"><span>📄 ${esc(r.name)}</span><button class="btn small" onclick="${close}">Kapat</button></div><iframe src="${url}"></iframe>`:
+ `<div style="padding:10px 13px;background:#eef3f8;color:var(--navy);font-size:11px;font-weight:800;display:flex;justify-content:space-between"><span>🖼️ ${esc(r.name)}</span><button class="btn small" onclick="${close}">Kapat</button></div><div style="padding:18px"><img src="${url}" alt="${esc(r.name)}"></div>`;
+ v.scrollIntoView({behavior:"smooth",block:"start"});
+}
+async function deleteResourceFromMaterialPage(id,i,j,category){
+ if(!confirm("Bu materyal silinsin mi?"))return;
+ await removeResource(id); showMaterialPage(i,j,category);
+}
+
+
+function detailedStructure(topic){
+ const base=subtopicData[topic]||[`${topic} — temel kavramlar`,`Temel sorular`,`Uygulama`,`Yeni nesil sorular`,`Sık yapılan hatalar`];
+ return base.map((sub,si)=>{
+   let micro=[];
+   const t=sub.toLocaleLowerCase("tr-TR");
+   if(t.includes("kavram")||t.includes("tanım")) micro=["Tanım ve temel mantık","Temel örnekler","Kavramı yorumlama","Kazanım kontrolü"];
+   else if(t.includes("karşılaştır")||t.includes("sıral")) micro=["Karşılaştırma mantığı","Sıralama yöntemleri","Hızlı yöntemler","Yeni nesil uygulamalar"];
+   else if(t.includes("işlem")) micro=["İşlem kuralı","Temel işlemler","Karma işlemler","Sık yapılan hatalar"];
+   else if(t.includes("denklem")) micro=["Denklem kurma","Çözüm adımları","Problem uygulamaları","Kontrol ve yorumlama"];
+   else if(t.includes("grafik")) micro=["Grafiği okuma","Veri yorumlama","Grafik oluşturma","Yeni nesil grafik soruları"];
+   else if(t.includes("alan")) micro=["Alan bağıntısı","Şekil üzerinden alan","Karma alanlar","Problem uygulamaları"];
+   else if(t.includes("açı")) micro=["Açı tanımı","Açı ilişkileri","Açı hesaplama","Yeni nesil uygulamalar"];
+   else if(t.includes("olasılık")) micro=["Örnek uzay","Olasılık hesaplama","Olasılık karşılaştırma","Problem uygulamaları"];
+   else if(t.includes("fonksiyon")) micro=["Fonksiyon kavramı","Tanım ve değer kümeleri","Grafik yorumlama","Uygulamalar"];
+   else if(t.includes("türev")) micro=["Türev mantığı","Türev alma","Grafik ve teğet","Uygulamalar"];
+   else if(t.includes("integral")) micro=["İntegral mantığı","İntegral alma","Belirli integral","Alan uygulamaları"];
+   else if(t.includes("limit")) micro=["Limit mantığı","Sağ ve sol limit","Belirsizlikler","Grafik üzerinden limit"];
+   else if(t.includes("trigonometri")) micro=["Temel tanımlar","Birim çember","Trigonometrik oranlar","Uygulamalar"];
+   else if(t.includes("dizi")) micro=["Genel terim","Örüntü mantığı","Aritmetik yapı","Geometrik yapı"];
+   else if(t.includes("logaritma")) micro=["Logaritma tanımı","Kurallar","Denklemler","Uygulamalar"];
+   else if(t.includes("geometri")||t.includes("üçgen")||t.includes("çember")||t.includes("dörtgen")||t.includes("çokgen")) micro=["Temel özellikler","Bağıntılar","Şekil üzerinde uygulama","Yeni nesil sorular"];
+   else if(t.includes("sayı")) micro=["Tanım ve temel mantık","Temel örnekler","İşlem ve yorum","Problem uygulamaları"];
+   else micro=["Konuya giriş","Temel düzey","Uygulama soruları","Yeni nesil / dikkat edilmesi gerekenler"];
+   return {name:sub,micro};
+ });
+}
+function microKey(si,mi){return `${si}-${mi}`}
+
+function isMicroDone(i,j,si,mi,s){
+ const key=`${i}-${j}-${microKey(si,mi)}`;
+ return s ? !!s.progress?.[topicKey(i,j)]?.micro?.[microKey(si,mi)] : !!generalMicroProgress[key];
+}
+
+function showTopic(i,j,mode="archive") {
+ const studentMode=mode==="student";
+ page={type:"topic",grade:i,topic:j,mode}; const g=data[i],t=g.topics[j];
+ const s=studentMode?student():null, key=topicKey(i,j);
+ const structure=detailedStructure(t[0]);
+ crumb.textContent=`${g.grade} / ${t[0]}`; search.value=""; renderSide();
+ let rec=s?.progress?.[key]||{done:false,sub:{},micro:{},note:""};
+ const totalMicro=structure.reduce((n,x)=>n+x.micro.length,0);
+ const doneMicro=structure.reduce((n,x,si)=>n+x.micro.filter((_,mi)=>isMicroDone(i,j,si,mi,s)).length,0);
+ const doneSubs=structure.filter((x,si)=>x.micro.length>0 && x.micro.every((_,mi)=>isMicroDone(i,j,si,mi,s))).length;
+ const pct=totalMicro?Math.round(doneMicro/totalMicro*100):0;
+ const lessonColors=["#5b7fa3","#6d9b7b","#9b8bb4","#c58a63","#b46b72","#5f8f8f","#6679a6","#7a6b8c"];
+ const cats=resourceCategories.slice(0,8);
+ content.innerHTML=`
+ <div class="page-title ${rec.done?'topic-page-completed':''}">
+   <button class="btn" onclick="${studentMode?`showStudent('${s?.id||''}')`:`showGrade(${i})`}">${studentMode?'← Öğrenci Takibi':`← ${g.grade}`}</button>
+   <div><h3>${esc(t[0])} ${rec.done?'<span class="topic-status done" style="vertical-align:middle;margin-left:6px">✓ BİTTİ</span>':''}</h3><p>${rec.done?'✓ Bu konu tamamlandı':'3 katmanlı konu ağacı • '+structure.length+' alt konu • '+totalMicro+' mikro konu'}</p></div>
+ </div>
+ ${studentMode&&s?`<div class="student-banner"><strong>👤 ${esc(s.name)}</strong><span>${s.grade} • %${pct} tamamlandı</span><button class="btn small primary" onclick="showStudent('${s.id}')">Öğrenci Takibine Dön</button></div>`:
+ `<div class="student-banner archive-context"><strong>📚 AFO Konu Arşivi</strong><span>Bu ekran yalnızca arşiv içeriğini gösterir. Öğrenci ilerlemesi burada tutulmaz.</span></div>`}
+ <section class="card detail">
+   <div class="topic-detail-head">
+     <div><div class="muted">KONU DOSYASI</div><h3>${esc(t[0])}</h3></div>
+     ${studentMode&&s?`<button class="btn ${rec.done?'topic-complete-btn':''} ${rec.done?'':'primary'}" onclick="toggleDone(${i},${j},${!rec.done})">${rec.done?'✓ KONU TAMAMLANDI':'KONUYU BİTİRDİ OLARAK İŞARETLE'}</button>`:""}
+   </div>
+   ${studentMode&&s?`<div class="progress"><div style="width:${pct}%"></div></div><div class="muted"><strong>%${pct}</strong> mikro konu tamamlandı • ${doneMicro}/${totalMicro} • ${doneSubs}/${structure.length} alt konu${rec.done?` • <strong style="color:#4f8847">✓ KONU TAMAMLANDI</strong>`:''}</div>`:""}
+   <div class="structure-summary"><span class="structure-pill">1 • Ana Konu</span><span class="structure-pill">2 • Alt Konu</span><span class="structure-pill">3 • Mikro Konu</span>${studentMode&&s?`<span class="structure-pill" style="background:#edf8e9;color:#5f914c">● Öğrenci ilerlemesi burada</span>`:`<span class="structure-pill" style="background:#eef3f8;color:#5f6e7d">● Arşiv görünümü</span>`}</div>
+   <div class="head"><h3>🧩 Konu Ağacı</h3><div style="display:flex;align-items:center;gap:8px"><button class="btn small" onclick="collapseAllTrees(${i},${j})">Tümünü Kapat</button><span>Alt konuya bas → aç / tekrar bas → kapat</span></div></div>
+   <p class="depth-note">${studentMode?"Öğrencinin nerede kaldığını mikro konu seviyesine kadar takip edebilirsin.":"Mikro konuya inerek bu konunun hazır ders paketlerini ve materyallerini kullan."}</p>
+   ${studentMode&&s&&rec.done?`<div class="topic-tree-complete-banner"><span class="tree-check">✓</span><div><strong>KONU TAMAMLANDI</strong><div style="font-weight:600;color:#70836d;margin-top:2px">Ağaçtaki tüm alt konular tamamlandı olarak gösteriliyor. Mikro konu işaretleri ayrıca korunuyor.</div></div></div>`:''}
+   <div class="tree">
+     ${structure.map((sub,si)=>{
+       const subDone=structure[si].micro.every((_,mi)=>isMicroDone(i,j,si,mi,s)), subMicroDone=sub.micro.filter((_,mi)=>isMicroDone(i,j,si,mi,s)).length;
+       const treeOpen=expandedTrees[`${i}-${j}-${si}`]===true;
+       const topicDoneStyle=rec.done?'topic-manually-done':'';
+       return `<article class="tree-item ${subDone?'all-done':''} ${topicDoneStyle} ${treeOpen?'open':''}" id="tree-${i}-${j}-${si}">
+         <div class="tree-main" onclick="toggleTree(${i},${j},${si})">
+           <div>
+             <strong>${si+1}. ${esc(sub.name)}</strong>
+             <div class="level-label"><span class="level-dot ${(subDone||rec.done)?'on':''}"></span>${rec.done?'✓ KONU TAMAMLANDI':`${subMicroDone}/${sub.micro.length} mikro konu${subDone?' • ✓ TAMAMI YAPILDI':''}`}</div>
+           </div>
+           <span class="tree-chevron">›</span>
+         </div>
+         <div class="tree-children">
+           ${sub.micro.map((m,mi)=>{
+             const done=studentMode&&s ? isMicroDone(i,j,si,mi,s) : false;
+             const microRs=getMicroResources(i,j,si,mi);
+             return `<div class="micro ${done?'done':(studentMode&&rec.done?'topic-manually-done':'')}">
+               <span class="micro-name" onclick="toggleMicro(${i},${j},${si},${mi},${!done})" style="cursor:pointer">${mi+1}. ${esc(m)}</span>
+               <span class="micro-action" style="display:flex;align-items:center;gap:7px">
+                 <button class="btn small micro-package-btn" onclick="event.stopPropagation();showLessonPackage(${i},${j},${si},${mi})">📦 Ders Paketi</button>
+                 <button class="btn small" onclick="event.stopPropagation();showMicroMaterialPage(${i},${j},${si},${mi})">📚 Arşiv ${microRs.length?`(${microRs.length})`:''}</button>
+                 ${studentMode&&s?`<button class="btn small" onclick="event.stopPropagation();toggleMicro(${i},${j},${si},${mi},${!done})">${done?'YAPILDI':'Yapıldı'}</button>`:''}
+               </span>
+             </div>`;
+           }).join("")}
+         </div>
+       </article>`;
+     }).join("")}
+   </div>
+
+   <div class="head" style="margin-top:28px"><h3>📚 Ders İçeriği Arşivi</h3><span>Önce mikro konuyu seç → içerikleri tek yerden aç</span></div>
+   <div class="lesson-grid archive-topic-categories">
+     ${cats.map((cat,k)=>{
+       const rs=getTopicResources(i,j).filter(r=>normalizeResourceCategory(r)===cat);
+       return `<div class="lesson-card" style="background:${lessonColors[k%lessonColors.length]};cursor:pointer" onclick="showMaterialPage(${i},${j},'${esc(cat).replace(/'/g,"\\'")}')">
+         <strong>${esc(cat)}</strong><span>${rs.length} materyal${rs.length?' • Görüntüle':' • Ekle'}</span>
+       </div>`;
+     }).join("")}
+   </div>
+
+   ${studentMode&&s?`<div class="notes" style="margin-top:23px">
+     <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:7px">📝 Öğretmen Notları</div>
+     <textarea id="note" placeholder="Öğrencinin zorlandığı yerler, soru fikirleri, kaynaklar...">${esc(rec.note||"")}</textarea>
+   </div>`:""}
+ </section>`;
+ const ta=document.getElementById("note");
+ if(ta && studentMode && s) ta.oninput=()=>{s.progress[key]=s.progress[key]||{done:false,sub:{},micro:{}};s.progress[key].note=ta.value;save()};
+}
+function collapseAllTrees(i,j){
+ const structure=detailedStructure(data[i].topics[j][0]);
+ structure.forEach((_,si)=>{
+   const key=`${i}-${j}-${si}`;
+   expandedTrees[key]=false;
+   const el=document.getElementById(`tree-${i}-${j}-${si}`);
+   if(el) el.classList.remove("open");
+ });
+ try{localStorage.setItem("afoExpandedTrees",JSON.stringify(expandedTrees));}catch(e){}
+ showTopic(i,j);
+}
+function toggleTree(i,j,si){
+ const el=document.getElementById(`tree-${i}-${j}-${si}`);
+ if(!el)return;
+ const key=`${i}-${j}-${si}`;
+ const open=!el.classList.contains("open");
+ if(open) el.classList.add("open");
+ else el.classList.remove("open");
+ expandedTrees[key]=open;
+ try{localStorage.setItem("afoExpandedTrees",JSON.stringify(expandedTrees));}catch(e){}
+}
+function toggleMicro(i,j,si,mi,v){
+ const s=student();
+ if(s){
+   const key=topicKey(i,j);
+   s.progress[key]=s.progress[key]||{done:false,sub:{},micro:{}};
+   s.progress[key].micro=s.progress[key].micro||{};
+   s.progress[key].sub=s.progress[key].sub||{};
+   s.progress[key].micro[microKey(si,mi)]=v;
+   const st=detailedStructure(data[i].topics[j][0]);
+   s.progress[key].sub[si]=st[si].micro.every((_,k)=>!!s.progress[key].micro?.[microKey(si,k)]);
+   save();
+ }else{
+   generalMicroProgress[`${i}-${j}-${microKey(si,mi)}`]=v;
+   localStorage.setItem("afoGeneralMicro",JSON.stringify(generalMicroProgress));
+ localStorage.setItem("afoMockExams",JSON.stringify(mockExams));
+ }
+ showTopic(i,j);
+}
+function toggleSub(i,j,k,v){
+ const s=student();if(!s)return;
+ const key=topicKey(i,j);
+ s.progress[key]=s.progress[key]||{done:false,sub:{},micro:{}};
+ s.progress[key].sub[k]=v;save();showTopic(i,j);
+}
+function toggleDone(i,j,v){
+ const s=student();
+ if(!s){
+   alert('Önce bir öğrenci seçmelisin.');
+   return;
+ }
+ const key=topicKey(i,j);
+ s.progress=s.progress||{};
+ s.progress[key]=s.progress[key]||{done:false,sub:{},micro:{},note:''};
+ s.progress[key].done=!!v;
+ s.progress[key].completedAt=v?new Date().toISOString():null;
+
+ // Ana kaydı hemen yaz: ekran yenilenmeden önce bile tamamlanma durumu saklansın.
+ try{
+   localStorage.setItem('afoStudents',JSON.stringify(students));
+   localStorage.setItem('afoActiveStudent',activeStudentId||'');
+ }catch(e){}
+ save();
+
+ // Kullanıcıya anında ve net görsel geri bildirim ver.
+ showTopic(i,j);
+}
+function showStudents(){
+ page={type:"students"}; crumb.textContent="Öğrenciler"; search.value=""; renderSide();
+ content.innerHTML=`<div class="page-title"><div><h3>Öğrenciler</h3><p>Öğrencilerini ve yaptıkları konuları buradan takip et.</p></div><button class="btn primary" onclick="openStudentModal()">＋ Öğrenci Ekle</button></div>
+ <div style="height:19px"></div><div class="student-list">${students.length?students.map(s=>`<article class="card student-card"><h4>${esc(s.name)}</h4><p>${s.grade} • Genel ilerleme %${studentProgress(s)}</p><div class="student-progress">${progressLabel(s)}</div><div class="progress"><div style="width:${studentProgress(s)}%"></div></div><div class="quick"><button class="btn small primary" onclick="selectStudent('${s.id}')">Öğrenciyi Gör</button><button class="btn small" onclick="editStudent('${s.id}')">Düzenle</button><button class="btn small danger" onclick="deleteStudent('${s.id}')">Sil</button></div></article>`).join(""):`<div class="empty" style="grid-column:1/-1">Henüz öğrenci eklemedin.</div>`}</div>`;
+}
+function progressLabel(s){
+ let total=0,done=0;data.forEach((g,gi)=>g.topics.forEach((t,ti)=>{total++;if(s.progress?.[topicKey(gi,ti)]?.done)done++}));
+ return `${done} / ${total} konu tamamlandı`;
+}
+
+function getStudentTopicStats(s){
+ let total=0,done=0,partial=0,notStarted=0;
+ const inProgress=[];
+ const completed=[];
+ const pending=[];
+ data.forEach((g,gi)=>{
+   g.topics.forEach((t,ti)=>{
+     total++;
+     const rec=s.progress?.[topicKey(gi,ti)]||{};
+     const st=detailedStructure(t[0]);
+     const microTotal=st.reduce((n,x)=>n+x.micro.length,0);
+     const microDone=st.reduce((n,x,si)=>n+x.micro.filter((_,mi)=>rec.micro?.[microKey(si,mi)]).length,0);
+     if(rec.done){done++;completed.push({gi,ti,grade:g.grade,topic:t[0]})}
+     else if(microDone>0){partial++;inProgress.push({gi,ti,grade:g.grade,topic:t[0],pct:Math.round(microDone/microTotal*100)})}
+     else {notStarted++;pending.push({gi,ti,grade:g.grade,topic:t[0]})}
+   })
+ });
+ return {total,done,partial,notStarted,inProgress,completed,pending};
+}
+function getCurrentPlace(s){
+ const stats=getStudentTopicStats(s);
+ const candidate=stats.inProgress[0]||stats.pending[0]||stats.completed[stats.completed.length-1]||null;
+ if(!candidate)return null;
+ const st=detailedStructure(data[candidate.gi].topics[candidate.ti][0]);
+ let targetSi=0,targetMi=0;
+ if(stats.inProgress[0]){
+   let found=false;
+   for(let si=0;si<st.length&&!found;si++) for(let mi=0;mi<st[si].micro.length;mi++){
+     if(!isMicroDone(candidate.gi,candidate.ti,si,mi,s)){targetSi=si;targetMi=mi;found=true;break;}
+   }
+ }else if(stats.pending[0]){ targetSi=0; targetMi=0; }
+ else {
+   for(let si=st.length-1;si>=0&&!candidate.micro;si--){}
+   targetSi=Math.max(0,st.length-1);targetMi=Math.max(0,st[targetSi].micro.length-1);
+ }
+ const sub=st[targetSi]||{name:"",micro:[]};
+ const micro=sub.micro?.[targetMi]||"";
+ const rec=s.progress?.[topicKey(candidate.gi,candidate.ti)]||{};
+ return {...candidate,si:targetSi,mi:targetMi,sub:sub.name,micro,pct:candidate.pct,teacherNote:rec.note||"",started:!!stats.inProgress.find(x=>x.gi===candidate.gi&&x.ti===candidate.ti)};
+}
+function gradeProgressForStudent(s,gi){
+ const total=data[gi].topics.length;
+ let done=0,partial=0;
+ data[gi].topics.forEach((t,ti)=>{
+   const rec=s.progress?.[topicKey(gi,ti)]||{};
+   if(rec.done){done++;return}
+   const st=detailedStructure(t[0]);
+   const dt=st.reduce((n,x)=>n+x.micro.length,0);
+   const dd=st.reduce((n,x,si)=>n+x.micro.filter((_,mi)=>rec.micro?.[microKey(si,mi)]).length,0);
+   if(dd>0)partial++;
+ });
+ return {total,done,partial,pct:total?Math.round((done+partial*.5)/total*100):0};
+}
+function showStudent(id){
+ activeStudentId=id; localStorage.setItem("afoActiveStudent",id);
+ const s=student(); page={type:"student",student:id}; crumb.textContent=`Öğrenciler / ${s.name}`; search.value=""; renderSide();
+
+ const gi=s.gradeIndex;
+ const g=data[gi];
+ const stats=getStudentTopicStats(s);
+ const current=getCurrentPlace(s);
+ const overall=studentProgress(s);
+
+ const classTopics=g.topics.map((t,ti)=>{
+   const rec=s.progress?.[topicKey(gi,ti)]||{};
+   const st=detailedStructure(t[0]);
+   const total=st.reduce((n,x)=>n+x.micro.length,0);
+   const done=st.reduce((n,x,si)=>n+x.micro.filter((_,mi)=>isMicroDone(gi,ti,si,mi,s)).length,0);
+   const pct=rec.done?100:(total?Math.round(done/total*100):0);
+   const finished=!!rec.done || (total>0 && done===total);
+   return {t,ti,pct,finished,done,total};
+ });
+
+ const currentHtml=current && current.gi===gi ? `
+   <div class="dashboard-section">
+    <div class="dashboard-section-title"><h3>📍 Kaldığı Yer</h3><span>Doğrudan mikro konuya kadar</span></div>
+    <div class="current-place">
+      <div class="ey">ÖĞRENCİNİN KONUMU</div>
+      <div class="path"><strong>${esc(g.grade)}</strong><span>→</span><strong>${esc(current.topic)}</strong><span>→</span><strong>${esc(current.sub)}</strong><span>→</span><strong>${esc(current.micro)}</strong></div>
+      <p>${current.pct!==undefined?`Konu ilerlemesi %${current.pct}`:"Konu henüz başlamadı"}</p>
+      ${current.teacherNote?`<div class="mini-note"><b>Öğretmen notu:</b> ${esc(current.teacherNote)}</div>`:''}
+      <div class="dashboard-actions" style="margin-top:11px;display:flex;gap:7px;flex-wrap:wrap"><button class="btn small primary" onclick="showMicroMaterialPage(${current.gi},${current.ti},${current.si},${current.mi})">Mikro Konuya Git →</button><button class="btn small" onclick="showLessonPackage(${current.gi},${current.ti},${current.si},${current.mi})">📦 Ders Paketi</button></div>
+    </div>
+   </div>` : "";
+
+ content.innerHTML=`
+ <div class="dashboard-hero">
+   <div class="dashboard-top">
+     <div>
+       <div class="eyebrow" style="font-size:10px;letter-spacing:2px;opacity:.62;font-weight:800">AFO • ÖĞRENCİ TAKİBİ</div>
+       <div class="dashboard-name">${esc(s.name)}</div>
+       <div class="dashboard-grade">${esc(g.grade)} • Sadece bu sınıfın konuları</div>
+     </div>
+     <div><div class="dashboard-percent">%${Math.round(classTopics.reduce((a,x)=>a+x.pct,0)/Math.max(classTopics.length,1))}</div><div class="dashboard-percent-label">SINIF İLERLEMESİ</div></div>
+   </div>
+   <div class="dashboard-stat-row">
+    <div class="dashboard-stat"><div class="v">${classTopics.filter(x=>x.finished).length}</div><div class="l">Tamamlanan konu</div></div>
+    <div class="dashboard-stat"><div class="v">${classTopics.filter(x=>x.pct>0&&!x.finished).length}</div><div class="l">Devam eden</div></div>
+    <div class="dashboard-stat"><div class="v">${classTopics.filter(x=>x.pct===0&&!x.finished).length}</div><div class="l">Başlanmayan</div></div>
+    <div class="dashboard-stat"><div class="v">${classTopics.length}</div><div class="l">Toplam konu</div></div>
+   </div>
+ </div>
+
+ ${currentHtml}
+
+ <div class="dashboard-section">
+  <div class="dashboard-section-title"><h3>📚 ${esc(g.grade)} Konuları</h3><span>Diğer sınıflar gizli</span></div>
+  <div class="search-results">${classTopics.map(x=>`<article class="card result ${x.finished?'completed':''}" onclick="showTopic(${gi},${x.ti})" style="${x.finished?'border-color:#b9d7b0;background:linear-gradient(135deg,#f3faef,#ffffff);':''}">
+    <div><div style="font-size:10px;color:${x.finished?'#5f914c':'var(--muted)'}">KONU ${String(x.ti+1).padStart(2,"0")}</div><div style="font-weight:750;color:${x.finished?'#4f8847':'var(--navy)'}">${esc(x.t[0])}</div><div style="font-size:10px;color:${x.finished?'#5f914c':'var(--muted)'};margin-top:4px">${x.finished?'KONU TAMAMLANDI':`${x.done}/${x.total} mikro konu • %${x.pct}`}</div></div>
+    <div class="topic-status ${x.finished?'done':'pending'}">${x.finished?'✓ BİTTİ':x.pct>0?'DEVAM EDİYOR':'BAŞLAMADI'}</div>
+  </article>`).join("")}</div>
+ </div>
+
+ <div class="dashboard-section">
+   <div class="dashboard-section-title"><h3>🧠 Güçlü / Geliştirilmeli Alanlar</h3><span>Bu sınıfa göre</span></div>
+   <div class="status-grid">
+    <article class="status-card green"><div class="label">GÜÇLÜ</div><div class="status-list">${classTopics.filter(x=>x.finished).slice(-5).reverse().map(x=>`<div class="status-line"><span>${esc(x.t[0])}</span><span>%${x.pct}</span></div>`).join("")||`<div class="status-line"><span>Henüz yeterli veri yok</span></div>`}</div></article>
+    <article class="status-card yellow"><div class="label">GELİŞTİRİLMELİ</div><div class="status-list">${classTopics.filter(x=>x.pct>0&&!x.finished).sort((a,b)=>a.pct-b.pct).slice(0,5).map(x=>`<div class="status-line"><span>${esc(x.t[0])}</span><span>%${x.pct}</span></div>`).join("")||`<div class="status-line"><span>Henüz yeterli veri yok</span></div>`}</div></article>
+    <article class="status-card gray"><div class="label">ÖNCELİKLİ</div><div class="status-list">${classTopics.filter(x=>x.pct===0&&!x.finished).slice(0,5).map(x=>`<div class="status-line"><span>${esc(x.t[0])}</span><span>Başlamadı</span></div>`).join("")||`<div class="status-line"><span>Başlanmamış konu yok</span></div>`}</div></article>
+   </div>
+ </div>
+
+ <div class="dashboard-section">
+   <div class="dashboard-section-title"><h3>📈 Deneme Performansı</h3><span>Bu öğrencinin son denemeleri</span></div>
+   ${renderMockChart(mockExams.filter(x=>x.studentId===s.id).slice().reverse())}
+ </div>
+
+ <div class="dashboard-section">
+   <div class="dashboard-section-title"><h3>⚙️ Öğrenci</h3><span>Yönet</span></div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn small primary" onclick="openStudentModal('${s.id}')">Düzenle</button>
+    <button class="btn small" onclick="showGrade(${gi})">${esc(g.grade)} Konularını Aç</button>
+    
+   </div>
+ </div>`;
+}
+function showAllTopics(){
+ page={type:"archiveClasses"}; crumb.textContent="AFO / Konu Arşivi"; search.value=""; renderSide();
+ content.innerHTML=`<div class="page-title"><div><h3>📚 Konu Arşivi</h3><p>Önce sınıfı seç. Sonra o sınıfın konu arşivine gir.</p></div></div>
+ <div class="head"><h3>Sınıf Seç</h3><span>4. sınıftan 12. sınıfa</span></div>
+ <div class="grade-grid">${data.map((g,i)=>`<article class="card grade" style="--accent:${g.color}" onclick="showGrade(${i})"><div class="bar" style="background:${g.color}"></div><div class="mini">AFO MATEMATİK ARŞİVİ</div><h4>${g.grade}</h4><p>${g.topics.length} ana konu başlığı</p><div class="count">${g.topics.map(t=>t[0]).slice(0,2).map(esc).join(' • ')}${g.topics.length>2?' …':''}</div></article>`).join("")}</div>`;
+}
+function selectStudent(id){activeStudentId=id;save();showStudent(id)}
+function openStudentModal(editId=null){
+ const s=editId?students.find(x=>x.id===editId):null;
+ document.getElementById("modalRoot").innerHTML=`<div class="modal-back" onclick="closeModal(event)"><div class="modal" onclick="event.stopPropagation()"><h3>${s?'Öğrenci Düzenle':'Yeni Öğrenci'}</h3>
+ <div class="field"><label>ÖĞRENCİ ADI</label><input id="studentName" value="${s?esc(s.name):''}" placeholder="Örn. Zeynep Yılmaz"></div>
+ <div class="field"><label>SINIF</label><select id="studentGrade">${data.map((g,i)=>`<option value="${i}" ${(s?.gradeIndex??0)==i?'selected':''}>${g.grade}</option>`).join("")}</select></div>
+ <div class="modal-actions"><button class="btn" onclick="closeModal()">Vazgeç</button><button class="btn primary" onclick="saveStudent('${editId||""}')">${s?'Kaydet':'Öğrenciyi Ekle'}</button></div></div></div>`;
+}
+function closeModal(e){if(!e||e.target.classList.contains("modal-back"))document.getElementById("modalRoot").innerHTML=""}
+function saveStudent(editId){
+ const name=document.getElementById("studentName").value.trim(), gi=+document.getElementById("studentGrade").value;
+ if(!name){alert("Öğrenci adını yazmalısın.");return}
+ if(editId){const s=students.find(x=>x.id===editId);s.name=name;s.gradeIndex=gi;s.grade=data[gi].grade}
+ else{const s={id:crypto.randomUUID?crypto.randomUUID():Date.now().toString(),name,gradeIndex:gi,grade:data[gi].grade,progress:{}};students.push(s);activeStudentId=s.id}
+ save();closeModal();showStudent(activeStudentId)
+}
+function editStudent(id){openStudentModal(id)}
+function deleteStudent(id){
+ const s=students.find(x=>x.id===id);if(!s)return;
+ if(!confirm(`${s.name} öğrencisini ve ilerleme kayıtlarını silmek istiyor musun?`))return;
+ students=students.filter(x=>x.id!==id);if(activeStudentId===id)activeStudentId=students[0]?.id||null;save();showStudents()
+}
+
+function uid(){return (crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()))}
+function questionListName(q){return `${q.gradeLabel||"Genel"} • ${q.topic||"Genel"}`}
+function showQuestionBank(){
+ page={type:"questions"}; crumb.textContent="Soru Bankası"; search.value=""; renderSide();
+ content.innerHTML=`<div class="page-title"><div><h3>❖ Soru Bankası</h3><p>Konularına göre soru oluştur, sakla ve testlerde tekrar kullan.</p></div><button class="btn primary" onclick="openQuestionModal()">＋ Soru Ekle</button></div>
+ <div class="qbank-toolbar">
+  <input class="input" id="qFilter" placeholder="Soru içinde ara...">
+  <select class="select" id="qGrade"><option value="">Tüm sınıflar</option>${data.map((g,i)=>`<option>${g.grade}</option>`).join("")}<option>LGS</option><option>TYT</option><option>AYT</option></select>
+  <select class="select" id="qLevel"><option value="">Tüm seviyeler</option><option>Temel</option><option>Orta</option><option>Zor</option><option>Yeni Nesil</option></select>
+ </div>
+ <div id="questionList"></div>`;
+ renderQuestionsList();
+ ["qFilter","qGrade","qLevel"].forEach(id=>document.getElementById(id).oninput=renderQuestionsList);
+}
+function renderQuestionsList(){
+ const list=document.getElementById("questionList"); if(!list)return;
+ const q=(document.getElementById("qFilter")?.value||"").toLocaleLowerCase("tr-TR");
+ const gr=document.getElementById("qGrade")?.value||"",lv=document.getElementById("qLevel")?.value||"";
+ const arr=questions.filter(x=>(!q||(x.text+" "+(x.topic||"")).toLocaleLowerCase("tr-TR").includes(q))&&(!gr||x.gradeLabel===gr)&&(!lv||x.level===lv));
+ list.innerHTML=arr.length?arr.map(x=>`<article class="card question-card"><div class="question-top"><div><div class="badges"><span class="badge">${esc(x.gradeLabel)}</span><span class="badge">${esc(x.topic||"Genel")}</span><span class="badge">${esc(x.level||"")}</span></div><div class="question-text">${esc(x.text)}</div></div><div style="display:flex;gap:5px"><button class="btn small" onclick="addToSelected('${x.id}')">＋ Teste</button><button class="btn small" onclick="openQuestionModal('${x.id}')">Düzenle</button><button class="btn small danger" onclick="deleteQuestion('${x.id}')">Sil</button></div></div>${(x.options||[]).map((o,k)=>`<div class="option ${k===x.correct?'correct':''}">${String.fromCharCode(65+k)}) ${esc(o)}</div>`).join("")}</article>`).join(""):`<div class="empty">Henüz soru yok. İlk sorunu ekle.</div>`;
+}
+function openQuestionModal(id=null){
+ const q=id?questions.find(x=>x.id===id):null, gi=q?.gradeIndex??0;
+ document.getElementById("modalRoot").innerHTML=`<div class="modal-back" onclick="closeModal(event)"><div class="modal" onclick="event.stopPropagation()"><h3>${q?'Soruyu Düzenle':'Yeni Soru'}</h3>
+ <div class="field"><label>SINIF / SINAV</label><select id="qmGrade">${data.map((g,i)=>`<option value="${i}" ${gi===i?'selected':''}>${g.grade}</option>`).join("")}<option value="LGS" ${q?.gradeLabel==='LGS'?'selected':''}>LGS</option><option value="TYT" ${q?.gradeLabel==='TYT'?'selected':''}>TYT</option><option value="AYT" ${q?.gradeLabel==='AYT'?'selected':''}>AYT</option></select></div>
+ <div class="field"><label>KONU</label><input id="qmTopic" value="${esc(q?.topic||"")}" placeholder="Örn. Üslü İfadeler"></div>
+ <div class="field"><label>SEVİYE</label><select id="qmLevel">${["Temel","Orta","Zor","Yeni Nesil"].map(x=>`<option ${q?.level===x?'selected':''}>${x}</option>`).join("")}</select></div>
+ <div class="field"><label>SORU METNİ</label><textarea class="textarea" id="qmText" rows="5" placeholder="Soruyu yaz...">${esc(q?.text||"")}</textarea></div>
+ <div class="field"><label>ŞIKLAR (her satıra bir şık)</label><textarea class="textarea" id="qmOptions" rows="5" placeholder="A şıkkı&#10;B şıkkı&#10;C şıkkı&#10;D şıkkı">${esc((q?.options||[]).join("\\n"))}</textarea></div>
+ <div class="field"><label>DOĞRU CEVAP</label><select id="qmCorrect">${["A","B","C","D","E"].map((x,i)=>`<option value="${i}" ${q?.correct===i?'selected':''}>${x}</option>`).join("")}</select></div>
+ <div class="modal-actions"><button class="btn" onclick="closeModal()">Vazgeç</button><button class="btn primary" onclick="saveQuestion('${id||""}')">${q?'Kaydet':'Soruyu Ekle'}</button></div></div></div>`;
+}
+function saveQuestion(id){
+ const giV=document.getElementById("qmGrade").value;
+ const gradeIndex=Number.isNaN(+giV)?null:+giV;
+ const gradeLabel=gradeIndex===null?giV:data[gradeIndex].grade;
+ const text=document.getElementById("qmText").value.trim();
+ const options=document.getElementById("qmOptions").value.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+ if(!text||options.length<2){alert("Soru metni ve en az iki şık gerekli.");return}
+ const obj={id:id||uid(),gradeIndex,gradeLabel,topic:document.getElementById("qmTopic").value.trim(),level:document.getElementById("qmLevel").value,text,options,correct:+document.getElementById("qmCorrect").value};
+ if(id){const idx=questions.findIndex(x=>x.id===id);questions[idx]=obj}else questions.push(obj);
+ save();closeModal();showQuestionBank();
+}
+function deleteQuestion(id){if(confirm("Bu soru silinsin mi?")){questions=questions.filter(x=>x.id!==id);selectedQuestionIds=selectedQuestionIds.filter(x=>x!==id);save();showQuestionBank()}}
+function addToSelected(id){if(!selectedQuestionIds.includes(id))selectedQuestionIds.push(id);alert("Soru test oluşturma seçimine eklendi.")}
+function showTests(){
+ page={type:"tests"}; crumb.textContent="Testler"; search.value=""; renderSide();
+ content.innerHTML=`<div class="page-title"><div><h3>▣ Testler</h3><p>Hazırladığın testleri yönet ve öğrencilere ata.</p></div><button class="btn primary" onclick="showTestBuilder()">＋ Test Oluştur</button></div><div style="height:18px"></div>
+ ${tests.length?`<div class="test-list">${tests.map(t=>`<article class="card test-card"><h4 style="margin:0;color:var(--navy)">${esc(t.title)}</h4><div class="test-meta"><span class="badge">${esc(t.exam||t.gradeLabel||"")}</span><span class="badge">${t.questionIds.length} soru</span></div><p style="font-size:11px;color:var(--muted)">${esc(t.note||"")}</p><div class="quick"><button class="btn small primary" onclick="assignTest('${t.id}')">Öğrenciye Ver</button><button class="btn small" onclick="previewTest('${t.id}')">Testi Aç</button><button class="btn small danger" onclick="deleteTest('${t.id}')">Sil</button></div></article>`).join("")}</div>`:`<div class="empty">Henüz test oluşturmadın.</div>`}`;
+}
+function showTestBuilder(){
+ page={type:"builder"}; crumb.textContent="Test Oluştur"; renderSide();
+ const pool=questions.length?questions:[]; selectedQuestionIds=[];
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showTests()">← Testler</button><div><h3>Yeni Test</h3><p>Soru bankasından istediğin soruları seç.</p></div></div><div style="height:18px"></div>
+ <div class="test-builder"><section class="card detail"><div class="field"><label>TEST ADI</label><input class="input" id="tbTitle" placeholder="Örn. Üslü İfadeler • Test 1"></div><div class="field"><label>SINAV</label><select class="select" id="tbExam"><option value="Genel">Genel</option><option>LGS</option><option>TYT</option><option>AYT</option></select></div><div class="field"><label>NOT</label><input class="input" id="tbNote" placeholder="Öğrenciye görünen açıklama"></div><div class="head"><h3>Sorular</h3><span>＋ ile seç</span></div><div class="search-results">${pool.map(q=>`<article class="card result"><div><div style="font-size:10px;color:var(--muted)">${esc(questionListName(q))}</div><div style="font-weight:700;color:var(--navy)">${esc(q.text.slice(0,130))}${q.text.length>130?'…':''}</div></div><button class="btn small" onclick="pickQuestion('${q.id}',this)">＋</button></article>`).join("")||`<div class="empty">Önce Soru Bankası'ndan soru ekle.</div>`}</div></section>
+ <aside class="card detail sticky-box"><h3 style="font-size:19px">Seçilen Sorular</h3><div id="selectedQs" class="empty">Henüz soru seçilmedi.</div><div class="modal-actions"><button class="btn primary" onclick="saveTest()">Testi Kaydet</button></div></aside></div>`;
+}
+function pickQuestion(id,el){
+ if(selectedQuestionIds.includes(id)){selectedQuestionIds=selectedQuestionIds.filter(x=>x!==id);el.textContent="＋"}
+ else {selectedQuestionIds.push(id);el.textContent="✓"}
+ renderSelectedQuestions();
+}
+function renderSelectedQuestions(){
+ const box=document.getElementById("selectedQs"); if(!box)return;
+ box.innerHTML=selectedQuestionIds.length?selectedQuestionIds.map((id,i)=>{const q=questions.find(x=>x.id===id);return `<div class="selected-q"><span>${i+1}. ${esc(q.text.slice(0,55))}${q.text.length>55?'…':''}</span><button class="btn small" onclick="removePicked('${id}')">×</button></div>`}).join(""):`<div class="empty">Henüz soru seçilmedi.</div>`;
+}
+function removePicked(id){selectedQuestionIds=selectedQuestionIds.filter(x=>x!==id);renderSelectedQuestions()}
+function saveTest(){
+ const title=document.getElementById("tbTitle").value.trim();if(!title||!selectedQuestionIds.length){alert("Test adı ve en az bir soru gerekli.");return}
+ tests.push({id:uid(),title,exam:document.getElementById("tbExam").value,note:document.getElementById("tbNote").value.trim(),questionIds:[...selectedQuestionIds],created:new Date().toISOString()});
+ save();showTests();
+}
+function deleteTest(id){if(confirm("Bu test silinsin mi?")){tests=tests.filter(x=>x.id!==id);assignments=assignments.filter(x=>x.testId!==id);save();showTests()}}
+function previewTest(id){
+ const t=tests.find(x=>x.id===id);if(!t)return;
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showTests()">← Testler</button><div><h3>${esc(t.title)}</h3><p>${esc(t.exam)} • ${t.questionIds.length} soru</p></div></div><div style="height:18px"></div>
+ <section class="card detail">${t.questionIds.map((id,i)=>{const q=questions.find(x=>x.id===id);return q?`<article class="question-card" style="border:1px solid var(--line);border-radius:14px"><div style="font-size:10px;color:var(--muted);font-weight:800">SORU ${i+1} • ${esc(q.topic||"")}</div><div class="question-text">${esc(q.text)}</div>${q.options.map((o,k)=>`<div class="option">${String.fromCharCode(65+k)}) ${esc(o)}</div>`).join("")}</article>`:""}).join("")}</section>`;
+}
+function assignTest(testId){
+ if(!students.length){alert("Önce en az bir öğrenci ekle.");openStudentModal();return}
+ const t=tests.find(x=>x.id===testId);
+ document.getElementById("modalRoot").innerHTML=`<div class="modal-back" onclick="closeModal(event)"><div class="modal" onclick="event.stopPropagation()"><h3>“${esc(t.title)}” Öğrenciye Ver</h3>
+ <div class="field"><label>ÖĞRENCİ</label><select id="assignStudent">${students.map(s=>`<option value="${s.id}">${esc(s.name)} • ${esc(s.grade)}</option>`).join("")}</select></div>
+ <div class="field"><label>TESLİM TARİHİ</label><input id="assignDue" type="date"></div>
+ <div class="modal-actions"><button class="btn" onclick="closeModal()">Vazgeç</button><button class="btn primary" onclick="saveAssignment('${testId}')">Teste Ata</button></div></div></div>`;
+}
+function saveAssignment(testId){
+ const studentId=document.getElementById("assignStudent").value;
+ assignments.push({id:uid(),testId,studentId,due:document.getElementById("assignDue").value,status:"assigned",assigned:new Date().toISOString()});
+ save();closeModal();showAssignments();
+}
+function showAssignments(){
+ page={type:"assignments"};crumb.textContent="Verilen Testler";search.value="";renderSide();
+ const arr=assignments.slice().reverse();
+ content.innerHTML=`<div class="page-title"><div><h3>➜ Verilen Testler</h3><p>Öğrencilere gönderdiğin testler ve durumları.</p></div></div><div style="height:18px"></div>
+ ${arr.length?`<div class="search-results">${arr.map(a=>{const t=tests.find(x=>x.id===a.testId),s=students.find(x=>x.id===a.studentId),r=results.find(x=>x.assignmentId===a.id);return `<article class="card result"><div><div style="font-size:10px;color:var(--muted)">${esc(s?.name||"Öğrenci silinmiş")} • ${esc(s?.grade||"")}</div><div style="font-weight:750;color:var(--navy)">${esc(t?.title||"Test silinmiş")}</div><div style="font-size:10px;color:var(--muted);margin-top:4px">${a.due?`Teslim: ${a.due}`:"Teslim tarihi yok"} • ${r?`Sonuç: ${r.score}/${r.total}`:"Henüz çözülmedi"}</div></div><div><button class="btn small" onclick="openAssignment('${a.id}')">Aç</button></div></article>`}).join("")}</div>`:`<div class="empty">Henüz öğrenciye test vermedin.</div>`}`;
+}
+function openAssignment(id){
+ const a=assignments.find(x=>x.id===id),t=tests.find(x=>x.id===a.testId),s=students.find(x=>x.id===a.studentId),r=results.find(x=>x.assignmentId===id);
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showAssignments()">← Verilen Testler</button><div><h3>${esc(t.title)}</h3><p>${esc(s.name)} • ${esc(s.grade)}</p></div></div><div style="height:18px"></div>
+ ${r?`<div class="result-grid"><div class="card metric"><div class="n">${r.score}/${r.total}</div><div class="l">DOĞRU</div></div><div class="card metric"><div class="n">%${Math.round(r.score/r.total*100)}</div><div class="l">BAŞARI</div></div><div class="card metric"><div class="n">${new Date(r.date).toLocaleDateString("tr-TR")}</div><div class="l">ÇÖZÜM TARİHİ</div></div></div>
+ <div class="card detail" style="margin-top:15px"><h3 style="font-size:19px">Yanıt Özeti</h3>${r.answers.map((ans,i)=>{const q=questions.find(x=>x.id===t.questionIds[i]);return `<div class="selected-q"><span>${i+1}. ${ans===q.correct?'✓':'✗'} ${esc(q.text.slice(0,75))}</span><span class="badge">${String.fromCharCode(65+ans)} / ${String.fromCharCode(65+q.correct)}</span></div>`}).join("")}</div>`:
+ `<form id="studentTestForm"><section class="card detail"><div class="student-banner"><strong>👤 ${esc(s.name)}</strong><span>${t.questionIds.length} soru</span></div>${t.questionIds.map((qid,i)=>{const q=questions.find(x=>x.id===qid);return `<article class="student-test"><div style="font-size:10px;color:var(--muted);font-weight:800">SORU ${i+1}</div><div class="question-text">${esc(q.text)}</div>${q.options.map((o,k)=>`<label class="answer-choice"><input type="radio" name="q${i}" value="${k}"> ${String.fromCharCode(65+k)}) ${esc(o)}</label>`).join("")}</article>`}).join("")}<button type="button" class="btn primary" onclick="submitAssignment('${id}')">✓ Testi Bitir</button></section></form>`}`;
+}
+function submitAssignment(id){
+ const a=assignments.find(x=>x.id===id),t=tests.find(x=>x.id===a.testId),answers=[];
+ for(let i=0;i<t.questionIds.length;i++){const el=document.querySelector(`input[name="q${i}"]:checked`);if(!el){alert("Tüm soruları cevaplamalısın.");return}answers.push(+el.value)}
+ let score=0;answers.forEach((ans,i)=>{const q=questions.find(x=>x.id===t.questionIds[i]);if(ans===q.correct)score++});
+ results=results.filter(x=>x.assignmentId!==id);results.push({id:uid(),assignmentId:id,studentId:a.studentId,testId:t.id,answers,score,total:answers.length,date:new Date().toISOString()});a.status="completed";save();openAssignment(id);
+}
+
+function mockFieldsFor(exam){
+ if(exam==="TYT")return ["Türkçe","Matematik","Sosyal","Fen"];
+ if(exam==="AYT")return ["AYT Matematik","Edebiyat","Tarih-1","Coğrafya-1","Fizik","Kimya","Biyoloji"];
+ return ["Türkçe","Matematik","Fen","İnkılap","Din","İngilizce"];
+}
+function showMockExams(){
+ page={type:"mocks"};crumb.textContent="Denemeler";search.value="";renderSide();
+ const s=student();
+ const arr=mockExams.filter(x=>!s||x.studentId===s.id).slice().reverse();
+ content.innerHTML=`<div class="page-title"><div><h3>📈 Deneme Takibi</h3><p>${s?`Öğrenci: ${esc(s.name)}`:"Öğrenci seçerek kişisel deneme takibi yapabilirsin."}</p></div><button class="btn primary" onclick="openMockModal()">＋ Deneme Ekle</button></div>
+ <div style="height:16px"></div>
+ <div class="mock-head"><div class="eyebrow">AFO • PERFORMANS TAKİBİ</div><h3>${s?esc(s.name):"Deneme Arşivi"}</h3><p>TYT, AYT ve LGS denemelerini kaydet; netlerin zaman içindeki değişimini gör.</p></div>
+ <div style="height:16px"></div>
+ ${s?`<div class="head"><h3>Son Denemeler</h3><span>${arr.length} kayıt</span></div>${arr.length?`<div class="search-results">${arr.map(x=>`<article class="card result"><div><div style="font-size:10px;color:var(--muted)">${esc(x.exam)} • ${x.date||"Tarih yok"}</div><div style="font-weight:750;color:var(--navy)">${esc(x.title)}</div><div style="font-size:10px;color:var(--muted);margin-top:4px">${x.total.toFixed(1)} toplam net</div></div><div style="display:flex;gap:6px"><button class="btn small" onclick="viewMock('${x.id}')">Aç</button><button class="btn small danger" onclick="deleteMock('${x.id}')">Sil</button></div></article>`).join("")}</div>`:`<div class="empty">Bu öğrenci için henüz deneme kaydı yok.</div>`}`:
+ `<div class="empty">Denemelerin öğrenci bazında kaydedilmesi için önce bir öğrenci seç.</div>`}
+ ${s?`<div class="head"><h3>📊 Net Grafiği</h3><span>Son 8 deneme</span></div>${renderMockChart(arr)}`:""}`;
+}
+function renderMockChart(arr){
+ const a=arr.slice(0,8).reverse();
+ if(!a.length)return `<div class="empty">Grafik için deneme ekle.</div>`;
+ const max=Math.max(...a.map(x=>x.total),1);
+ return `<div class="card detail"><div class="spark">${a.map(x=>`<div class="barx" style="height:${Math.max(12,Math.round(x.total/max*100))}%"><span>${x.total.toFixed(1)}</span><small>${esc(x.title.slice(0,9))}</small></div>`).join("")}</div></div>`;
+}
+function openMockModal(){
+ const s=student(); if(!s){alert("Önce bir öğrenci seç.");showStudents();return}
+ document.getElementById("modalRoot").innerHTML=`<div class="modal-back" onclick="closeModal(event)"><div class="modal" onclick="event.stopPropagation()"><h3>📈 Deneme Ekle</h3>
+ <div class="field"><label>DENEME ADI</label><input class="input" id="mockTitle" placeholder="Örn. TYT Deneme 7"></div>
+ <div class="field"><label>SINAV TÜRÜ</label><select class="select" id="mockExam"><option>TYT</option><option>AYT</option><option>LGS</option></select></div>
+ <div class="field"><label>TARİH</label><input class="input" id="mockDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div>
+ <div class="field"><label>NETLER</label><div class="mock-subjects" id="mockSubjects">${mockFieldsFor("TYT").map(f=>`<div class="mock-subject"><label>${f}</label><input type="number" step="0.25" value="0" data-subject="${esc(f)}"></div>`).join("")}</div></div>
+ <div class="modal-actions"><button class="btn" onclick="closeModal()">Vazgeç</button><button class="btn primary" onclick="saveMock()">Kaydet</button></div></div></div>`;
+ document.getElementById("mockExam").onchange=e=>{
+   document.getElementById("mockSubjects").innerHTML=mockFieldsFor(e.target.value).map(f=>`<div class="mock-subject"><label>${f}</label><input type="number" step="0.25" value="0" data-subject="${esc(f)}"></div>`).join("");
+ };
+}
+function saveMock(){
+ const s=student();if(!s)return;
+ const nets={};document.querySelectorAll("#mockSubjects input").forEach(i=>nets[i.dataset.subject]=parseFloat(i.value)||0);
+ const total=Object.values(nets).reduce((a,b)=>a+b,0);
+ mockExams.push({id:uid(),studentId:s.id,title:document.getElementById("mockTitle").value.trim()||"Deneme",exam:document.getElementById("mockExam").value,date:document.getElementById("mockDate").value,nets,total});
+ save();closeModal();showMockExams();
+}
+function viewMock(id){
+ const x=mockExams.find(m=>m.id===id);if(!x)return;
+ content.innerHTML=`<div class="page-title"><button class="btn" onclick="showMockExams()">← Denemeler</button><div><h3>${esc(x.title)}</h3><p>${esc(x.exam)} • ${x.date}</p></div></div><div style="height:15px"></div>
+ <div class="result-grid"><div class="card metric"><div class="n">${x.total.toFixed(1)}</div><div class="l">TOPLAM NET</div></div><div class="card metric"><div class="n">${esc(x.exam)}</div><div class="l">SINAV</div></div><div class="card metric"><div class="n">${x.date}</div><div class="l">TARİH</div></div></div>
+ <div style="height:15px"></div><section class="card detail"><h3 style="font-size:19px">Ders Netleri</h3><table class="mock-table"><thead><tr><th>DERS</th><th>NET</th></tr></thead><tbody>${Object.entries(x.nets).map(([k,v])=>`<tr><td>${esc(k)}</td><td><strong>${Number(v).toFixed(1)}</strong></td></tr>`).join("")}</tbody></table></section>`;
+}
+function deleteMock(id){if(confirm("Bu deneme kaydı silinsin mi?")){mockExams=mockExams.filter(x=>x.id!==id);save();showMockExams()}}
+function showResults(){
+ page={type:"results"};crumb.textContent="Sonuçlar";search.value="";renderSide();
+ const rs=results.slice().reverse();
+ content.innerHTML=`<div class="page-title"><div><h3>◔ Sonuçlar</h3><p>Çözülen testlerin performansını gör.</p></div></div><div style="height:18px"></div>
+ ${rs.length?`<div class="search-results">${rs.map(r=>{const s=students.find(x=>x.id===r.studentId),t=tests.find(x=>x.id===r.testId);return `<article class="card result"><div><div style="font-size:10px;color:var(--muted)">${esc(s?.name||"")} • ${esc(s?.grade||"")}</div><div style="font-weight:750;color:var(--navy)">${esc(t?.title||"")}</div></div><div style="text-align:right"><strong style="color:var(--navy)">${r.score}/${r.total}</strong><div style="font-size:10px;color:var(--muted)">%${Math.round(r.score/r.total*100)}</div></div></article>`}).join("")}</div>`:`<div class="empty">Henüz çözülmüş test yok.</div>`}`;
+}
+
+async function exportAfoBackup(){
+ const payload=appStateSnapshot();
+ payload.exportType="AFO_STRUCTURED_BACKUP";
+ payload.note="Materyal dosyalarının kendisi bu JSON'a dahil değildir; tarayıcı içindeki IndexedDB'de tutulurlar.";
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download=`AFO_Yedek_${new Date().toISOString().slice(0,10)}.json`;a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function importAfoBackup(input){
+ const file=input.files?.[0];if(!file)return;
+ const reader=new FileReader();
+ reader.onload=()=>{
+  try{
+   const x=JSON.parse(reader.result);
+   if(x.exportType!=="AFO_STRUCTURED_BACKUP" || !Array.isArray(x.students) || !Array.isArray(x.questions)) throw new Error("Geçersiz AFO yedeği");
+   if(!confirm("Mevcut öğrenci, test ve ilerleme verileri içe aktarılan yedekle değiştirilecek. Devam edilsin mi?")) return;
+   students=x.students||[];questions=x.questions||[];tests=x.tests||[];assignments=x.assignments||[];results=x.results||[];mockExams=x.mockExams||[];expandedTrees=x.expandedTrees||{};generalMicroProgress=x.generalMicroProgress||{};activeStudentId=x.activeStudentId||null;
+   save();
+   showDataManager();
+   alert("Yedek başarıyla geri yüklendi.");
+  }catch(e){alert("Yedek okunamadı. Lütfen AFO'nun oluşturduğu JSON dosyasını seç.");}
+  input.value="";
+ };
+ reader.readAsText(file);
+}
+
+
+function cloudGetConfig(){
+ const url=(localStorage.getItem('afoCloudUrl')||'').trim();
+ const key=(localStorage.getItem('afoCloudKey')||'').trim();
+ const email=(localStorage.getItem('afoCloudEmail')||'').trim();
+ return {url,key,email};
+}
+let afoSupabase=null;
+function cloudClient(){
+ const c=cloudGetConfig();
+ if(!c.url||!c.key) throw new Error('Bulut bağlantı bilgileri eksik.');
+ if(!afoSupabase || afoSupabase._afoUrl!==c.url || afoSupabase._afoKey!==c.key){
+   afoSupabase=window.supabase.createClient(c.url,c.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+   afoSupabase._afoUrl=c.url; afoSupabase._afoKey=c.key;
+ }
+ return afoSupabase;
+}
+function setCloudStatus(text,ok=true){
+ const el=document.getElementById('cloudStatus'); if(el){el.textContent=text;el.style.color=ok?'#5f914f':'#a83f50';}
+}
+async function cloudSaveSettings(){
+ const url=(document.getElementById('cloudUrl')?.value||'').trim().replace(/\/+$/,'');
+ const key=(document.getElementById('cloudKey')?.value||'').trim();
+ const email=(document.getElementById('cloudEmail')?.value||'').trim();
+ localStorage.setItem('afoCloudUrl',url); localStorage.setItem('afoCloudKey',key); localStorage.setItem('afoCloudEmail',email);
+ try{cloudClient(); setCloudStatus('Bağlantı bilgileri kaydedildi.',true);}catch(e){setCloudStatus(e.message,false)}
+}
+async function cloudSignIn(){
+ try{
+  await cloudSaveSettings();
+  const c=cloudGetConfig(); if(!c.url||!c.key||!c.email){setCloudStatus('URL, Publishable Key ve e-posta gerekli.',false);return}
+  const pw=(document.getElementById('cloudPassword')?.value||'');
+  if(!pw){setCloudStatus('Şifre gerekli.',false);return}
+  const {data,error}=await cloudClient().auth.signInWithPassword({email:c.email,password:pw});
+  if(error) throw error;
+  setCloudStatus(`Bulut hesabı bağlı: ${data.user?.email||c.email}`,true); renderCloudInfo();
+ }catch(e){console.error(e);setCloudStatus('Giriş başarısız: '+(e.message||e),false)}
+}
+async function cloudSignUp(){
+ try{
+  await cloudSaveSettings();
+  const c=cloudGetConfig(); const pw=(document.getElementById('cloudPassword')?.value||'');
+  if(!c.url||!c.key||!c.email||!pw){setCloudStatus('E-posta ve şifre ile birlikte bağlantı bilgilerini doldur.',false);return}
+  const {data,error}=await cloudClient().auth.signUp({email:c.email,password:pw});
+  if(error) throw error;
+  setCloudStatus(data.session?'Hesap oluşturuldu ve giriş yapıldı.':'Hesap oluşturuldu. E-posta doğrulaması gerekebilir.',true); renderCloudInfo();
+ }catch(e){console.error(e);setCloudStatus('Hesap oluşturulamadı: '+(e.message||e),false)}
+}
+async function cloudSignOut(){try{await cloudClient().auth.signOut();setCloudStatus('Bulut hesabından çıkıldı.',true);renderCloudInfo()}catch(e){setCloudStatus('Çıkış yapılamadı.',false)}}
+async function cloudCurrentUser(){try{const {data}=await cloudClient().auth.getUser();return data?.user||null}catch(e){return null}}
+async function renderCloudInfo(){
+ const info=document.getElementById('cloudSessionInfo'); if(!info)return;
+ const u=await cloudCurrentUser();
+ info.innerHTML=u?`<div class="cloud-pill ok">● Bağlı: ${esc(u.email||'Öğretmen hesabı')}</div><button class="btn small" onclick="cloudSignOut()">Çıkış</button>`:`<div class="cloud-pill">● Bağlı hesap yok</div>`;
+}
+async function cloudEnsureReady(){
+ const c=cloudGetConfig(); if(!c.url||!c.key) throw new Error('Önce Project URL ve Publishable Key kaydet.');
+ const sb=cloudClient(); const u=await cloudCurrentUser(); if(!u) throw new Error('Önce öğretmen hesabıyla giriş yap.'); return {sb,u};
+}
+async function cloudUploadArchive(){
+ try{
+  const {sb,u}=await cloudEnsureReady();
+  const localIds=new Set(resources.map(r=>r.id));
+  let pushed=0;
+  for(const r of resources){
+    const path=`${u.id}/${r.id}.${r.type==='pdf'?'pdf':'bin'}`;
+    const {error:upErr}=await sb.storage.from('afo-archive').upload(path,r.data,{upsert:true,contentType:r.mime||undefined});
+    if(upErr) throw upErr;
+    const row={id:r.id,owner_user_id:u.id,grade_index:r.gradeIndex,topic_index:r.topicIndex,grade_label:r.gradeLabel||null,topic:r.topic||null,category:normalizeResourceCategory(r),name:r.name||'Materyal',type:r.type||'pdf',mime:r.mime||null,size:r.size||0,storage_path:path,level:r.microtopic?'micro':'topic',micro_sub_index:r.microSubIndex??null,micro_index:r.microIndex??null,subtopic:r.subtopic||null,microtopic:r.microtopic||null,updated_at:new Date().toISOString()};
+    const {error:insErr}=await sb.from('afo_archive_items').upsert(row,{onConflict:'id'}); if(insErr) throw insErr; pushed++;
+  }
+  setCloudStatus(`${pushed} arşiv materyali buluta gönderildi.`,true); return pushed;
+ }catch(e){console.error(e);setCloudStatus('Buluta gönderme başarısız: '+(e.message||e),false);throw e}
+}
+async function cloudPullArchive(){
+ try{
+  const {sb,u}=await cloudEnsureReady();
+  const {data:rows,error}=await sb.from('afo_archive_items').select('*').eq('owner_user_id',u.id).order('created_at',{ascending:true}); if(error) throw error;
+  let added=0,updated=0;
+  const localMap=new Map(resources.map(r=>[r.id,r]));
+  for(const row of (rows||[])){
+    let local=localMap.get(row.id);
+    if(local){
+      // Metadata güncellemesi; dosya zaten yerelde varsa tekrar indirmiyoruz.
+      Object.assign(local,{gradeIndex:row.grade_index,topicIndex:row.topic_index,gradeLabel:row.grade_label,topic:row.topic,category:row.category,name:row.name,type:row.type,mime:row.mime,size:Number(row.size||0),key:row.level==='micro'?topicResourceKey(row.grade_index,row.topic_index,row.micro_sub_index,row.micro_index):topicResourceKey(row.grade_index,row.topic_index),microSubIndex:row.micro_sub_index,microIndex:row.micro_index,subtopic:row.subtopic,microtopic:row.microtopic});
+      updated++;
+      continue;
+    }
+    const {data:blobData,error:blobErr}=await sb.storage.from('afo-archive').download(row.storage_path); if(blobErr) throw blobErr;
+    const obj={id:row.id,gradeIndex:row.grade_index,topicIndex:row.topic_index,gradeLabel:row.grade_label,topic:row.topic,category:row.category,name:row.name,type:row.type,mime:row.mime,size:Number(row.size||0),data:blobData,key:row.level==='micro'?topicResourceKey(row.grade_index,row.topic_index,row.micro_sub_index,row.micro_index):topicResourceKey(row.grade_index,row.topic_index),microSubIndex:row.micro_sub_index,microIndex:row.micro_index,subtopic:row.subtopic,microtopic:row.microtopic};
+    await saveResource(obj); added++;
+  }
+  await loadResources();
+  setCloudStatus(`Buluttan ${added} yeni materyal alındı; ${updated} kayıt güncellendi.`,true); return {added,updated};
+ }catch(e){console.error(e);setCloudStatus('Buluttan alma başarısız: '+(e.message||e),false);throw e}
+}
+async function cloudSyncArchive(){
+ const btn=document.getElementById('cloudSyncBtn'); if(btn) btn.disabled=true;
+ try{
+  setCloudStatus('Senkronizasyon yapılıyor…',true);
+  await cloudUploadArchive();
+  await cloudPullArchive();
+  setCloudStatus('✓ Arşiv senkronizasyonu tamamlandı.',true);
+  renderArchiveManager();
+ }catch(e){}finally{if(btn)btn.disabled=false}
+}
+async function showCloudSync(){
+ page={type:'cloud'}; crumb.textContent='AFO / Arşiv Senkronizasyonu'; search.value=''; renderSide();
+ const c=cloudGetConfig();
+ content.innerHTML=`<div class="page-title"><div><h3>☁️ Arşiv Senkronizasyonu</h3><p>Sadece AFO arşivini cihazların arasında eşitle. Öğrenci ilerlemesi bu bölümle senkronize edilmez.</p></div></div>
+ <section class="card detail" style="margin-top:18px"><div class="head" style="margin-top:0"><h3>Bulut bağlantısı</h3><span>Supabase</span></div>
+ <div class="cloud-form"><div class="field"><label>PROJECT URL</label><input id="cloudUrl" value="${esc(c.url)}" placeholder="https://....supabase.co"></div>
+ <div class="field"><label>PUBLISHABLE KEY</label><input id="cloudKey" type="password" value="${esc(c.key)}" placeholder="sb_publishable_..." autocomplete="off"></div>
+ <div class="field"><label>ÖĞRETMEN E-POSTA</label><input id="cloudEmail" value="${esc(c.email)}" placeholder="senin e-posta adresin"></div>
+ <div class="field"><label>ŞİFRE</label><input id="cloudPassword" type="password" placeholder="Bulut hesabı şifren"></div></div>
+ <div class="toolbar"><button class="btn" onclick="cloudSaveSettings()">Kaydet</button><button class="btn primary" onclick="cloudSignIn()">Giriş Yap</button><button class="btn" onclick="cloudSignUp()">Hesap Oluştur</button></div>
+ <div id="cloudSessionInfo" style="margin-top:13px"></div><div id="cloudStatus" style="font-size:11px;color:var(--muted);margin-top:12px">Bağlantıyı hazırlamak için bilgileri kaydet.</div></section>
+ <section class="card detail" style="margin-top:14px"><div class="head" style="margin-top:0"><h3>📚 Arşiv Senkronizasyonu</h3><span>Sadece materyaller</span></div>
+ <p class="muted" style="line-height:1.7">Bu sistem yalnızca <strong>arşiv materyallerini</strong> Supabase Storage + veritabanına gönderir. Öğrenci kayıtları ve öğrenci ilerlemeleri burada tutulmaz.</p>
+ <div class="toolbar" style="margin-top:14px"><button id="cloudSyncBtn" class="btn primary" onclick="cloudSyncArchive()">☁️ Arşivi Senkronize Et</button><button class="btn" onclick="cloudUploadArchive()">↑ Sadece Buluta Gönder</button><button class="btn" onclick="cloudPullArchive()">↓ Sadece Buluttan Al</button></div>
+ <div class="cloud-note">İlk kullanımda önce hesabınla giriş yap, sonra <strong>Arşivi Senkronize Et</strong> düğmesine bas.</div></section>`;
+ await renderCloudInfo();
+}
+
+function showDataManager(){
+ page={type:"data"};crumb.textContent="Veri Yönetimi";search.value="";renderSide();
+ const kb=(new Blob([JSON.stringify(appStateSnapshot())]).size/1024).toFixed(1);
+ content.innerHTML=`<div class="page-title"><div><h3>💾 Veri Yönetimi</h3><p>AFO'nun öğrenci, ilerleme, soru, test ve deneme verileri artık tek IndexedDB katmanında saklanıyor.</p></div></div>
+ <div class="result-grid" style="margin-top:18px">
+  <div class="card metric"><div class="n">${students.length}</div><div class="l">ÖĞRENCİ</div></div>
+  <div class="card metric"><div class="n">${questions.length}</div><div class="l">SORU</div></div>
+  <div class="card metric"><div class="n">${tests.length}</div><div class="l">TEST</div></div>
+  <div class="card metric"><div class="n">${mockExams.length}</div><div class="l">DENEME</div></div>
+ </div>
+ <div style="height:16px"></div>
+ <section class="card detail"><h3>1. Veri Katmanı</h3><p class="muted" style="line-height:1.7">Ana veri kaynağı: <strong>IndexedDB</strong>. localStorage eski sürüm uyumluluğu için geri dönüş kopyası olarak korunuyor. Böylece sayfa yenilendiğinde veriler uygulamanın ayrı veritabanında kalıyor.</p>
+ <div class="toolbar" style="margin-top:14px"><button class="btn primary" onclick="exportAfoBackup()">⬇ JSON Yedek Al</button><label class="btn" style="cursor:pointer">⬆ Yedek Geri Yükle<input type="file" accept="application/json,.json" style="display:none" onchange="importAfoBackup(this)"></label></div>
+ <p class="muted" style="font-size:10px;margin-top:12px">Son yapılandırılmış veri boyutu: yaklaşık ${kb} KB. PDF/görsel materyaller ayrı IndexedDB deposunda tutulur.</p></section>
+ <section class="card detail" style="margin-top:14px"><h3>Sonraki adım</h3><p class="muted" style="line-height:1.7">Bu adım veri kaybı riskini ve dağınık kayıt yapısını düzeltiyor. <strong>Henüz bulut senkronizasyonu yok</strong>; sonraki mimari adım öğretmen hesabı + güvenli sunucu veritabanı olacak.</p></section>`;
+}
+
+search.oninput=()=>{
+ const q=search.value.trim().toLocaleLowerCase("tr-TR");
+ if(!q){
+   const restore={home:()=>home(),grade:()=>showGrade(page.grade),topic:()=>showTopic(page.grade,page.topic),students:()=>showStudents(),student:()=>showStudent(page.student),exam:()=>showExam(page.exam),questions:()=>showQuestionBank(),tests:()=>showTests(),assignments:()=>showAssignments(),results:()=>showResults(),builder:()=>showTestBuilder(),materialPage:()=>showMaterialPage(page.grade,page.topic,page.category),microMaterial:()=>showMicroMaterialPage(page.grade,page.topic,page.si,page.mi),lessonPackage:()=>showLessonPackage(page.grade,page.topic,page.si,page.mi),mocks:()=>showMockExams(),data:()=>showDataManager(),cloud:()=>showCloudSync(),archive:()=>renderArchiveManager(),archiveClasses:()=>showAllTopics()};
+   (restore[page.type]||home)(); return;
+ }
+ const topicResults=[],subResults=[],microResults=[],materialResults=[],studentResults=[];
+ data.forEach((g,gi)=>g.topics.forEach((t,ti)=>{
+   const topicText=(g.grade+" "+t[0]+" "+(t[1]||[]).join(" ")).toLocaleLowerCase("tr-TR");
+   if(topicText.includes(q)) topicResults.push({g,gi,t,ti});
+   const st=detailedStructure(t[0]);
+   st.forEach((sub,si)=>{
+     if((g.grade+" "+t[0]+" "+sub.name).toLocaleLowerCase("tr-TR").includes(q)) subResults.push({g,gi,t,ti,sub,si});
+     sub.micro.forEach((m,mi)=>{if((g.grade+" "+t[0]+" "+sub.name+" "+m).toLocaleLowerCase("tr-TR").includes(q)) microResults.push({g,gi,t,ti,sub,si,m,mi})});
+   });
+ }));
+ students.forEach(s=>{if((s.name+" "+s.grade).toLocaleLowerCase("tr-TR").includes(q))studentResults.push(s)});
+ resources.forEach(r=>{const hay=[r.name,r.topic,r.subtopic,r.microtopic,r.gradeLabel,r.category].filter(Boolean).join(" ").toLocaleLowerCase("tr-TR");if(hay.includes(q))materialResults.push(r)});
+ const total=topicResults.length+subResults.length+microResults.length+materialResults.length+studentResults.length;
+ crumb.textContent="Arama";renderSide();
+ content.innerHTML=`<div class="page-title"><div><h3>Arama</h3><p>${total} sonuç bulundu</p></div></div>
+ ${studentResults.length?`<div class="search-group"><div class="search-kind">ÖĞRENCİLER</div><div class="search-results">${studentResults.map(s=>`<article class="card result" onclick="showStudent('${s.id}')"><div><strong>${esc(s.name)}</strong><div class="search-meta">${esc(s.grade)} • %${studentProgress(s)}</div></div><span>→</span></article>`).join('')}</div></div>`:''}
+ ${topicResults.length?`<div class="search-group"><div class="search-kind">ANA KONULAR</div><div class="search-results">${topicResults.map(x=>`<article class="card result" onclick="showTopic(${x.gi},${x.ti},'archive')"><div><div class="search-meta">${esc(x.g.grade)}</div><div style="font-weight:750;color:var(--navy)">${esc(x.t[0])}</div></div><span>→</span></article>`).join('')}</div></div>`:''}
+ ${subResults.length?`<div class="search-group"><div class="search-kind">ALT KONULAR</div><div class="search-results">${subResults.slice(0,40).map(x=>`<article class="card result" onclick="showTopic(${x.gi},${x.ti},'archive')"><div><div class="search-meta">${esc(x.g.grade)} • ${esc(x.t[0])}</div><div style="font-weight:700;color:var(--navy)">${esc(x.sub.name)}</div></div><span>→</span></article>`).join('')}</div></div>`:''}
+ ${microResults.length?`<div class="search-group"><div class="search-kind">MİKRO KONULAR</div><div class="search-results">${microResults.slice(0,60).map(x=>`<article class="card result" onclick="showMicroMaterialPage(${x.gi},${x.ti},${x.si},${x.mi})"><div><div class="search-meta">${esc(x.g.grade)} • ${esc(x.t[0])} • ${esc(x.sub.name)}</div><div style="font-weight:700;color:var(--navy)">${esc(x.m)}</div><div class="search-meta">📦 Ders paketini aç</div></div><span>→</span></article>`).join('')}</div></div>`:''}
+ ${materialResults.length?`<div class="search-group"><div class="search-kind">ARŞİV MATERYALLERİ</div><div class="search-results">${materialResults.slice(0,60).map(r=>`<article class="card result" onclick="${r.microtopic?`showMicroMaterialPage(${r.gradeIndex},${r.topicIndex},${r.microSubIndex||0},${r.microIndex||0})`:`showMaterialPage(${r.gradeIndex},${r.topicIndex},'${esc(normalizeResourceCategory(r)).replace(/'/g,"\'")}')`}"><div><div style="font-weight:750;color:var(--navy)">${esc(r.name)}</div><div class="search-meta">${esc(r.gradeLabel||'')} • ${esc(r.topic||'')} • ${esc(normalizeResourceCategory(r))}</div></div><span>→</span></article>`).join('')}</div></div>`:''}
+ ${!total?`<div class="empty" style="margin-top:18px">Aradığın konu, mikro konu, öğrenci veya materyal bulunamadı.</div>`:''}`;
+}
+
+(function bootAfo(){
+  // AFO önce açılır; veri yükleme sonradan arka planda tamamlanır.
+  try{ renderSide(); showWelcome(); }catch(e){
+    console.error("AFO açılış hatası:",e);
+    try{ document.body.classList.remove("afo-welcome-mode"); renderSide(); home(); }catch(_){}
+  }
+  Promise.allSettled([loadAppState(),loadResources()]).then(()=>{
+    try{
+      if(page.type!=="welcome" && page.type!=="topic" && page.type!=="student" && page.type!=="archiveClasses" && page.type!=="archive"){ renderSide(); }
+    }catch(e){ console.warn("AFO arka plan veri yenileme uyarısı",e); }
+  });
+})();
+</script>
+</body>
+</html>
