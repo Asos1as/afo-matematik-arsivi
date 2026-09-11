@@ -360,38 +360,44 @@ body.afo-welcome-mode #content{min-height:100vh}
 .afo-app-enter{animation:afoAppEnter .38s ease both}
 @keyframes afoAppEnter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* AFO giriş ekranı + Atatürk */
+/* AFO giriş ekranı + Atatürk — temiz landing */
 html,body{max-width:100%;overflow-x:hidden}
-body.afo-welcome-mode{overflow-x:hidden}
+body.afo-welcome-mode{overflow:hidden}
 body.afo-welcome-mode .main{overflow:hidden}
-.afo-welcome-screen{min-height:100vh;height:100vh;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,1fr);place-items:stretch;padding:0;background:#fff;overflow:hidden}
-.afo-welcome-ataturk{position:relative;min-width:0;overflow:hidden;background:#f8fafc}
+.afo-welcome-screen{min-height:100vh;height:100vh;box-sizing:border-box;display:grid;grid-template-columns:46% 54%;padding:0;background:#fff;overflow:hidden;position:relative}
+.afo-welcome-ataturk{position:relative;min-width:0;overflow:hidden;background:#f8fbfd}
 .afo-welcome-ataturk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center}
-.afo-welcome-ataturk:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 58%,rgba(255,255,255,.95) 100%);pointer-events:none}
-.afo-welcome-right{position:relative;z-index:4;display:flex;align-items:center;justify-content:center;padding:48px 7vw 48px 28px;min-width:0;background:linear-gradient(90deg,rgba(255,255,255,.88),#fff 18%)}
-.afo-welcome-right .afo-welcome-clean{width:min(650px,100%);text-align:left;animation:afoWelcomeIn .75s cubic-bezier(.18,.8,.2,1) both}
+.afo-welcome-ataturk:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 48%,rgba(255,255,255,.55) 78%,rgba(255,255,255,.98) 100%);pointer-events:none}
+.afo-welcome-right{position:relative;z-index:4;display:flex;align-items:center;justify-content:center;padding:42px 7vw 42px 38px;min-width:0;background:#fff}
+.afo-welcome-right .afo-welcome-clean{width:min(640px,100%);text-align:left;animation:afoWelcomeIn .75s cubic-bezier(.18,.8,.2,1) both}
 .afo-welcome-right .afo-welcome-mark{margin:0;background:#203955}
-.afo-welcome-right .afo-welcome-eyebrow{margin-top:22px}
-.afo-welcome-right .afo-welcome-title{font-size:clamp(38px,4.5vw,64px);margin-top:10px}
+.afo-welcome-right .afo-welcome-eyebrow{margin-top:22px;color:#65788e}
+.afo-welcome-right .afo-welcome-title{font-size:clamp(42px,4.2vw,66px);line-height:1.03;margin-top:10px;white-space:normal}
 .afo-welcome-right .afo-welcome-text{margin:0;max-width:590px}
 .afo-welcome-right .afo-welcome-actions{justify-content:flex-start;margin-top:28px}
 .afo-welcome-right .afo-welcome-meta{justify-content:flex-start}
-.afo-welcome-screen .afo-math-field{z-index:1;opacity:.5}
+.afo-welcome-screen .afo-math-field{z-index:1;opacity:.42;pointer-events:none}
 .afo-welcome-screen .afo-math-symbol{z-index:1}
-.afo-home-ataturk{margin-bottom:22px}
-@media(max-width:900px){.afo-welcome-screen{grid-template-columns:1fr;height:100vh}.afo-welcome-ataturk{position:absolute;inset:0;z-index:1}.afo-welcome-ataturk:after{background:linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,.96) 68%)}.afo-welcome-right{position:relative;z-index:3;background:linear-gradient(90deg,rgba(255,255,255,.25),rgba(255,255,255,.9) 55%,#fff);padding:32px 7vw}}
-@media(max-width:600px){.afo-welcome-right{padding:28px 22px}.afo-welcome-right .afo-welcome-title{font-size:38px}.afo-welcome-right .afo-welcome-actions{display:flex;flex-wrap:wrap}}
+.afo-welcome-screen .afo-welcome-ataturk{z-index:2}
+@media(max-width:900px){
+ .afo-welcome-screen{grid-template-columns:1fr;height:100vh}
+ .afo-welcome-ataturk{position:absolute;inset:0;z-index:1}
+ .afo-welcome-ataturk:after{background:linear-gradient(90deg,rgba(255,255,255,.25),rgba(255,255,255,.94) 72%,#fff)}
+ .afo-welcome-right{position:relative;z-index:3;background:linear-gradient(90deg,rgba(255,255,255,.2),rgba(255,255,255,.9) 60%,#fff);padding:32px 7vw}
+}
+@media(max-width:600px){
+ .afo-welcome-right{padding:28px 22px}
+ .afo-welcome-right .afo-welcome-title{font-size:39px}
+ .afo-welcome-right .afo-welcome-actions{display:flex;flex-wrap:wrap}
+}
 
-.afo-ataturk-hero{position:relative;min-height:390px;border-radius:28px;overflow:hidden;background:linear-gradient(90deg,#f7fafc 0%,#fff 45%,#20324e 70%,#304f70 100%);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.45);display:flex;align-items:stretch}
-.afo-ataturk-image{position:absolute;left:0;top:0;bottom:0;width:55%;object-fit:cover;object-position:left center;z-index:1;pointer-events:none}
-.afo-ataturk-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.02) 30%,rgba(32,50,78,.08) 48%,rgba(32,50,78,.86) 69%,rgba(32,50,78,.98) 100%);z-index:2}
-.afo-ataturk-content{position:relative;z-index:3;width:53%;margin-left:auto;padding:48px 42px 42px 25px;display:flex;flex-direction:column;justify-content:center;color:#fff}
-.afo-ataturk-content .eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:800;opacity:.65}
-.afo-ataturk-content h2{font-size:36px;line-height:1.08;margin:10px 0 12px;letter-spacing:-1px}
-.afo-ataturk-content p{margin:0;color:#dce5ee;line-height:1.65;max-width:520px;font-size:13px}
-.afo-ataturk-content .stats{margin-top:20px}
-.afo-ataturk-content .stat{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(4px)}
-@media(max-width:800px){.afo-ataturk-hero{min-height:430px;background:#20324e}.afo-ataturk-image{width:100%;opacity:.42}.afo-ataturk-overlay{background:linear-gradient(90deg,rgba(32,50,78,.25),rgba(32,50,78,.92))}.afo-ataturk-content{width:100%;padding:35px 28px}}
+/* Normal ana sayfada çok hafif Atatürk silüeti — metinlerin arkasına geçmez */
+body:not(.afo-welcome-mode) .app{position:relative;isolation:isolate}
+body:not(.afo-welcome-mode) .app:after{content:"";position:fixed;right:-90px;bottom:-150px;width:min(520px,42vw);height:min(720px,78vh);background:url('ataturk-afo.png') no-repeat right bottom/contain;opacity:.045;filter:grayscale(1);pointer-events:none;z-index:0}
+body:not(.afo-welcome-mode) .sidebar,body:not(.afo-welcome-mode) .main{position:relative;z-index:1}
+
+/* Ana sayfadaki Atatürk kartını kaldır; klasik ana sayfa korunur */
+.afo-home-ataturk{display:none!important}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -866,17 +872,7 @@ function enterArchiveFromWelcome(){
 }
 function home(){
  page={type:"home",grade:null,topic:null}; search.value=""; crumb.textContent="Ana Sayfa"; renderSide();
- content.innerHTML=`<section class="afo-ataturk-hero afo-home-ataturk">
-  <img class="afo-ataturk-image" src="ataturk-afo.png" alt="Atatürk ve matematik">
-  <div class="afo-ataturk-overlay"></div>
-  <div class="afo-ataturk-content">
-    <div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
-    <h2>Kendi matematik arşivin.</h2>
-    <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
-    <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div>
-  </div>
-</section>
-<section class="hero"><div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
+ content.innerHTML=`<section class="hero"><div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
  <h2>Kendi matematik arşivin.</h2>
  <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
  <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div></section>
