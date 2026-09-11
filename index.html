@@ -494,6 +494,77 @@ input:focus,select:focus,textarea:focus{border-color:#9eb7d1!important;box-shado
   .grade{min-height:142px;padding:17px}
 }
 </style>
+
+<style id="afo-final-landing">
+/* AFO FINAL LANDING — Atatürk + temiz ana sayfa */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body.afo-welcome-mode{overflow:hidden!important}
+body.afo-welcome-mode .main{overflow:hidden!important}
+.afo-welcome-screen{
+  width:100%;height:100vh;min-height:620px;box-sizing:border-box;
+  display:grid;grid-template-columns:minmax(390px,47%) minmax(0,53%);
+  padding:0;background:#fff;overflow:hidden;position:relative;
+}
+.afo-welcome-ataturk{
+  position:relative;min-width:0;overflow:hidden;background:#f7fafc;
+}
+.afo-welcome-ataturk img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:left center;display:block;
+}
+.afo-welcome-ataturk:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,0) 55%,rgba(255,255,255,.30) 72%,rgba(255,255,255,.94) 100%);
+}
+.afo-welcome-right{
+  position:relative;z-index:5;min-width:0;display:flex;align-items:center;
+  justify-content:center;padding:42px clamp(28px,5vw,80px) 42px 34px;background:#fff;
+}
+.afo-welcome-right .afo-welcome-clean{
+  width:min(650px,100%);text-align:left;animation:afoWelcomeIn .75s cubic-bezier(.18,.8,.2,1) both;
+}
+.afo-welcome-right .afo-welcome-mark{margin:0;background:#203955}
+.afo-welcome-right .afo-welcome-eyebrow{margin-top:22px;color:#65788e}
+.afo-welcome-right .afo-welcome-title{
+  font-size:clamp(40px,4.3vw,64px);line-height:1.02;margin:10px 0 14px;
+  letter-spacing:-1.8px;white-space:normal;color:#203955;
+}
+.afo-welcome-right .afo-welcome-title span{color:#5c8f55}
+.afo-welcome-right .afo-welcome-text{margin:0;max-width:590px;color:#65788e;line-height:1.7}
+.afo-welcome-right .afo-welcome-actions{justify-content:flex-start;margin-top:28px;gap:10px;flex-wrap:wrap}
+.afo-welcome-right .afo-welcome-meta{justify-content:flex-start;flex-wrap:wrap}
+.afo-welcome-quote{margin-top:28px;padding-left:16px;border-left:2px solid rgba(92,143,85,.35);color:#7b8da0;font:italic 15px/1.55 Georgia,serif;max-width:390px}
+.afo-welcome-quote strong{display:block;margin-top:5px;font:700 10px/1.2 Arial,sans-serif;letter-spacing:1.5px;color:#65788e;font-style:normal}
+.afo-scroll-hint{margin-top:25px;font-size:10px;color:#98a7b7;display:flex;align-items:center;gap:8px;opacity:.8}
+.afo-scroll-hint .mouse{width:15px;height:22px;border:1.5px solid #8fa0b0;border-radius:10px;display:inline-block;position:relative}
+.afo-scroll-hint .mouse:after{content:"";position:absolute;width:2px;height:5px;border-radius:2px;background:#8fa0b0;left:5px;top:4px}
+/* Normal ana sayfada çok hafif dekoratif Atatürk dokusu; içerikleri engellemez. */
+body:not(.afo-welcome-mode) #content{position:relative;isolation:isolate;overflow:visible}
+body:not(.afo-welcome-mode) #content:before{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  width:min(700px,65vw);height:700px;right:-80px;bottom:-220px;
+  background:url('ataturk-afo.png') no-repeat right bottom/contain;
+  opacity:.035;filter:grayscale(1);mix-blend-mode:multiply;
+}
+body:not(.afo-welcome-mode) #content > *{position:relative;z-index:1}
+@media(max-width:1050px){
+ .afo-welcome-screen{grid-template-columns:minmax(330px,45%) minmax(0,55%)}
+ .afo-welcome-right{padding-right:32px}
+ .afo-welcome-right .afo-welcome-title{font-size:clamp(36px,4.8vw,54px)}
+}
+@media(max-width:800px){
+ .afo-welcome-screen{grid-template-columns:1fr;min-height:100vh;height:100vh}
+ .afo-welcome-ataturk{position:absolute;inset:0;z-index:1}
+ .afo-welcome-ataturk:after{background:linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,.88) 70%,#fff 100%)}
+ .afo-welcome-right{position:relative;z-index:3;background:rgba(255,255,255,.78);padding:34px 7vw}
+ .afo-welcome-right .afo-welcome-title{font-size:clamp(38px,8vw,54px)}
+}
+@media(max-width:520px){
+ .afo-welcome-right{padding:28px 22px}
+ .afo-welcome-right .afo-welcome-actions{display:flex}
+ .afo-welcome-quote{display:none}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -818,12 +889,9 @@ function showWelcome(){
  document.body.classList.add("afo-welcome-mode");
  page={type:"welcome",grade:null,topic:null};
  search.value=""; crumb.textContent="AFO / Hoş Geldiniz"; renderSide();
- const s=student();
  content.innerHTML=`
  <section class="afo-welcome-screen" id="welcomeScreen">
   <div class="afo-math-field" aria-hidden="true">
-   <div class="afo-math-grid"></div>
-   <div class="afo-math-curve"></div>
    <span class="afo-math-symbol s1">x² + y² = r²</span>
    <span class="afo-math-symbol s2">Σ aₙ</span>
    <span class="afo-math-symbol s3">∫ f(x) dx</span>
@@ -831,9 +899,11 @@ function showWelcome(){
    <span class="afo-math-symbol s5">π · r²</span>
    <span class="afo-math-symbol s6">f′(x)</span>
   </div>
+
   <div class="afo-welcome-ataturk" aria-hidden="true">
    <img src="ataturk-afo.png" alt="">
   </div>
+
   <div class="afo-welcome-right">
    <div class="afo-welcome-clean">
     <div class="afo-welcome-mark">AFO</div>
@@ -849,6 +919,8 @@ function showWelcome(){
      <span class="afo-welcome-chip">${data.length} sınıf</span>
      <span class="afo-welcome-chip">${data.reduce((a,g)=>a+g.topics.length,0)} konu</span>
     </div>
+    <div class="afo-welcome-quote">“Hayatta en hakiki mürşit ilimdir.”<strong>— Mustafa Kemal Atatürk</strong></div>
+    <div class="afo-scroll-hint"><span class="mouse"></span><span>Arşivi keşfetmek için Derse Başla</span></div>
    </div>
   </div>
  </section>`;
