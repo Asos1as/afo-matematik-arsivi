@@ -1,0 +1,19 @@
+{
+  "name": "AFO Matematik Arşivi",
+  "short_name": "AFO",
+  "description": "Kişisel matematik arşivin.",
+  "lang": "tr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#20324e",
+  "icons": [
+    {
+      "src": "afo-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

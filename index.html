@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#20324e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="afo-icon.svg" type="image/svg+xml">
 <title>AFO Matematik Arşivi</title>
 <style>
 :root{
@@ -2082,6 +2085,14 @@ search.oninput=()=>{
     }catch(e){ console.warn("AFO arka plan veri yenileme uyarısı",e); }
   });
 })();
+</script>
+<script>
+  /* AFO'yu Windows'ta ayrı bir uygulama olarak kurabilmek için. */
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js").catch(function () {});
+    });
+  }
 </script>
 <style id="afo-layout-fix">
 /* Ana sayfa: sol menüden sonra dengeli çalışma alanı */
