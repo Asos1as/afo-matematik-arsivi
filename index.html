@@ -1142,7 +1142,7 @@ function showWelcome(){
     <h1>Hoş geldiniz<br>Hocam.</h1>
     <p>
       Kendi matematik arşivinizi oluşturun. Konularınızı, ders materyallerinizi
-      ve öğrencileriniz için hazırladığınız içerikleri tek yerde yönetin.
+      ve ders içeriklerinizi tek yerde yönetin.
     </p>
 
     <div class="afo-v10-actions">
@@ -1179,7 +1179,7 @@ function enterArchiveFromWelcome(){
 function home(){
  page={type:"home",grade:null,topic:null}; search.value=""; crumb.textContent="Ana Sayfa"; renderSide();
  content.innerHTML=`<section class="hero"><div class="eyebrow">AFO • MATEMATİK ARŞİVİ</div>
- <h2>Kendi matematik arşivin.</h2>
+ <h2>Ders Kontrol Merkezin.</h2>
  <p>Konuyu bul, mikro seviyeye kadar in ve hazır konu anlatımı, örnek, test ve ödev materyallerini tek yerden kullan.</p>
  <div class="stats"><div class="stat">9 sınıf</div><div class="stat">${data.reduce((a,g)=>a+g.topics.length,0)} konu</div><div class="stat">☁ Bulut arşivi</div></div></section>
  <div class="quick-grid">
